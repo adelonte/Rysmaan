@@ -1,0 +1,38 @@
+<script setup lang="ts">
+interface ValueProp {
+  title: string
+  description: string
+  features: string[]
+  icon: string
+}
+
+const props = defineProps<{
+  valueProps: ValueProp[]
+}>()
+</script>
+
+<template>
+  <UContainer>
+    <div class="py-24 sm:py-32">
+      <div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
+        <div v-for="(prop, index) in valueProps" :key="index" class="flex flex-col">
+          <div class="flex items-center gap-x-3">
+            <UIcon :name="prop.icon" class="w-8 h-8 text-primary-500" />
+            <h2 class="text-2xl font-bold">
+              {{ prop.title }}
+            </h2>
+          </div>
+          <p class="mt-4 text-gray-600 dark:text-gray-400">
+            {{ prop.description }}
+          </p>
+          <ul class="mt-8 space-y-3">
+            <li v-for="(feature, idx) in prop.features" :key="idx" class="flex items-start gap-x-3">
+              <UIcon name="i-heroicons-check" class="w-5 h-5 shrink-0 text-primary-500" />
+              <span class="text-gray-700 dark:text-gray-300">{{ feature }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </UContainer>
+</template>
