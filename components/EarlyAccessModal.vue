@@ -69,7 +69,7 @@ async function onSubmit() {
           </UFormGroup>
 
           <UFormGroup label="Interest Type (Optional)" name="interestType" class="mb-4">
-            <USelect v-model="state.interestType" :options="['Individual', 'Small Business', 'Enterprise', 'Partner']" placeholder="Select interest" />
+            <USelect v-model="state.interestType" :options="['Early Access', 'Product Launch', 'Partnership Opportunities', 'Other']" placeholder="Select interest" />
           </UFormGroup>
 
           <UFormGroup label="Phone (Optional)" name="phone" class="mb-4">
