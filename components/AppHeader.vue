@@ -7,19 +7,14 @@ const links = [
 </script>
 
 <template>
-  <UHeader :ui="{ wrapper: 'h-32 flex items-center', container: 'flex items-center justify-between gap-3 h-full max-w-full px-4' }">
-    <template #left>
-      <NuxtLink to="/" class="flex items-center gap-2">
-        <img src="/logo.png" alt="Rysmaan Logo" class="h-24 w-auto" />
-      </NuxtLink>
-    </template>
+  <header class="h-32 flex items-center bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800">
+    <nav class="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center">
+        <NuxtLink to="/" class="flex items-center gap-2">
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-24 w-auto" />
+        </NuxtLink>
+      </div>
 
-    <template #center>
-      <!-- Empty template to override default centering -->
-      <div />
-    </template>
-
-    <template #right>
       <div class="flex items-center gap-3">
         <UButton to="/auth/login" variant="ghost" color="gray">
           Sign In
@@ -29,6 +24,6 @@ const links = [
         </UButton>
         <UColorModeButton />
       </div>
-    </template>
-  </UHeader>
+    </nav>
+  </header>
 </template>
