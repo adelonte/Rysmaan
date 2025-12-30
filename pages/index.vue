@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const landingData = {
   hero: {
-    title: "Connect Project Managers and Vendors Effortlessly",
+    title: "Simplified, Trusted Partnerships",
     description: "Rysmaan’s secure platform helps project managers find and evaluate qualified local vendors, while giving vendors visibility to projects that need their expertise. Streamline your RFQ process and build better partnerships.",
     cta: {
       primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
