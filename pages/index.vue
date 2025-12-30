@@ -2,7 +2,7 @@
 const landingData = {
   hero: {
     title: "Streamline Your RFQ Process",
-    description: "Connect project managers with qualified vendors through competitive bidding. Save time, reduce costs, and build better partnerships with Rysmaan.",
+    description: "Rysmaan’s secure platform helps project managers find and evaluate qualified local vendors, while giving vendors visibility to projects that need their expertise. Streamline your RFQ process and build better partnerships.",
     cta: {
       primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
       secondary: { label: "Join as Vendor", to: "/auth/signup?role=vendor" }
