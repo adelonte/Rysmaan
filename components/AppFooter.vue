@@ -30,11 +30,15 @@ const links = [
 
 <template>
   <UFooter :links="links">
+    <template #top>
+      <div class="flex justify-center py-12">
+        <NuxtLink to="/" class="flex items-center gap-2">
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-32 w-auto" />
+        </NuxtLink>
+      </div>
+    </template>
     <template #left>
       <div class="flex flex-col gap-4">
-        <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="Rysmaan Logo" class="h-10 w-auto" />
-        </NuxtLink>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Streamline your RFQ process and connect with the right partners.
         </p>

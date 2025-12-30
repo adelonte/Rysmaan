@@ -7,10 +7,10 @@ const links = [
 </script>
 
 <template>
-  <UHeader>
+  <UHeader :ui="{ wrapper: 'h-32 flex items-center', container: 'flex items-center justify-between gap-3 h-full' }">
     <template #logo>
       <NuxtLink to="/" class="flex items-center gap-2">
-        <img src="/logo.png" alt="Rysmaan Logo" class="h-20 w-auto" />
+        <img src="/logo.png" alt="Rysmaan Logo" class="h-24 w-auto" />
       </NuxtLink>
     </template>
 

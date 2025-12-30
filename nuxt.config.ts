@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ui: {
     colors: {
-      primary: '#002B49'
+      primary: '#1BB0B0'
     }
   },
   vite: {
