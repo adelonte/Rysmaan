@@ -13,10 +13,10 @@ const props = defineProps<{
   <ULandingHero :title="title">
     <template #description>
       <div class="flex flex-col items-center gap-6">
-        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-1">
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-2">
           {{ description }}
         </p>
-        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 order-2">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 order-1">
           <UButton :to="cta.primary.to" size="xl" color="primary">
             {{ cta.primary.label }}
           </UButton>
