@@ -10,14 +10,21 @@ const props = defineProps<{
 </script>
 
 <template>
-  <ULandingHero :title="title" :description="description">
-    <template #links>
-      <UButton :to="cta.primary.to" size="xl" color="primary">
-        {{ cta.primary.label }}
-      </UButton>
-      <UButton :to="cta.secondary.to" size="xl" variant="outline" color="gray">
-        {{ cta.secondary.label }}
-      </UButton>
+  <ULandingHero :title="title">
+    <template #description>
+      <div class="flex flex-col items-center gap-6">
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-1">
+          {{ description }}
+        </p>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 order-2">
+          <UButton :to="cta.primary.to" size="xl" color="primary">
+            {{ cta.primary.label }}
+          </UButton>
+          <UButton :to="cta.secondary.to" size="xl" variant="outline" color="gray">
+            {{ cta.secondary.label }}
+          </UButton>
+        </div>
+      </div>
     </template>
     <template #default>
       <div class="relative w-full max-w-5xl mx-auto mt-12">
