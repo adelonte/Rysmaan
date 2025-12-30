@@ -32,9 +32,8 @@ const links = [
   <UFooter :links="links">
     <template #left>
       <div class="flex flex-col gap-4">
-        <NuxtLink to="/" class="flex items-center gap-2 text-xl font-bold">
-          <UIcon name="i-heroicons-building-office" class="w-6 h-6" />
-          Rysmaan
+        <NuxtLink to="/" class="flex items-center gap-2">
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-10 w-auto" />
         </NuxtLink>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Streamline your RFQ process and connect with the right partners.
