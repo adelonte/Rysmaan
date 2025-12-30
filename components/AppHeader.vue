@@ -9,9 +9,8 @@ const links = [
 <template>
   <UHeader>
     <template #logo>
-      <NuxtLink to="/" class="flex items-center gap-2 text-xl font-bold">
-        <UIcon name="i-heroicons-building-office" class="w-6 h-6" />
-        Rysmaan
+      <NuxtLink to="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Rysmaan Logo" class="h-8 w-auto" />
       </NuxtLink>
     </template>
 
