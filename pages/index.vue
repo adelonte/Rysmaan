@@ -167,6 +167,8 @@ const landingData = {
 
     <EarlyAccessModal v-model:is-open="isModalOpen" />
 
+    <WhyRysmaanSection />
+
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <ValuePropsSection :value-props="landingData.valueProps" />
     </ULandingSection>
