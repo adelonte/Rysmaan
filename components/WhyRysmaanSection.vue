@@ -56,7 +56,7 @@ const painPoints = {
 <template>
   <ULandingSection
     title="Why Rysmaan Matters"
-    description="Addressing the core challenges in project procurement and vendor management"
+    description="Addressing the core challanges connecting the right projects with the right partners"
   >
     <div class="grid lg:grid-cols-2 gap-16">
       <!-- Project Managers -->
