@@ -14,17 +14,10 @@ const props = defineProps<{
 <template>
   <ULandingHero :title="title">
     <template #default>
-      <div class="flex flex-col items-center gap-6">
-        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-1">
+      <div class="flex flex-col items-center gap-6 text-center">
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
           {{ description }}
         </p>
-        <div class="relative w-full max-w-5xl mx-auto mt-12 order-2">
-          <img
-            src="/screenshots/landing-hero.png"
-            alt="Rysmaan RFQ Platform"
-            class="w-full h-auto rounded-lg shadow-2xl border border-gray-200 dark:border-gray-800"
-          />
-        </div>
       </div>
     </template>
   </ULandingHero>
