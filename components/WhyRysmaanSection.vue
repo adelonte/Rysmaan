@@ -65,7 +65,7 @@ const painPoints = {
           <UIcon name="i-heroicons-briefcase" class="w-6 h-6 text-primary" />
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
-        <div class="grid gap-6">
+        <div class="grid sm:grid-cols-2 gap-6">
           <div v-for="item in painPoints.pm.items" :key="item.title" class="flex gap-4">
             <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
               <UIcon :name="item.icon" class="w-6 h-6 text-primary" />
@@ -84,7 +84,7 @@ const painPoints = {
           <UIcon name="i-heroicons-building-office" class="w-6 h-6 text-primary" />
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
-        <div class="grid gap-6">
+        <div class="grid sm:grid-cols-2 gap-6">
           <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex gap-4">
             <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
               <UIcon :name="item.icon" class="w-6 h-6 text-primary" />
