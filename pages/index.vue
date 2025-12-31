@@ -11,12 +11,14 @@ const landingData = {
   valueProps: [
     {
       title: "For Project Managers",
-      description: "Post your requirements once and receive competitive quotes from qualified vendors",
+      description: "One platform to manage your RFQ from start to finish",
       features: [
-        "Save time with streamlined RFQ creation",
-        "Compare detailed quotes side-by-side",
-        "Centralized communication with all vendors",
-        "Track project lifecycle from quote to completion"
+        "Find qualified vendors matched to your project needs",
+        "Build tailored RFQs that reflect your project’s scope and complexity",
+        "Share RFQs with trusted and newly qualified vendors in one step",
+        "Compare responses side-by-side using your preferred criteria",
+        "Keep all vendor communication organized in one place",
+        "Award work confidently to the right vendor"
       ],
       icon: "i-heroicons-briefcase"
     },
