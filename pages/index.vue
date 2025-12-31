@@ -24,12 +24,13 @@ const landingData = {
     },
     {
       title: "For Vendors",
-      description: "Discover new opportunities and grow your business with professional bidding tools",
+      description: "One platform to connect your expertise with the right projects",
       features: [
-        "Access to quality RFQ opportunities",
-        "Submit professional quotes with line items",
-        "Direct messaging with project managers",
-        "Build your reputation with performance metrics"
+        "Showcase your services, qualifications, and compliance to project managers",
+        "Keep your profile and certifications up to date with a few clicks",
+        "Discover RFQ opportunities that match your expertise",
+        "Prepare quotes, communicate, and track responses in one place",
+        "Build your reputation with performance metrics after project completion"
       ],
       icon: "i-heroicons-building-office"
     }
