@@ -29,23 +29,23 @@ const painPoints = {
     title: "Vendors",
     items: [
       {
-        title: "Opportunities are hard to discover",
-        description: "Finding relevant projects that match your expertise can be a challenge",
+        title: "Finding the right opportunities is challenging and expensive",
+        description: "Projects that match a vendor’s expertise, qualifications, and compliance are often hard to discover, limiting growth.",
         icon: "i-heroicons-light-bulb-20-solid"
       },
       {
-        title: "Showcase your capabilities is difficult",
-        description: "Demonstrating qualifications and compliance to the right PMs is time-consuming",
+        title: "Showcase your qualifications and compliance and keeping them updated is tedious",
+        description: "Presenting certifications, services, and compliance consistently to the right project managers takes extra effort.",
         icon: "i-heroicons-star-20-solid"
       },
       {
-        title: "Responding and tracking quotes is messy",
-        description: "Handling multiple RFQs manually leads to errors and missed opportunities",
+        title: "Managing quotes and responses is challenging",
+        description: "Handling multiple submissions manually increases the risk of errors or missed deadlines.",
         icon: "i-heroicons-pencil-square-20-solid"
       },
       {
-        title: "Building a reputation is slow",
-        description: "Performance and feedback are often not captured or visible to PMs",
+        title: "Building a strong reputation takes time",
+        description: "Tracking performance and feedback from completed projects is often inconsistent, limiting visibility to new clients.",
         icon: "i-heroicons-trophy-20-solid"
       }
     ]
