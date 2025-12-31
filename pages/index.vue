@@ -4,7 +4,7 @@ const { isModalOpen } = useEarlyAccess()
 const landingData = {
   hero: {
     title: "Simplified, Trusted Partnerships",
-    description: "An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process",
+    description: "An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process.",
     cta: {
       primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
       secondary: { label: "Join as Vendor", to: "/auth/signup?role=vendor" }
