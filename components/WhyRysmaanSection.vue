@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const painPoints = {
   pm: {
-    title: "For Project Managers",
+    title: "Project Managers",
     items: [
       {
         title: "Finding qualified vendors is slow and uncertain",
@@ -26,7 +26,7 @@ const painPoints = {
     ]
   },
   vendor: {
-    title: "For Vendors",
+    title: "Vendors",
     items: [
       {
         title: "Opportunities are hard to discover",
