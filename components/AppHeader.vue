@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const isModalOpen = ref(false)
+const { isModalOpen } = useEarlyAccess()
 
 const links = [
   { label: 'Features', to: '#features' },
@@ -19,7 +19,7 @@ const links = [
       </div>
 
       <div class="flex items-center gap-3">
-        <UButton to="/auth/login" variant="ghost" color="gray">
+        <UButton variant="ghost" color="gray" @click="isModalOpen = true">
           Sign In
         </UButton>
         <UButton color="primary" @click="isModalOpen = true">
@@ -28,6 +28,5 @@ const links = [
         <UColorModeButton />
       </div>
     </nav>
-    <EarlyAccessModal v-model:is-open="isModalOpen" />
   </header>
 </template>

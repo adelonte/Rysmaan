@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { isModalOpen } = useEarlyAccess()
+
 const landingData = {
   hero: {
     title: "Simplified, Trusted Partnerships",
@@ -162,6 +164,8 @@ const landingData = {
       :description="landingData.hero.description"
       :cta="landingData.hero.cta"
     />
+
+    <EarlyAccessModal v-model:is-open="isModalOpen" />
 
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <ValuePropsSection :value-props="landingData.valueProps" />

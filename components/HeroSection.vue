@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { isModalOpen } = useEarlyAccess()
+
 const props = defineProps<{
   title: string
   description: string
@@ -14,10 +16,10 @@ const props = defineProps<{
     <template #default>
       <div class="flex flex-col items-center gap-6">
         <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 order-1">
-          <UButton :to="cta.primary.to" size="xl" color="primary">
+          <UButton size="xl" color="primary" @click="isModalOpen = true">
             {{ cta.primary.label }}
           </UButton>
-          <UButton :to="cta.secondary.to" size="xl" variant="outline" color="gray">
+          <UButton size="xl" variant="outline" color="gray" @click="isModalOpen = true">
             {{ cta.secondary.label }}
           </UButton>
         </div>
