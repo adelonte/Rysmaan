@@ -15,18 +15,10 @@ const props = defineProps<{
   <ULandingHero :title="title">
     <template #default>
       <div class="flex flex-col items-center gap-6">
-        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 order-1">
-          <UButton size="xl" color="primary" @click="isModalOpen = true">
-            {{ cta.primary.label }}
-          </UButton>
-          <UButton size="xl" variant="outline" color="gray" @click="isModalOpen = true">
-            {{ cta.secondary.label }}
-          </UButton>
-        </div>
-        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-2">
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto order-1">
           {{ description }}
         </p>
-        <div class="relative w-full max-w-5xl mx-auto mt-12 order-3">
+        <div class="relative w-full max-w-5xl mx-auto mt-12 order-2">
           <img
             src="/screenshots/landing-hero.png"
             alt="Rysmaan RFQ Platform"
