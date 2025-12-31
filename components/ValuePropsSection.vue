@@ -15,7 +15,7 @@ const props = defineProps<{
 
 <template>
   <UContainer>
-    <div class="py-24 sm:py-32">
+    <div class="py-12 sm:py-16">
       <div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div v-for="(prop, index) in valueProps" :key="index" class="flex flex-col">
           <div class="flex items-center gap-x-3">
