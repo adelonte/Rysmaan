@@ -12,7 +12,7 @@ const landingData = {
   },
   valueProps: [
     {
-      title: "For Project Managers",
+      title: "Project Managers",
       description: "One platform to manage your RFQ from start to finish",
       features: [
         "Find qualified vendors matched to your project needs",
@@ -25,7 +25,7 @@ const landingData = {
       icon: "i-heroicons-briefcase"
     },
     {
-      title: "For Vendors",
+      title: "Vendors",
       description: "One platform to connect your expertise with the right projects",
       features: [
         "Showcase your services, qualifications, and compliance to project managers",
