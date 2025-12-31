@@ -12,9 +12,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <ULandingHero :title="title">
+  <ULandingHero :title="title" class="pb-0 mb-0">
     <template #default>
-      <div class="flex flex-col items-center gap-6 text-center">
+      <div class="flex flex-col items-center gap-2 text-center -mt-8">
         <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
           {{ description }}
         </p>
