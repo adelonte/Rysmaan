@@ -34,8 +34,8 @@ const painPoints = {
         icon: "i-heroicons-light-bulb-20-solid"
       },
       {
-        title: "Showcase your qualifications and compliance and keeping them updated is tedious",
-        description: "Presenting certifications, services, and compliance consistently to the right project managers takes extra effort.",
+        title: "Showcase your qualifications and compliance is tedious",
+        description: "Updating and showcasing certifications, services, and compliance to the right project managers requires effort.",
         icon: "i-heroicons-star-20-solid"
       },
       {
