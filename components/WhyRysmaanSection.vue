@@ -29,7 +29,7 @@ const painPoints = {
     title: "Vendors",
     items: [
       {
-        title: "Finding the right opportunities is challenging and expensive",
+        title: "Finding the right opportunities is demanding",
         description: "Projects that match a vendor’s expertise, qualifications, and compliance are often hard to discover, limiting growth.",
         icon: "i-heroicons-light-bulb-20-solid"
       },
