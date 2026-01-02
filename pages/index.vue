@@ -78,24 +78,24 @@ const landingData = {
       title: "For Project Managers",
       steps: [
         {
-          title: "Post Your RFQ",
-          description: "Create a detailed request with service type, location, budget, and requirements",
-          icon: "i-heroicons-document-plus"
+          title: "Define Your Requirements",
+          description: "Create and share RFQs based on your project scope, qualifications, and compliance needs.",
+          icon: "i-heroicons-clipboard-document-list"
         },
         {
-          title: "Receive Competitive Quotes",
-          description: "Qualified vendors submit detailed quotes with line-item pricing",
-          icon: "i-heroicons-inbox"
+          title: "Discover Qualified Vendors",
+          description: "Find available vendors matched by expertise, qualifications, and compliance.",
+          icon: "i-heroicons-magnifying-glass"
         },
         {
-          title: "Compare & Communicate",
-          description: "Review quotes side-by-side and message vendors for clarification",
-          icon: "i-heroicons-arrows-right-left"
+          title: "Review and Compare Responses",
+          description: "Evaluate proposals side by side using your preferred criteria.",
+          icon: "i-heroicons-chart-bar"
         },
         {
-          title: "Award & Manage",
-          description: "Accept the best quote and manage the project through completion",
-          icon: "i-heroicons-check-circle"
+          title: "Award with Confidence",
+          description: "Select the right vendor with clear documentation and decision history.",
+          icon: "i-heroicons-hand-raised"
         }
       ]
     },
