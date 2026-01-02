@@ -67,11 +67,13 @@ const painPoints = {
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
           <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
+              </div>
+              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
             </div>
             <div>
-              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight mb-2 min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
               <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
             </div>
           </div>
@@ -86,11 +88,13 @@ const painPoints = {
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
           <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-4">
-            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
+            <div class="flex items-center gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
+              </div>
+              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
             </div>
             <div>
-              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight mb-2 min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
               <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
             </div>
           </div>
