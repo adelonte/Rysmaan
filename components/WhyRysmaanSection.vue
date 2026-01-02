@@ -4,22 +4,22 @@ const painPoints = {
     title: "Project Managers",
     items: [
       {
-        title: "Finding available qualified vendors is challenging",
+        title: "Finding Available Qualified Vendors",
         description: "Identifying vendors who are qualified, compliant, and available for your project can delay startup.",
         icon: "i-heroicons-magnifying-glass-20-solid"
       },
       {
-        title: "Comparing quotes is time-consuming",
+        title: "Comparing Quotes",
         description: "Reviewing multiple proposals manually can slow decisions and increase the chance of mistakes.",
         icon: "i-heroicons-chart-bar-20-solid"
       },
       {
-        title: "Managing communications is scattered",
+        title: "Managing Multiple Communications",
         description: "Emails, calls, and messages across multiple vendors make coordination difficult.",
         icon: "i-heroicons-chat-bubble-left-right-20-solid"
       },
       {
-        title: "Tracking project progress is complicated",
+        title: "Tracking Project Progress",
         description: "Following RFQs from submission to award and completion requires constant follow-up.",
         icon: "i-heroicons-clock-20-solid"
       }
