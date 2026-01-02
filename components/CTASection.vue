@@ -1,8 +1,10 @@
 <script setup lang="ts">
+const { isModalOpen } = useEarlyAccess()
+
 interface CTAData {
   title: string
   description: string
-  primary: { label: string; to: string }
+  primary: { label: string }
   secondary?: { label: string; to: string }
 }
 
@@ -14,7 +16,7 @@ const props = defineProps<{
 <template>
   <ULandingCTA :title="cta.title" :description="cta.description">
     <template #links>
-      <UButton :to="cta.primary.to" size="xl" color="primary">
+      <UButton size="xl" color="primary" @click="isModalOpen = true">
         {{ cta.primary.label }}
       </UButton>
       <UButton v-if="cta.secondary" :to="cta.secondary.to" size="xl" variant="outline" color="gray">
