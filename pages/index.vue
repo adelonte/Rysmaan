@@ -178,10 +178,6 @@ const landingData = {
       <HowItWorksSection :how-it-works="landingData.howItWorks" />
     </ULandingSection>
 
-    <ULandingSection>
-      <TestimonialsSection :testimonials="landingData.testimonials" />
-    </ULandingSection>
-
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <CTASection :cta="landingData.cta" />
     </ULandingSection>
