@@ -149,8 +149,8 @@ const landingData = {
     }
   ],
   cta: {
-    title: "Ready to Streamline Your Procurement?",
-    description: "Join project managers and vendors who are already saving time and building better partnerships.",
+    title: "Ready to Experience Rysmaan?",
+    description: "Join project managers and vendors connect more effectively on one platform",
     primary: { label: "Get Started for Free", to: "/auth/signup" },
     secondary: { label: "Learn More", to: "/docs" }
   }
