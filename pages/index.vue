@@ -185,15 +185,5 @@ const landingData = {
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <CTASection :cta="landingData.cta" />
     </ULandingSection>
-
-    <ULandingSection>
-      <div class="relative w-full max-w-5xl mx-auto">
-        <img
-          src="/screenshots/landing-hero.png"
-          alt="Rysmaan RFQ Platform"
-          class="w-full h-auto rounded-lg shadow-2xl border border-gray-200 dark:border-gray-800"
-        />
-      </div>
-    </ULandingSection>
   </div>
 </template>
