@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
+
 const tabs = [
   {
     label: 'Project Manager Workspace',
@@ -89,24 +91,37 @@ watch(activeTabIndex, () => {
               </div>
               
               <!-- Content Placeholder -->
-              <div class="flex-1 p-8 flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-900/50">
-                <UIcon :name="tabs[activeTabIndex].icon" class="w-16 h-16 text-primary-200 dark:text-primary-800 mb-6" />
-                <h3 class="text-xl font-bold mb-2">{{ tabs[activeTabIndex].content[activeSubTabIndex].title }}</h3>
-                <p class="text-gray-500 dark:text-gray-400 max-w-md">{{ tabs[activeTabIndex].content[activeSubTabIndex].description }}</p>
+              <div class="flex-1 overflow-hidden relative">
+                <!-- PM Screenshots -->
+                <img v-if="activeTabIndex === 0 && activeSubTabIndex === 0" src="/screenshots/discovery-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 1" src="/screenshots/rfq-creation-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 2" src="/screenshots/quote-comparison-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 3" src="/screenshots/communication-placeholder.png" class="w-full h-full object-cover" />
                 
-                <!-- Placeholder UI Elements -->
-                <div class="mt-8 w-full max-w-3xl space-y-4 opacity-20">
-                  <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mx-auto"></div>
-                  <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mx-auto"></div>
-                  <div class="grid grid-cols-3 gap-4 pt-4">
-                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
-                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
-                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
-                  </div>
-                </div>
+                <!-- Vendor Screenshots -->
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 0" src="/screenshots/vendor-profile-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 1" src="/screenshots/rfq-opps-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 2" src="/screenshots/quote-submission-placeholder.png" class="w-full h-full object-cover" />
 
-                <div class="absolute bottom-4 right-4 px-3 py-1 bg-primary-500/10 text-primary-500 text-[10px] font-mono rounded border border-primary-500/20">
-                  SCREENSHOT_PLACEHOLDER
+                <!-- Fallback/Default Placeholder if image fails to load -->
+                <div class="absolute inset-0 p-8 flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-900/50">
+                  <UIcon :name="tabs[activeTabIndex].icon" class="w-16 h-16 text-primary-200 dark:text-primary-800 mb-6" />
+                  <h3 class="text-xl font-bold mb-2">{{ tabs[activeTabIndex].content[activeSubTabIndex].title }}</h3>
+                  <p class="text-gray-500 dark:text-gray-400 max-w-md">{{ tabs[activeTabIndex].content[activeSubTabIndex].description }}</p>
+                  
+                  <div class="mt-8 w-full max-w-3xl space-y-4 opacity-20">
+                    <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mx-auto"></div>
+                    <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mx-auto"></div>
+                    <div class="grid grid-cols-3 gap-4 pt-4">
+                      <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                      <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                      <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                    </div>
+                  </div>
+
+                  <div class="absolute bottom-4 right-4 px-3 py-1 bg-primary-500/10 text-primary-500 text-[10px] font-mono rounded border border-primary-500/20">
+                    SCREENSHOT_PLACEHOLDER
+                  </div>
                 </div>
               </div>
             </div>
