@@ -151,8 +151,7 @@ const landingData = {
   cta: {
     title: "Ready to Experience Rysmaan?",
     description: "Join project managers and vendors connect more effectively on one platform",
-    primary: { label: "Get Started for Free", to: "/auth/signup" },
-    secondary: { label: "Learn More", to: "/docs" }
+    primary: { label: "Get Started for Free", to: "/auth/signup" }
   }
 }
 </script>
