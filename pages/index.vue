@@ -95,7 +95,7 @@ const landingData = {
         {
           title: "Award with Confidence",
           description: "Select the right vendor with clear documentation and decision history.",
-          icon: "emoji:🤝"
+          icon: "i-heroicons-trophy"
         }
       ]
     },
