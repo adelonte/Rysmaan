@@ -29,22 +29,22 @@ const painPoints = {
     title: "Vendors",
     items: [
       {
-        title: "Finding the right opportunities is demanding",
+        title: "Finding the Right Opportunities",
         description: "Projects that match a vendor’s expertise, qualifications, and compliance are often hard to discover, limiting growth.",
         icon: "i-heroicons-light-bulb-20-solid"
       },
       {
-        title: "Showcase your qualifications and compliance is tedious",
+        title: "Showcasing Your Qualifications/Compliance",
         description: "Updating and showcasing certifications, services, and compliance to the right project managers requires effort.",
         icon: "i-heroicons-star-20-solid"
       },
       {
-        title: "Managing quotes and responses is challenging",
+        title: "Managing Multiple Quotes",
         description: "Handling multiple submissions manually increases the risk of errors or missed deadlines.",
         icon: "i-heroicons-pencil-square-20-solid"
       },
       {
-        title: "Building a strong reputation takes time",
+        title: "Building Strong Reputation",
         description: "Tracking performance and feedback from completed projects is often inconsistent, limiting visibility to new clients.",
         icon: "i-heroicons-trophy-20-solid"
       }
@@ -62,7 +62,7 @@ const painPoints = {
       <!-- Project Managers -->
       <div class="space-y-12">
         <div class="flex items-center gap-3">
-          <UIcon name="i-heroicons-briefcase" class="w-7 h-7 text-primary" />
+          <UIcon name="i-heroicons-briefcase" class="w-10 h-10 text-primary" />
           <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
@@ -81,7 +81,7 @@ const painPoints = {
       <!-- Vendors -->
       <div class="space-y-12">
         <div class="flex items-center gap-3">
-          <UIcon name="i-heroicons-building-office" class="w-7 h-7 text-primary" />
+          <UIcon name="i-heroicons-building-office" class="w-10 h-10 text-primary" />
           <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
