@@ -5,11 +5,6 @@ const links = [];
 <template>
   <UFooter :links="links">
     <template #left>
-      <div class="flex flex-col gap-4">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Streamline your RFQ process and connect with the right partners.
-        </p>
-      </div>
     </template>
 
     <template #right>
