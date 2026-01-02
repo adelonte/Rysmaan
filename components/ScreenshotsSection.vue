@@ -36,7 +36,7 @@ const screenshots: Screenshot[] = [
           See Rysmaan in Action
         </h2>
         <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-          A powerful, intuitive platform designed to streamline your procurement process
+          An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
         </p>
       </div>
 
