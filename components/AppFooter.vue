@@ -1,31 +1,5 @@
 <script setup lang="ts">
-const links = [
-  {
-    label: "Product",
-    children: [
-      { label: "Features", to: "/#features" },
-      { label: "How It Works", to: "/#how-it-works" },
-      { label: "Pricing", to: "/pricing" },
-    ],
-  },
-  {
-    label: "Resources",
-    children: [
-      { label: "Documentation", to: "/docs" },
-      { label: "Support", to: "/support" },
-      { label: "Blog", to: "/blog" },
-    ],
-  },
-  {
-    label: "Company",
-    children: [
-      { label: "About", to: "/about" },
-      { label: "Contact", to: "/contact" },
-      { label: "Privacy", to: "/privacy" },
-      { label: "Terms", to: "/terms" },
-    ],
-  },
-];
+const links = [];
 </script>
 
 <template>
