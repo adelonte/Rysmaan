@@ -58,40 +58,40 @@ const painPoints = {
     title="Why Rysmaan Matters"
     description="Addressing the core challanges connecting the right projects with the right partners"
   >
-    <div class="grid lg:grid-cols-2 gap-16">
+    <div class="grid lg:grid-cols-2 gap-24 max-w-7xl mx-auto">
       <!-- Project Managers -->
-      <div class="space-y-8">
+      <div class="space-y-12">
         <div class="flex items-center gap-3">
-          <UIcon name="i-heroicons-briefcase" class="w-6 h-6 text-primary" />
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
+          <UIcon name="i-heroicons-briefcase" class="w-7 h-7 text-primary" />
+          <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div v-for="item in painPoints.pm.items" :key="item.title" class="flex gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <UIcon :name="item.icon" class="w-6 h-6 text-primary" />
+        <div class="grid sm:grid-cols-2 gap-x-12 gap-y-10">
+          <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white">{{ item.title }}</h4>
-              <p class="text-gray-500 dark:text-gray-400 mt-1">{{ item.description }}</p>
+              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight mb-2">{{ item.title }}</h4>
+              <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Vendors -->
-      <div class="space-y-8">
+      <div class="space-y-12">
         <div class="flex items-center gap-3">
-          <UIcon name="i-heroicons-building-office" class="w-6 h-6 text-primary" />
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
+          <UIcon name="i-heroicons-building-office" class="w-7 h-7 text-primary" />
+          <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex gap-4">
-            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <UIcon :name="item.icon" class="w-6 h-6 text-primary" />
+        <div class="grid sm:grid-cols-2 gap-x-12 gap-y-10">
+          <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white">{{ item.title }}</h4>
-              <p class="text-gray-500 dark:text-gray-400 mt-1">{{ item.description }}</p>
+              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight mb-2">{{ item.title }}</h4>
+              <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
             </div>
           </div>
         </div>
