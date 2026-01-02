@@ -1,67 +1,129 @@
 <script setup lang="ts">
-interface Screenshot {
-  src: string
-  alt: string
-  title: string
-  description: string
-}
-
-const screenshots: Screenshot[] = [
+const tabs = [
   {
-    src: '/screenshots/pm-dashboard.png',
-    alt: 'Project Manager Dashboard',
-    title: 'Dashboard Overview',
-    description: 'Get a complete view of your RFQs, quotes, and activities at a glance'
+    label: 'Project Manager Workspace',
+    icon: 'i-heroicons-briefcase',
+    content: [
+      { id: 'pm-discovery', title: 'Vendor Discovery & Filtering', description: 'Find available vendors matched by expertise, qualifications, and compliance.' },
+      { id: 'pm-rfq', title: 'RFQ Creation', description: 'Create and share RFQs based on your project scope, qualifications, and compliance needs.' },
+      { id: 'pm-comparison', title: 'Quote Comparison', description: 'Evaluate proposals side by side using your preferred criteria.' },
+      { id: 'pm-communication', title: 'Vendor Communication', description: 'Keep all vendor communication organized in one place.' }
+    ]
   },
   {
-    src: '/screenshots/rfqs-list.png',
-    alt: 'RFQ List View',
-    title: 'Manage All Your RFQs',
-    description: 'Filter, search, and organize your quote requests with powerful tools'
-  },
-  {
-    src: '/screenshots/rfq-detail.png',
-    alt: 'RFQ Detail Page',
-    title: 'Detailed RFQ View',
-    description: 'Track quotes, manage deadlines, and award projects with ease'
+    label: 'Vendor Workspace',
+    icon: 'i-heroicons-building-office',
+    content: [
+      { id: 'vendor-profile', title: 'Vendor Profile', description: 'Showcase your services, qualifications, and compliance in a single profile.' },
+      { id: 'vendor-opps', title: 'RFQ Opportunity View', description: 'Discover RFQ opportunities that match your expertise.' },
+      { id: 'vendor-quotes', title: 'Quote Submission & Status', description: 'Prepare quotes, communicate, and track responses in one place.' }
+    ]
   }
 ]
+
+const activeTabIndex = ref(0)
+const activeSubTabIndex = ref(0)
+
+watch(activeTabIndex, () => {
+  activeSubTabIndex.value = 0
+})
 </script>
 
 <template>
-  <UContainer>
-    <div class="py-24 sm:py-32">
-      <div class="mx-auto max-w-2xl text-center mb-16">
-        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+  <div class="py-12 sm:py-16">
+    <UContainer>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
           See Rysmaan in Action
         </h2>
-        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-          An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Experience how our platform simplifies the connection between project managers and qualified vendors.
         </p>
       </div>
 
-      <div class="space-y-24">
-        <div
-          v-for="(screenshot, index) in screenshots"
-          :key="index"
-          class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
-          :class="index % 2 === 1 ? 'lg:flex-row-reverse' : ''"
-        >
-          <div :class="index % 2 === 1 ? 'lg:order-2' : ''">
-            <h3 class="text-2xl font-bold mb-4">{{ screenshot.title }}</h3>
-            <p class="text-lg text-gray-600 dark:text-gray-400">
-              {{ screenshot.description }}
-            </p>
+      <div class="flex flex-col items-center">
+        <!-- Main Tabs -->
+        <div class="flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl mb-8">
+          <button
+            v-for="(tab, index) in tabs"
+            :key="index"
+            @click="activeTabIndex = index"
+            class="px-6 py-2 rounded-lg text-sm font-medium transition-all"
+            :class="activeTabIndex === index ? 'bg-white dark:bg-gray-700 shadow text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'"
+          >
+            <div class="flex items-center gap-2">
+              <UIcon :name="tab.icon" />
+              {{ tab.label }}
+            </div>
+          </button>
+        </div>
+
+        <!-- Sub Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+          <button
+            v-for="(subTab, index) in tabs[activeTabIndex].content"
+            :key="subTab.id"
+            @click="activeSubTabIndex = index"
+            class="px-4 py-1.5 rounded-full text-xs font-medium border transition-all"
+            :class="activeSubTabIndex === index ? 'bg-primary-50 border-primary-200 text-primary-700 dark:bg-primary-900/30 dark:border-primary-800 dark:text-primary-400' : 'bg-transparent border-gray-200 text-gray-500 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:border-gray-600'"
+          >
+            {{ subTab.title }}
+          </button>
+        </div>
+
+        <!-- Macbook Frame -->
+        <div class="relative w-full max-w-5xl mx-auto">
+          <!-- Screen Container -->
+          <div class="relative bg-gray-800 rounded-[2.5rem] p-3 shadow-2xl border-[8px] border-gray-900 aspect-[16/10] overflow-hidden">
+            <div class="absolute inset-0 bg-white dark:bg-gray-900 overflow-hidden flex flex-col">
+              <!-- Browser Header -->
+              <div class="h-8 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center px-4 gap-2">
+                <div class="flex gap-1.5">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                </div>
+                <div class="mx-auto bg-white dark:bg-gray-700 rounded-md px-16 py-0.5 text-[10px] text-gray-400 truncate max-w-xs">
+                  rysmaan.com/app/{{ tabs[activeTabIndex].content[activeSubTabIndex].id }}
+                </div>
+              </div>
+              
+              <!-- Content Placeholder -->
+              <div class="flex-1 p-8 flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-900/50">
+                <UIcon :name="tabs[activeTabIndex].icon" class="w-16 h-16 text-primary-200 dark:text-primary-800 mb-6" />
+                <h3 class="text-xl font-bold mb-2">{{ tabs[activeTabIndex].content[activeSubTabIndex].title }}</h3>
+                <p class="text-gray-500 dark:text-gray-400 max-w-md">{{ tabs[activeTabIndex].content[activeSubTabIndex].description }}</p>
+                
+                <!-- Placeholder UI Elements -->
+                <div class="mt-8 w-full max-w-3xl space-y-4 opacity-20">
+                  <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mx-auto"></div>
+                  <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mx-auto"></div>
+                  <div class="grid grid-cols-3 gap-4 pt-4">
+                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                    <div class="aspect-video bg-gray-200 dark:bg-gray-800 rounded"></div>
+                  </div>
+                </div>
+
+                <div class="absolute bottom-4 right-4 px-3 py-1 bg-primary-500/10 text-primary-500 text-[10px] font-mono rounded border border-primary-500/20">
+                  SCREENSHOT_PLACEHOLDER
+                </div>
+              </div>
+            </div>
           </div>
-          <div :class="index % 2 === 1 ? 'lg:order-1' : ''">
-            <img
-              :src="screenshot.src"
-              :alt="screenshot.alt"
-              class="rounded-lg shadow-2xl border border-gray-200 dark:border-gray-800 w-full"
-            />
-          </div>
+          
+          <!-- Base/Hinge -->
+          <div class="relative mx-auto h-3 w-[105%] -ml-[2.5%] bg-gray-900 rounded-b-xl shadow-lg"></div>
+          <div class="relative mx-auto h-2 w-32 bg-gray-800 rounded-b-xl"></div>
+        </div>
+
+        <!-- Description beneath -->
+        <div class="mt-12 text-center max-w-2xl px-4">
+          <p class="text-gray-600 dark:text-gray-400 italic">
+            "{{ tabs[activeTabIndex].content[activeSubTabIndex].description }}"
+          </p>
         </div>
       </div>
-    </div>
-  </UContainer>
+    </UContainer>
+  </div>
 </template>
