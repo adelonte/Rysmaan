@@ -171,6 +171,10 @@ const landingData = {
     <WhyRysmaanSection class="pt-0" />
 
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+      <ValuePropsSection :value-props="landingData.valueProps" />
+    </ULandingSection>
+
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <ScreenshotsSection />
     </ULandingSection>
 
