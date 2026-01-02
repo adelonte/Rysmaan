@@ -103,24 +103,24 @@ const landingData = {
       title: "For Vendors",
       steps: [
         {
-          title: "Browse Opportunities",
-          description: "Filter RFQs by service type, location, and other criteria",
-          icon: "i-heroicons-magnifying-glass"
+          title: "Showcase Your Capabilities",
+          description: "Present your services, qualifications, and compliance in a single profile.",
+          icon: "i-heroicons-shield-check"
         },
         {
-          title: "Submit Your Quote",
-          description: "Create professional quotes with detailed line items and pricing",
-          icon: "i-heroicons-document-text"
+          title: "Get Discovered",
+          description: "Be visible to project managers seeking qualified partners.",
+          icon: "i-heroicons-cursor-arrow-ripple"
         },
         {
-          title: "Engage with PMs",
-          description: "Answer questions and refine your quote based on feedback",
-          icon: "i-heroicons-chat-bubble-left-ellipsis"
+          title: "Respond and Communicate",
+          description: "Submit quotes and communicate clearly in one place.",
+          icon: "i-heroicons-chat-bubble-left-right"
         },
         {
-          title: "Win Projects",
-          description: "Get notified when your quote is accepted and start the project",
-          icon: "i-heroicons-trophy"
+          title: "Build Your Track Record",
+          description: "Strengthen your reputation through performance metrics after project completion.",
+          icon: "i-heroicons-chart-bar-square"
         }
       ]
     }
