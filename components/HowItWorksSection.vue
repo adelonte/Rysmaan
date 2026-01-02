@@ -42,7 +42,8 @@ const props = defineProps<{
               class="relative flex flex-col items-center text-center"
             >
               <div class="flex w-16 h-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900">
-                <UIcon :name="step.icon" class="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <UIcon v-if="!step.icon.startsWith('emoji:')" :name="step.icon" class="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <span v-else class="text-3xl">{{ step.icon.split(':')[1] }}</span>
               </div>
               <div class="mt-4">
                 <div class="mb-2 text-sm font-semibold text-primary-600 dark:text-primary-400">
@@ -71,7 +72,8 @@ const props = defineProps<{
               class="relative flex flex-col items-center text-center"
             >
               <div class="flex w-16 h-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900">
-                <UIcon :name="step.icon" class="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <UIcon v-if="!step.icon.startsWith('emoji:')" :name="step.icon" class="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <span v-else class="text-3xl">{{ step.icon.split(':')[1] }}</span>
               </div>
               <div class="mt-4">
                 <div class="mb-2 text-sm font-semibold text-primary-600 dark:text-primary-400">
