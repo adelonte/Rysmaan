@@ -174,12 +174,12 @@ const landingData = {
       <ValuePropsSection :value-props="landingData.valueProps" />
     </ULandingSection>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
-      <ScreenshotsSection />
-    </ULandingSection>
-
     <ULandingSection>
       <HowItWorksSection :how-it-works="landingData.howItWorks" />
+    </ULandingSection>
+
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+      <ScreenshotsSection />
     </ULandingSection>
 
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
