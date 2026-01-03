@@ -170,7 +170,7 @@ const landingData = {
 
     <WhyRysmaanSection />
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-0' }">
       <ValuePropsSection :value-props="landingData.valueProps" />
     </ULandingSection>
 
