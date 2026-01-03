@@ -39,7 +39,7 @@ watch(activeTabIndex, () => {
           See Rysmaan in Action
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Experience how our platform simplifies the connection between project managers and qualified vendors.
+          An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
         </p>
       </div>
 
