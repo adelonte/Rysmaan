@@ -162,12 +162,12 @@ const landingData = {
       :title="landingData.hero.title"
       :description="landingData.hero.description"
       :cta="landingData.hero.cta"
-      class="pb-0"
+      class="pb-0 mb-0"
     />
 
     <EarlyAccessModal v-model:is-open="isModalOpen" />
 
-    <WhyRysmaanSection class="py-0" />
+    <WhyRysmaanSection class="py-0 my-0" />
 
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <ValuePropsSection :value-props="landingData.valueProps" />
