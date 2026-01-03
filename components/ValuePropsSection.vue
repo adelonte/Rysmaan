@@ -16,6 +16,11 @@ const props = defineProps<{
 <template>
   <UContainer>
     <div class="py-12 sm:py-16">
+      <div class="text-center mb-16">
+        <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-medium">
+          An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
+        </p>
+      </div>
       <div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div v-for="(prop, index) in valueProps" :key="index" class="flex flex-col">
           <div class="flex items-center gap-x-3">

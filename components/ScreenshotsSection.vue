@@ -38,9 +38,6 @@ watch(activeTabIndex, () => {
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
           See Rysmaan in Action
         </h2>
-        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
-        </p>
       </div>
 
       <div class="flex flex-col items-center">
