@@ -32,7 +32,7 @@ watch(activeTabIndex, () => {
 </script>
 
 <template>
-  <div class="py-12 sm:py-16">
+  <div class="py-24 sm:py-32">
     <UContainer>
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">

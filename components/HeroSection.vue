@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="pt-24 pb-8">
+  <div class="py-24 sm:py-32">
     <div class="text-center">
       <h1 class="text-4xl font-bold tracking-tight sm:text-6xl text-gray-900 dark:text-white mb-4">
         {{ title }}

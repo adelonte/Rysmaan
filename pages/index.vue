@@ -168,19 +168,19 @@ const landingData = {
 
     <WhyRysmaanSection class="bg-gray-50 dark:bg-gray-900" />
 
-    <ULandingSection>
+    <ULandingSection :ui="{ wrapper: 'py-24 sm:py-32' }">
       <ValuePropsSection :value-props="landingData.valueProps" />
     </ULandingSection>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-24 sm:py-32' }">
       <HowItWorksSection :how-it-works="landingData.howItWorks" />
     </ULandingSection>
 
-    <ULandingSection>
+    <ULandingSection :ui="{ wrapper: 'py-24 sm:py-32' }">
       <ScreenshotsSection />
     </ULandingSection>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-24 sm:py-32' }">
       <CTASection :cta="landingData.cta" />
     </ULandingSection>
   </div>
