@@ -157,17 +157,18 @@ const landingData = {
 </script>
 
 <template>
-  <div>
-    <HeroSection
-      :title="landingData.hero.title"
-      :description="landingData.hero.description"
-      :cta="landingData.hero.cta"
-      class="pb-0 mb-0"
-    />
+  <div class="space-y-0">
+    <UContainer>
+      <HeroSection
+        :title="landingData.hero.title"
+        :description="landingData.hero.description"
+        :cta="landingData.hero.cta"
+      />
+    </UContainer>
 
     <EarlyAccessModal v-model:is-open="isModalOpen" />
 
-    <WhyRysmaanSection class="py-0 my-0" />
+    <WhyRysmaanSection />
 
     <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <ValuePropsSection :value-props="landingData.valueProps" />

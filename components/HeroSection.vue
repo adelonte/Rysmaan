@@ -12,20 +12,14 @@ const props = defineProps<{
 </script>
 
 <template>
-  <ULandingHero :title="title" class="pb-0">
-    <template #title>
-      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl text-gray-900 dark:text-white">
+  <div class="py-4">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl text-gray-900 dark:text-white mb-4">
         {{ title }}
       </h1>
-    </template>
-    <template #description>
       <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
         {{ description }}
       </p>
-    </template>
-    <template #default>
-      <div class="flex flex-col items-center gap-2 text-center mt-8">
-      </div>
-    </template>
-  </ULandingHero>
+    </div>
+  </div>
 </template>
