@@ -14,7 +14,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <ULandingCTA :title="cta.title" :description="cta.description">
+  <ULandingCTA :title="cta.title" :description="cta.description" :ui="{ title: 'text-3xl sm:text-4xl', description: 'text-lg sm:text-xl' }">
     <template #links>
       <UButton size="xl" color="primary" @click="isModalOpen = true">
         {{ cta.primary.label }}

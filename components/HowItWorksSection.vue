@@ -24,7 +24,7 @@ const props = defineProps<{
   <UContainer>
     <div class="py-24 sm:py-32">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
           How It Works
         </h2>
       </div>
@@ -48,10 +48,10 @@ const props = defineProps<{
                 <div class="mb-2 text-sm font-semibold text-primary-600 dark:text-primary-400">
                   Step {{ index + 1 }}
                 </div>
-                <h4 class="text-lg font-semibold">
+                <h4 class="text-xl font-semibold">
                   {{ step.title }}
                 </h4>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
                   {{ step.description }}
                 </p>
               </div>
@@ -77,10 +77,10 @@ const props = defineProps<{
                 <div class="mb-2 text-sm font-semibold text-primary-600 dark:text-primary-400">
                   Step {{ index + 1 }}
                 </div>
-                <h4 class="text-lg font-semibold">
+                <h4 class="text-xl font-semibold">
                   {{ step.title }}
                 </h4>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
                   {{ step.description }}
                 </p>
               </div>
