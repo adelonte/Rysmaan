@@ -45,28 +45,28 @@ watch(activeTabIndex, () => {
 
       <div class="flex flex-col items-center">
         <!-- Main Tabs -->
-        <div class="flex p-1 bg-gray-100 dark:bg-gray-800 rounded-xl mb-8">
+        <div class="flex p-1.5 bg-gray-100 dark:bg-gray-800 rounded-xl mb-8">
           <button
             v-for="(tab, index) in tabs"
             :key="index"
             @click="activeTabIndex = index"
-            class="px-6 py-2 rounded-lg text-sm font-medium transition-all"
+            class="px-8 py-3 rounded-lg text-lg font-semibold transition-all"
             :class="activeTabIndex === index ? 'bg-white dark:bg-gray-700 shadow text-primary-600 dark:text-primary-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'"
           >
-            <div class="flex items-center gap-2">
-              <UIcon :name="tab.icon" />
+            <div class="flex items-center gap-3">
+              <UIcon :name="tab.icon" class="w-6 h-6" />
               {{ tab.label }}
             </div>
           </button>
         </div>
 
         <!-- Sub Tabs -->
-        <div class="flex flex-wrap justify-center gap-2 mb-12">
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
           <button
             v-for="(subTab, index) in tabs[activeTabIndex].content"
             :key="subTab.id"
             @click="activeSubTabIndex = index"
-            class="px-4 py-1.5 rounded-full text-xs font-medium border transition-all"
+            class="px-5 py-2 rounded-full text-sm font-semibold border transition-all"
             :class="activeSubTabIndex === index ? 'bg-primary-50 border-primary-200 text-primary-700 dark:bg-primary-900/30 dark:border-primary-800 dark:text-primary-400' : 'bg-transparent border-gray-200 text-gray-500 hover:border-gray-300 dark:border-gray-700 dark:text-gray-400 dark:hover:border-gray-600'"
           >
             {{ subTab.title }}
@@ -134,7 +134,7 @@ watch(activeTabIndex, () => {
 
         <!-- Description beneath -->
         <div class="mt-12 text-center max-w-2xl px-4">
-          <p class="text-gray-600 dark:text-gray-400 italic">
+          <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 italic">
             "{{ tabs[activeTabIndex].content[activeSubTabIndex].description }}"
           </p>
         </div>
