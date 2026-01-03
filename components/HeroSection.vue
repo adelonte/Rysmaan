@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <ULandingHero :title="title" class="pb-0 mb-0">
+  <ULandingHero :title="title" class="pb-8">
     <template #title>
       <h1 class="text-4xl font-bold tracking-tight sm:text-6xl text-gray-900 dark:text-white">
         {{ title }}
