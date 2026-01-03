@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const isOpen = defineModel<boolean>('isOpen', { default: false })
+const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess()
 
 const form = reactive({
   email: '',
@@ -54,7 +55,7 @@ const handleSignIn = async () => {
       <template #footer>
         <p class="text-sm text-center text-gray-500 dark:text-gray-400">
           Don't have an account?
-          <UButton variant="link" color="primary" size="sm" @click="isOpen = false">
+          <UButton variant="link" color="primary" size="sm" @click="isOpen = false; isEarlyAccessOpen = true">
             Request Early Access
           </UButton>
         </p>
