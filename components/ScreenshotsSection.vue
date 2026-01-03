@@ -93,15 +93,15 @@ watch(activeTabIndex, () => {
               <!-- Content Placeholder -->
               <div class="flex-1 overflow-hidden relative">
                 <!-- PM Screenshots -->
-                <img v-if="activeTabIndex === 0 && activeSubTabIndex === 0" src="/screenshots/discovery-placeholder.png" class="w-full h-full object-cover" />
-                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 1" src="/screenshots/rfq-creation-placeholder.png" class="w-full h-full object-cover" />
-                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 2" src="/screenshots/quote-comparison-placeholder.png" class="w-full h-full object-cover" />
-                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 3" src="/screenshots/communication-placeholder.png" class="w-full h-full object-cover" />
+                <img v-if="activeTabIndex === 0 && activeSubTabIndex === 0" src="https://placehold.co/1600x1000/ffffff/004b8d?text=Vendor+Discovery" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 1" src="https://placehold.co/1600x1000/ffffff/004b8d?text=RFQ+Creation" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 2" src="https://placehold.co/1600x1000/ffffff/004b8d?text=Quote+Comparison" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 0 && activeSubTabIndex === 3" src="https://placehold.co/1600x1000/ffffff/004b8d?text=Vendor+Communication" class="w-full h-full object-cover" />
                 
                 <!-- Vendor Screenshots -->
-                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 0" src="/screenshots/vendor-profile-placeholder.png" class="w-full h-full object-cover" />
-                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 1" src="/screenshots/rfq-opps-placeholder.png" class="w-full h-full object-cover" />
-                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 2" src="/screenshots/quote-submission-placeholder.png" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 0" src="https://placehold.co/1600x1000/ffffff/004b8d?text=Vendor+Profile" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 1" src="https://placehold.co/1600x1000/ffffff/004b8d?text=RFQ+Opportunities" class="w-full h-full object-cover" />
+                <img v-else-if="activeTabIndex === 1 && activeSubTabIndex === 2" src="https://placehold.co/1600x1000/ffffff/004b8d?text=Quote+Submission" class="w-full h-full object-cover" />
 
                 <!-- Fallback/Default Placeholder if image fails to load -->
                 <div class="absolute inset-0 p-8 flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-900/50">
