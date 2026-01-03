@@ -56,14 +56,15 @@ const painPoints = {
 <template>
   <ULandingSection
     title="Why Rysmaan Matters"
-    description="Addressing the core challanges connecting the right projects with the right partners"
+    description="Addressing the core challenges connecting the right projects with the right partners"
+    :ui="{ title: 'text-3xl sm:text-4xl', description: 'text-lg sm:text-xl' }"
   >
     <div class="grid lg:grid-cols-2 gap-16 lg:gap-32 max-w-7xl mx-auto">
       <!-- Project Managers -->
       <div class="space-y-12">
         <div class="flex items-center gap-3">
           <UIcon name="i-heroicons-briefcase" class="w-10 h-10 text-primary" />
-          <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
           <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-4">
@@ -84,7 +85,7 @@ const painPoints = {
       <div class="space-y-12">
         <div class="flex items-center gap-3">
           <UIcon name="i-heroicons-building-office" class="w-10 h-10 text-primary" />
-          <h3 class="text-3xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
           <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-4">

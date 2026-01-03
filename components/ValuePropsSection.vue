@@ -20,11 +20,11 @@ const props = defineProps<{
         <div v-for="(prop, index) in valueProps" :key="index" class="flex flex-col">
           <div class="flex items-center gap-x-3">
             <UIcon :name="prop.icon" class="w-8 h-8 text-primary-500" />
-            <h2 class="text-2xl font-bold">
+            <h2 class="text-3xl font-bold">
               {{ prop.title }}
             </h2>
           </div>
-          <p class="mt-4 text-gray-600 dark:text-gray-400">
+          <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
             {{ prop.description }}
           </p>
           <ul class="mt-8 space-y-3 flex-grow">
