@@ -19,11 +19,11 @@ const links = [
         </NuxtLink>
       </div>
 
-      <div class="flex items-center gap-3">
-        <UButton variant="ghost" color="gray" @click="isSignInOpen = true">
+      <div class="flex items-center gap-4">
+        <UButton variant="ghost" color="gray" size="lg" class="font-semibold" @click="isSignInOpen = true">
           Sign In
         </UButton>
-        <UButton color="primary" @click="isEarlyAccessOpen = true">
+        <UButton color="primary" size="lg" class="font-semibold" @click="isEarlyAccessOpen = true">
           Get Early Access
         </UButton>
         <UColorModeButton />
