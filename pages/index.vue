@@ -158,27 +158,25 @@ const landingData = {
 
 <template>
   <div class="space-y-0">
-    <UContainer>
-      <HeroSection
-        :title="landingData.hero.title"
-        :description="landingData.hero.description"
-        :cta="landingData.hero.cta"
-      />
-    </UContainer>
+    <HeroSection
+      :title="landingData.hero.title"
+      :description="landingData.hero.description"
+      :cta="landingData.hero.cta"
+    />
 
     <EarlyAccessModal v-model:is-open="isModalOpen" />
 
-    <WhyRysmaanSection />
+    <WhyRysmaanSection class="bg-gray-50 dark:bg-gray-900" />
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-0' }">
+    <ULandingSection>
       <ValuePropsSection :value-props="landingData.valueProps" />
     </ULandingSection>
 
-    <ULandingSection>
+    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
       <HowItWorksSection :how-it-works="landingData.howItWorks" />
     </ULandingSection>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900">
+    <ULandingSection>
       <ScreenshotsSection />
     </ULandingSection>
 
