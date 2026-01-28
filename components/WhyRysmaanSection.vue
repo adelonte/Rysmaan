@@ -68,12 +68,14 @@ const painPoints = {
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
-          <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-2">
+          <div v-for="item in painPoints.pm.items" :key="item.title" class="group flex flex-col gap-2 p-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-300">
             <div class="flex items-center gap-2">
               <UIcon :name="item.icon" class="w-5 h-5 text-primary shrink-0" />
               <h4 class="font-bold text-base text-gray-900 dark:text-white leading-tight">{{ item.title }}</h4>
             </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto overflow-hidden">
+              {{ item.description }}
+            </p>
           </div>
         </div>
       </div>
@@ -85,12 +87,14 @@ const painPoints = {
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
-          <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-2">
+          <div v-for="item in painPoints.vendor.items" :key="item.title" class="group flex flex-col gap-2 p-4 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-300">
             <div class="flex items-center gap-2">
               <UIcon :name="item.icon" class="w-5 h-5 text-primary shrink-0" />
               <h4 class="font-bold text-base text-gray-900 dark:text-white leading-tight">{{ item.title }}</h4>
             </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-0 group-hover:h-auto overflow-hidden">
+              {{ item.description }}
+            </p>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ const props = defineProps<{
         </p>
       </div>
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <div v-for="(prop, index) in valueProps" :key="index" class="flex flex-col p-8 bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
+        <div v-for="(prop, index) in valueProps" :key="index" class="group flex flex-col p-8 bg-white dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-300">
           <div class="flex items-center gap-x-3 mb-6">
             <div class="p-3 bg-primary-50 dark:bg-primary-900/30 rounded-xl">
               <UIcon :name="prop.icon" class="w-8 h-8 text-primary-500" />
@@ -34,7 +34,7 @@ const props = defineProps<{
           <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 font-medium">
             {{ prop.description }}
           </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow opacity-0 group-hover:opacity-100 transition-all duration-300 h-0 group-hover:h-auto overflow-hidden">
             <div v-for="(feature, idx) in prop.features" :key="idx" class="flex items-start gap-x-3">
               <UIcon name="i-heroicons-check-circle" class="w-5 h-5 shrink-0 text-primary-500 mt-0.5" />
               <span class="text-sm text-gray-700 dark:text-gray-300 leading-snug">{{ feature }}</span>
