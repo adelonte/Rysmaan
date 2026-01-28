@@ -10,20 +10,20 @@ const links = [
 </script>
 
 <template>
-  <header class="h-32 flex items-center bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800">
-    <nav class="flex items-center justify-between w-full px-4 sm:px-6 lg:px-8">
+  <header class="h-20 flex items-center bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-800 sticky top-0 z-50">
+    <nav class="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center">
         <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="Rysmaan Logo" class="h-24 w-auto mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
-          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-24 w-auto mix-blend-screen brightness-200 contrast-200" />
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-10 w-auto mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
+          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-10 w-auto mix-blend-screen brightness-200 contrast-200" />
         </NuxtLink>
       </div>
 
-      <div class="flex items-center gap-4">
-        <UButton variant="ghost" color="gray" size="lg" class="font-semibold" @click="isSignInOpen = true">
+      <div class="flex items-center gap-6">
+        <UButton variant="ghost" color="gray" size="md" class="font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" @click="isSignInOpen = true">
           Sign In
         </UButton>
-        <UButton color="primary" size="lg" class="font-semibold" @click="isEarlyAccessOpen = true">
+        <UButton color="primary" size="md" class="font-semibold px-6 rounded-full" @click="isEarlyAccessOpen = true">
           Get Early Access
         </UButton>
         <UColorModeButton />

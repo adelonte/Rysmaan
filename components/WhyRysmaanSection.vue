@@ -57,7 +57,7 @@ const painPoints = {
   <ULandingSection
     title="Why Rysmaan Matters"
     description="Addressing the core challenges connecting the right projects with the right partners"
-    :ui="{ wrapper: 'py-20 sm:py-24', title: 'text-3xl sm:text-4xl', description: 'text-lg sm:text-xl' }"
+    :ui="{ wrapper: 'py-20 sm:py-28', title: 'text-3xl sm:text-4xl font-bold tracking-tight mb-4', description: 'text-lg sm:text-xl text-gray-500 dark:text-gray-400' }"
     v-bind="$attrs"
   >
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">

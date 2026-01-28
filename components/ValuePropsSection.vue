@@ -15,9 +15,9 @@ const props = defineProps<{
 
 <template>
   <UContainer>
-    <div>
+    <div class="py-20 sm:py-28">
       <div class="text-center mb-16">
-        <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-medium">
+        <p class="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
           An intuitive platform to discover vendors, showcase qualifications, and streamline your RFQ process
         </p>
       </div>
