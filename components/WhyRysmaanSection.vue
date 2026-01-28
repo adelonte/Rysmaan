@@ -57,48 +57,40 @@ const painPoints = {
   <ULandingSection
     title="Why Rysmaan Matters"
     description="Addressing the core challenges connecting the right projects with the right partners"
-    :ui="{ wrapper: 'py-24 sm:py-32', title: 'text-3xl sm:text-4xl', description: 'text-lg sm:text-xl' }"
+    :ui="{ wrapper: 'py-20 sm:py-24', title: 'text-3xl sm:text-4xl', description: 'text-lg sm:text-xl' }"
     v-bind="$attrs"
   >
-    <div class="grid lg:grid-cols-2 gap-16 lg:gap-32 max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
       <!-- Project Managers -->
-      <div class="space-y-12">
-        <div class="flex items-center gap-3">
-          <UIcon name="i-heroicons-briefcase" class="w-10 h-10 text-primary" />
+      <div class="bg-white dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+        <div class="flex items-center gap-3 mb-8">
+          <UIcon name="i-heroicons-briefcase" class="w-8 h-8 text-primary" />
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.pm.title }}</h3>
         </div>
-        <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
-          <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-4">
-            <div class="flex items-center gap-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
-              </div>
-              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div v-for="item in painPoints.pm.items" :key="item.title" class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <UIcon :name="item.icon" class="w-5 h-5 text-primary shrink-0" />
+              <h4 class="font-bold text-base text-gray-900 dark:text-white leading-tight">{{ item.title }}</h4>
             </div>
-            <div>
-              <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
-            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
           </div>
         </div>
       </div>
 
       <!-- Vendors -->
-      <div class="space-y-12">
-        <div class="flex items-center gap-3">
+      <div class="bg-white dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+        <div class="flex items-center gap-3 mb-8">
           <UIcon name="i-heroicons-building-office" class="w-10 h-10 text-primary" />
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ painPoints.vendor.title }}</h3>
         </div>
-        <div class="grid sm:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-10">
-          <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-4">
-            <div class="flex items-center gap-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <UIcon :name="item.icon" class="w-7 h-7 text-primary" />
-              </div>
-              <h4 class="font-bold text-lg text-gray-900 dark:text-white leading-tight min-h-[3.5rem] flex items-center">{{ item.title }}</h4>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div v-for="item in painPoints.vendor.items" :key="item.title" class="flex flex-col gap-2">
+            <div class="flex items-center gap-2">
+              <UIcon :name="item.icon" class="w-5 h-5 text-primary shrink-0" />
+              <h4 class="font-bold text-base text-gray-900 dark:text-white leading-tight">{{ item.title }}</h4>
             </div>
-            <div>
-              <p class="text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
-            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{{ item.description }}</p>
           </div>
         </div>
       </div>
