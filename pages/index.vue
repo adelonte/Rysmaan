@@ -4,7 +4,7 @@ const { isModalOpen } = useEarlyAccess()
 const landingData = {
   hero: {
     title: "Simplified, Trusted Partnerships",
-    description: "Rysmaan’s secure platform helps project managers find and evaluate qualified local vendors, while giving vendors visibility to projects that need their expertise. Streamline your RFQ process and build better partnerships",
+    description: "Simplified software for project managers in solo, small, and mid-sized firms, as well as service providers across all engineering disciplines. Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.",
     cta: {
       primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
       secondary: { label: "Join as Vendor", to: "/auth/signup?role=vendor" }
