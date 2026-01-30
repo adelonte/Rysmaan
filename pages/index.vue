@@ -3,7 +3,7 @@ const { isModalOpen } = useEarlyAccess()
 
 const landingData = {
   hero: {
-    title: "Simplified software for project managers in solo, small, and mid-sized firms, as well as service providers across all engineering disciplines.",
+    title: "Simplified software for project managers in solo, small, and mid-sized firms, as well as service providers across all engineering disciplines",
     description: "Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.",
     cta: {
       primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
