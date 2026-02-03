@@ -3,13 +3,25 @@ const isOpen = defineModel<boolean>('isOpen', { default: false })
 
 const state = reactive({
   name: '',
-  email: '',
   company: '',
-  location: '',
-  role: '',
-  interestType: '',
-  phone: ''
+  email: ''
 })
+
+const validate = (state: any) => {
+  const errors = []
+  if (!state.name) errors.push({ path: 'name', message: 'Name is required' })
+  if (!state.company) errors.push({ path: 'company', message: 'Company is required' })
+  if (!state.email) {
+    errors.push({ path: 'email', message: 'Work email is required' })
+  } else {
+    const personalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'me.com', 'aol.com', 'msn.com', 'live.com']
+    const domain = state.email.split('@')[1]?.toLowerCase()
+    if (personalDomains.includes(domain)) {
+      errors.push({ path: 'email', message: 'Please use a work email address' })
+    }
+  }
+  return errors
+}
 
 const isSubmitted = ref(false)
 const loading = ref(false)
@@ -17,10 +29,9 @@ const loading = ref(false)
 async function onSubmit() {
   loading.value = true
   try {
-    await $fetch('/api/early-access', {
-      method: 'POST',
-      body: state
-    })
+    // In a real app, this would be an API call
+    console.log('Submitted:', state)
+    await new Promise(resolve => setTimeout(resolve, 1000))
     isSubmitted.value = true
   } catch (error) {
     console.error('Submission failed', error)
@@ -35,63 +46,46 @@ async function onSubmit() {
     <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
       <template #header>
         <div class="flex items-center justify-between">
-          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            {{ isSubmitted ? 'Registration Successful' : 'Get Early Access' }}
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+            {{ isSubmitted ? 'Request Sent' : 'Request Early Access' }}
           </h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark" class="-my-1" @click="isOpen = false" />
         </div>
       </template>
 
-      <div v-if="!isSubmitted" class="p-4">
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Fill out the form below to join our early access program.
-        </p>
-
-        <UForm :state="state" @submit="onSubmit">
-          <UFormGroup label="Name" name="name" required class="mb-4">
-            <UInput v-model="state.name" placeholder="John Doe" required />
+      <div v-if="!isSubmitted">
+        <UForm :state="state" :validate="validate" class="space-y-4 p-4" @submit="onSubmit">
+          <UFormGroup label="Name" name="name">
+            <UInput v-model="state.name" placeholder="John Doe" size="lg" />
           </UFormGroup>
 
-          <UFormGroup label="Email" name="email" required class="mb-4">
-            <UInput v-model="state.email" type="email" placeholder="john@example.com" required />
+          <UFormGroup label="Company" name="company">
+            <UInput v-model="state.company" placeholder="ACME Inc." size="lg" />
           </UFormGroup>
 
-          <UFormGroup label="Company/Organization" name="company" required class="mb-4">
-            <UInput v-model="state.company" placeholder="ACME Inc." required />
+          <UFormGroup label="Work Email" name="email">
+            <UInput v-model="state.email" type="email" placeholder="john@company.com" size="lg" />
           </UFormGroup>
 
-          <UFormGroup label="Location" name="location" required class="mb-4">
-            <UInput v-model="state.location" placeholder="City, Country" required />
-          </UFormGroup>
-
-          <UFormGroup label="Role/Position (Optional)" name="role" class="mb-4">
-            <UInput v-model="state.role" placeholder="Product Manager" />
-          </UFormGroup>
-
-          <UFormGroup label="Interest Type (Optional)" name="interestType" class="mb-4">
-            <USelect v-model="state.interestType" :options="['Early Access', 'Product Launch', 'Partnership Opportunities', 'Other']" placeholder="Select interest" />
-          </UFormGroup>
-
-          <UFormGroup label="Phone (Optional)" name="phone" class="mb-4">
-            <UInput v-model="state.phone" type="tel" placeholder="+1 (555) 000-0000" />
-          </UFormGroup>
-
-          <div class="flex justify-end gap-3 mt-6">
-            <UButton variant="ghost" color="gray" @click="isOpen = false">Cancel</UButton>
-            <UButton type="submit" color="primary" :loading="loading">Submit</UButton>
+          <div class="pt-4">
+            <UButton type="submit" block size="xl" color="primary" :loading="loading">
+              Submit Request
+            </UButton>
           </div>
         </UForm>
       </div>
 
       <div v-else class="p-8 text-center">
         <UIcon name="i-heroicons-check-circle" class="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <p class="text-lg font-medium text-gray-900 dark:text-white mb-2">
-          Thank you for your interest!
+        <p class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+          Request Received
         </p>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          We’ll keep you updated with the latest news and opportunities. We respect your privacy. Your information will never be shared and you can unsubscribe anytime.
+        <p class="text-gray-500 dark:text-gray-400">
+          Thank you for your interest! We'll review your request and get back to you shortly at your work email.
         </p>
-        <UButton class="mt-6" color="primary" @click="isOpen = false">Close</UButton>
+        <UButton class="mt-6" color="primary" block size="lg" @click="isOpen = false">
+          Close
+        </UButton>
       </div>
     </UCard>
   </UModal>

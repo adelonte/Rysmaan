@@ -9,15 +9,6 @@
         <p class="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
           Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.
         </p>
-        
-        <div class="mt-10 flex flex-wrap justify-center gap-4">
-          <UButton size="xl" color="primary" class="rounded-full px-8" @click="isModalOpen = true">
-            Get Early Access
-          </UButton>
-          <UButton size="xl" variant="ghost" color="gray" class="rounded-full px-8" @click="isModalOpen = true">
-            See it in action
-          </UButton>
-        </div>
       </div>
     </div>
 
@@ -121,6 +112,21 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- 6. Footer CTA -->
+    <div class="py-20 sm:py-32 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+          Ready to take your company to the next level?
+        </h2>
+        <p class="text-xl text-gray-500 dark:text-gray-400 mb-10">
+          Join project managers and service providers who are modernizing their workflows with Rysmaan.
+        </p>
+        <UButton size="xl" color="primary" class="rounded-full px-12 py-4 text-lg font-semibold" @click="isModalOpen = true">
+          Request Early Access
+        </UButton>
       </div>
     </div>
   </div>
