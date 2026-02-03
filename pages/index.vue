@@ -1,187 +1,104 @@
-<script setup lang="ts">
-const { isModalOpen } = useEarlyAccess()
-
-const landingData = {
-  hero: {
-    title: "Simplified software for project managers in solo, small, and mid-sized firms, as well as service providers across all engineering disciplines",
-    description: "Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.",
-    cta: {
-      primary: { label: "Get Started as Project Manager", to: "/auth/signup?role=pm" },
-      secondary: { label: "Join as Vendor", to: "/auth/signup?role=vendor" }
-    }
-  },
-  valueProps: [
-    {
-      title: "Project Managers",
-      description: "One platform to manage your RFQ from start to finish",
-      features: [
-        "Find qualified vendors matched to your project needs",
-        "Build tailored RFQs that reflect your project’s scope and complexity",
-        "Share RFQs with trusted and newly qualified vendors in one step",
-        "Compare responses side-by-side using your preferred criteria",
-        "Keep all vendor communication organized in one place",
-        "Award work confidently to the right vendor"
-      ],
-      icon: "i-heroicons-briefcase"
-    },
-    {
-      title: "Vendors",
-      description: "One platform to connect your expertise with the right projects",
-      features: [
-        "Showcase your services, qualifications, and compliance to project managers",
-        "Keep your profile and certifications up to date with a few clicks",
-        "Discover RFQ opportunities that match your expertise",
-        "Prepare quotes, communicate, and track responses in one place",
-        "Build your reputation with performance metrics after project completion"
-      ],
-      icon: "i-heroicons-building-office"
-    }
-  ],
-  features: {
-    title: "Everything You Need",
-    description: "A complete platform for managing the entire RFQ-to-project lifecycle",
-    items: [
-      {
-        title: "Smart RFQ Management",
-        description: "Create detailed RFQs with service types, locations, budgets, and deadlines. Track status from draft to awarded.",
-        icon: "i-heroicons-document-text"
-      },
-      {
-        title: "Detailed Quote Comparison",
-        description: "Review quotes with line-item breakdowns, delivery dates, and payment terms. Accept or reject with feedback.",
-        icon: "i-heroicons-calculator"
-      },
-      {
-        title: "Built-in Messaging",
-        description: "Communicate directly with vendors or project managers. Thread-based conversations keep everything organized.",
-        icon: "i-heroicons-chat-bubble-left-right"
-      },
-      {
-        title: "Quote Versioning",
-        description: "Vendors can update quotes based on feedback. Track all versions and changes transparently.",
-        icon: "i-heroicons-arrow-path"
-      },
-      {
-        title: "Project Management",
-        description: "Seamless transition from accepted quote to active project with milestone tracking and status updates.",
-        icon: "i-heroicons-rectangle-group"
-      },
-      {
-        title: "Performance Analytics",
-        description: "Track response rates, win rates, and response times. Make data-driven decisions.",
-        icon: "i-heroicons-chart-bar"
-      }
-    ]
-  },
-  howItWorks: {
-    pm: {
-      title: "For Project Managers",
-      steps: [
-        {
-          title: "Define Your Requirements",
-          description: "Create and share RFQs based on your project scope, qualifications, and compliance needs.",
-          icon: "i-heroicons-clipboard-document-list"
-        },
-        {
-          title: "Discover Qualified Vendors",
-          description: "Find available vendors matched by expertise, qualifications, and compliance.",
-          icon: "i-heroicons-magnifying-glass"
-        },
-        {
-          title: "Review and Compare Responses",
-          description: "Evaluate proposals side by side using your preferred criteria.",
-          icon: "i-heroicons-chart-bar"
-        },
-        {
-          title: "Award with Confidence",
-          description: "Select the right vendor with clear documentation and decision history.",
-          icon: "i-heroicons-trophy"
-        }
-      ]
-    },
-    vendor: {
-      title: "For Vendors",
-      steps: [
-        {
-          title: "Showcase Your Capabilities",
-          description: "Present your services, qualifications, and compliance in a single profile.",
-          icon: "i-heroicons-shield-check"
-        },
-        {
-          title: "Get Discovered",
-          description: "Be visible to project managers seeking qualified partners.",
-          icon: "i-heroicons-cursor-arrow-ripple"
-        },
-        {
-          title: "Respond and Communicate",
-          description: "Submit quotes and communicate clearly in one place.",
-          icon: "i-heroicons-chat-bubble-left-right"
-        },
-        {
-          title: "Build Your Track Record",
-          description: "Strengthen your reputation through performance metrics after project completion.",
-          icon: "i-heroicons-chart-bar-square"
-        }
-      ]
-    }
-  },
-  testimonials: [
-    {
-      name: "Sarah Johnson",
-      role: "Construction Project Manager",
-      company: "BuildCo",
-      avatar: "https://avatar.vercel.sh/sarah",
-      quote: "Rysmaan cut our procurement time in half. We now receive 3-5 competitive quotes for every project."
-    },
-    {
-      name: "Michael Chen",
-      role: "General Contractor",
-      company: "Chen Construction",
-      avatar: "https://avatar.vercel.sh/michael",
-      quote: "The platform helped us find consistent work. The messaging system makes it easy to clarify requirements."
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Facilities Manager",
-      company: "Metro Properties",
-      avatar: "https://avatar.vercel.sh/emily",
-      quote: "Quote comparison is incredibly detailed. We can see exactly what we're paying for with line-item breakdowns."
-    }
-  ],
-  cta: {
-    title: "Ready to Experience Rysmaan?",
-    description: "Join project managers and vendors connect more effectively on one platform",
-    primary: { label: "Get Started" }
-  }
-}
-</script>
-
 <template>
-  <div class="space-y-0">
-    <HeroSection
-      :title="landingData.hero.title"
-      :description="landingData.hero.description"
-      :cta="landingData.hero.cta"
-    />
+  <div class="space-y-0 bg-white dark:bg-gray-900">
+    <!-- 1. Intro Section -->
+    <div class="py-20 sm:py-28 lg:py-32">
+      <div class="text-center max-w-5xl mx-auto px-4">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-5xl text-gray-900 dark:text-white mb-8 leading-[1.2]">
+          Simplified software for project managers in solo, small, and mid-sized firms, along with service providers across all engineering disciplines.
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.
+        </p>
+        
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <UButton size="xl" color="primary" class="rounded-full px-8" @click="isModalOpen = true">
+            Get Early Access
+          </UButton>
+          <UButton size="xl" variant="ghost" color="gray" class="rounded-full px-8" @click="isModalOpen = true">
+            See it in action
+          </UButton>
+        </div>
+      </div>
+    </div>
 
     <EarlyAccessModal v-model:is-open="isModalOpen" />
 
-    <WhyRysmaanSection class="bg-gray-50 dark:bg-gray-900" />
+    <!-- 2. Big Image Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-32">
+      <div class="aspect-[16/9] bg-gray-100 dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-2xl overflow-hidden flex items-center justify-center group cursor-pointer hover:border-primary-200 dark:hover:border-primary-800 transition-colors">
+        <div class="text-center">
+          <UIcon name="i-heroicons-play-circle" class="w-20 h-20 text-gray-300 dark:text-gray-600 group-hover:text-primary-500 transition-colors mb-4 mx-auto" />
+          <p class="text-gray-400 dark:text-gray-500 font-medium">Main Product Interface Screenshot / Video</p>
+        </div>
+      </div>
+    </div>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-20 sm:py-28' }">
-      <ValuePropsSection :value-props="landingData.valueProps" />
-    </ULandingSection>
+    <!-- 3. Core Value Text Section -->
+    <div class="py-20 sm:py-32 bg-gray-50 dark:bg-gray-950/50">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">
+          Made for Project Managers and Service Providers
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+          Rysmaan is built by engineers who have managed real-world projects and faced the challenge of finding qualified vendors. It provides practical tools that effectively streamline workflows and strengthen your teams.
+        </p>
+      </div>
+    </div>
 
-    <ULandingSection :ui="{ wrapper: 'py-20 sm:py-28' }">
-      <HowItWorksSection :how-it-works="landingData.howItWorks" />
-    </ULandingSection>
+    <!-- 4. Triple Feature Cards -->
+    <div class="py-20 sm:py-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <!-- Card 1 -->
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <div class="p-2 bg-primary-50 dark:bg-primary-900/30 rounded-lg">
+                <UIcon name="i-heroicons-briefcase" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                Purpose-built for Project Managers
+              </h3>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Rysmaan was developed to empower project managers in small- to mid-sized firms to do their best work. Every feature is intentionally designed to help teams focus on what they do best: building on budget/schedule projects.
+            </p>
+          </div>
 
-    <ULandingSection class="bg-gray-50 dark:bg-gray-900" :ui="{ wrapper: 'py-20 sm:py-28' }">
-      <ScreenshotsSection />
-    </ULandingSection>
+          <!-- Card 2 -->
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <div class="p-2 bg-primary-50 dark:bg-primary-900/30 rounded-lg">
+                <UIcon name="i-heroicons-sparkles" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                Purpose-built for Service Providers
+              </h3>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Rysmaan enables you to showcase your expertise and capabilities to those who looking for it at the right time. It is designed to help your team to focus on what really matters: delivering quality work.
+            </p>
+          </div>
 
-    <ULandingSection :ui="{ wrapper: 'py-20 sm:py-28' }">
-      <CTASection :cta="landingData.cta" />
-    </ULandingSection>
+          <!-- Card 3 -->
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <div class="p-2 bg-primary-50 dark:bg-primary-900/30 rounded-lg">
+                <UIcon name="i-heroicons-cpu-chip" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                Meticulously crafted
+              </h3>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+              Gone are the days of clunky, slow, and bloated tools. Rysmaan is snappy, speedy, and a pleasure to use. It's intuitive and easy to learn, but flexible enough to adapt to your team’s unique way of working.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const { isModalOpen } = useEarlyAccess()
+</script>
