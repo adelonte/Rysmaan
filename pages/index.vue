@@ -46,7 +46,7 @@
     </div>
 
     <!-- 4. Triple Feature Cards -->
-    <div class="py-20 sm:py-32">
+    <div class="py-20 sm:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
           <!-- Card 1 -->
@@ -96,9 +96,64 @@
         </div>
       </div>
     </div>
+
+    <!-- 5. All Features Section (Alternating) -->
+    <div class="bg-gray-50 dark:bg-gray-950/50 py-20 sm:py-28 space-y-24 sm:space-y-32">
+      <div v-for="(feature, index) in detailedFeatures" :key="index" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:items-center gap-12 lg:gap-20" :class="index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'">
+          <!-- Text Content -->
+          <div class="flex-1 space-y-6">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {{ feature.title }}
+            </h2>
+            <p class="text-xl text-gray-500 dark:text-gray-400 leading-relaxed">
+              {{ feature.description }}
+            </p>
+          </div>
+          
+          <!-- Image Placeholder -->
+          <div class="flex-1">
+            <div class="aspect-[4/3] bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl flex items-center justify-center p-8">
+              <div class="text-center">
+                <UIcon :name="feature.icon" class="w-16 h-16 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
+                <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual representation for <br/> {{ feature.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const { isModalOpen } = useEarlyAccess()
+
+const detailedFeatures = [
+  {
+    title: "Project-Centric Platform",
+    description: "An all-in-one place to procure your projects, with a level of detail tailored to your needs.",
+    icon: "i-heroicons-rectangle-stack"
+  },
+  {
+    title: "Tender and Vendor Management",
+    description: "Create RFQs, deliver them to your trusted vendors, receive quotes, communicate, compare proposals, evaluate vendors, and award services within a single platform. No more buried and scattered emails or messages.",
+    icon: "i-heroicons-document-check"
+  },
+  {
+    title: "Vendors Visibility",
+    description: "Let your preferred vendors keep their services and qualifications up to date. Project managers always have real-time visibility into the most current vendor information.",
+    icon: "i-heroicons-eye"
+  },
+  {
+    title: "Risk Identification",
+    description: "Don’t worry about missing deadlines to send out RFQs, submit quotes, or award contracts. Rysmaan has your back, helping both project managers and service providers stay on track while managing multiple projects.",
+    icon: "i-heroicons-exclamation-triangle"
+  },
+  {
+    title: "Central Repository",
+    description: "Gone are the days of storing contracts and important documents across a web of emails, shared drives, or project servers. Rysmaan enables you to centrally store contracts and supporting documents in one place.",
+    icon: "i-heroicons-folder-open"
+  }
+]
 </script>
