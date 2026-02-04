@@ -50,7 +50,30 @@ The build outputs to `.output/` directory.
 - Development server: Port 5000 (configured for Replit proxy compatibility)
 - HMR uses WSS protocol on port 443
 
+## Design Specifications (Constructable.ai-inspired)
+
+### Typography
+- **H1 (Hero)**: `text-[32px] md:text-[48px]`, `font-bold`, `leading-[1.15]`, `tracking-[-0.02em]`
+- **H2 (Sections)**: `text-[28px] md:text-[40px]`, `font-bold`, `leading-[1.2]`
+- **Feature Titles**: `text-[24px] md:text-[32px]`, `font-bold`
+- **Card Titles**: `text-[16px]`, `font-bold`
+- **Body Text**: `text-[15px]-[18px]`, `leading-[1.6]`, `text-gray-500`
+- **Font Family**: Inter (via @nuxt/fonts)
+
+### Spacing
+- **Section Gaps**: `gap-12 md:gap-20 lg:gap-32`
+- **Container Padding**: `px-4 md:px-8 xl:px-16`
+- **Section Padding**: `py-20 md:py-28`
+
+### Colors
+- **Primary**: Navy blue RGB(0, 75, 141) - `#004B8D`
+- **Highlighted Text**: `text-primary-500` for accent words
+- **Body Text**: `text-gray-500`
+
 ## Recent Changes
-- 2026-02-04: Updated all styling to match Constructable.ai specifications (Inter font, h-16 header, text-4xl/md:text-5xl font-semibold headings, gap-6/8/16/24 spacing, px-4/md:px-8/xl:px-16 container padding)
+- 2026-02-04: Refined all typography with precise pixel values to match Constructable.ai exactly (48px H1 font-bold, 18px subheading, tracking-[-0.02em])
+- 2026-02-04: Added black "See it in action" CTA button with arrow in hero section
+- 2026-02-04: Added blue highlight to "Simplified" word in H1
+- 2026-02-04: Updated all styling to match Constructable.ai specifications (Inter font, h-16 header)
 - 2026-02-04: Added @nuxt/fonts module for Inter font family
 - 2025-12-23: Configured for Replit environment (port 5000, HMR settings)
