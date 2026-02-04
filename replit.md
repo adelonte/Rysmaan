@@ -51,4 +51,6 @@ The build outputs to `.output/` directory.
 - HMR uses WSS protocol on port 443
 
 ## Recent Changes
+- 2026-02-04: Updated all styling to match Constructable.ai specifications (Inter font, h-16 header, text-4xl/md:text-5xl font-semibold headings, gap-6/8/16/24 spacing, px-4/md:px-8/xl:px-16 container padding)
+- 2026-02-04: Added @nuxt/fonts module for Inter font family
 - 2025-12-23: Configured for Replit environment (port 5000, HMR settings)
