@@ -13,9 +13,9 @@ const links = [
   <header class="h-20 flex items-center bg-white border-b border-gray-100 dark:bg-gray-900 dark:border-gray-800 sticky top-0 z-50">
     <nav class="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center">
-        <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="Rysmaan Logo" class="h-10 w-auto mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
-          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-10 w-auto mix-blend-screen brightness-200 contrast-200" />
+        <NuxtLink to="/" class="flex items-center gap-3">
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-14 w-auto mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
+          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-14 w-auto mix-blend-screen brightness-200 contrast-200" />
         </NuxtLink>
       </div>
 
