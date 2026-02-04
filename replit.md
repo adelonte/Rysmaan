@@ -72,10 +72,9 @@ The build outputs to `.output/` directory.
 
 ### Sticky Scroll Feature
 - Feature sections use CSS `position: sticky` for engaging scroll experience
-- Text content pins at `top-40` while images scroll normally
-- Each feature section has `min-h-screen` for adequate scroll space
-- Alternating layout preserved with `md:flex-row-reverse`
-- "Feature X" indicator with blue accent line for visual hierarchy
+- Text content pins at `top-32` while images scroll normally (desktop only)
+- Uses CSS Grid layout with `md:order-1/2` for alternating layout
+- Spacing between features: `mb-20 md:mb-32` for scroll distance
 
 ## Recent Changes
 - 2026-02-04: Implemented sticky scroll effect for feature sections (text pins while images scroll)
