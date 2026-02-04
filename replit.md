@@ -70,7 +70,15 @@ The build outputs to `.output/` directory.
 - **Highlighted Text**: `text-primary-500` for accent words
 - **Body Text**: `text-gray-500`
 
+### Sticky Scroll Feature
+- Feature sections use CSS `position: sticky` for engaging scroll experience
+- Text content pins at `top-40` while images scroll normally
+- Each feature section has `min-h-screen` for adequate scroll space
+- Alternating layout preserved with `md:flex-row-reverse`
+- "Feature X" indicator with blue accent line for visual hierarchy
+
 ## Recent Changes
+- 2026-02-04: Implemented sticky scroll effect for feature sections (text pins while images scroll)
 - 2026-02-04: Refined all typography with precise pixel values to match Constructable.ai exactly (48px H1 font-bold, 18px subheading, tracking-[-0.02em])
 - 2026-02-04: Added black "See it in action" CTA button with arrow in hero section
 - 2026-02-04: Added blue highlight to "Simplified" word in H1
