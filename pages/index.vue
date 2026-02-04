@@ -12,7 +12,7 @@
           Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.
         </p>
         <div class="flex justify-start md:justify-center mt-6">
-          <UButton size="lg" color="black" class="rounded-full px-6 py-2.5 font-medium text-[15px]" @click="isModalOpen = true">
+          <UButton size="lg" color="primary" class="rounded-full px-6 py-2.5 font-medium text-[15px]" @click="isModalOpen = true">
             See it in action
             <UIcon name="i-heroicons-arrow-right-20-solid" class="w-4 h-4 ml-1.5" />
           </UButton>
