@@ -33,7 +33,7 @@
     <!-- 3. Core Value Text Section -->
     <div class="bg-gray-50 dark:bg-gray-950/50">
       <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto py-20 md:py-28">
-        <div class="flex flex-col gap-6 text-left md:text-center max-w-4xl mx-auto">
+        <div class="flex flex-col gap-6 text-left max-w-4xl">
           <h2 class="text-[28px] md:text-[40px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
             Made for Project Managers and Service Providers
           </h2>
