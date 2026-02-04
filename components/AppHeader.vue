@@ -9,8 +9,8 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess()
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <NuxtLink to="/" class="flex items-center space-x-2">
-            <img src="/logo.png" alt="Rysmaan Logo" class="h-8 mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
-            <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-8 mix-blend-screen brightness-200 contrast-200" />
+            <img src="/logo.png" alt="Rysmaan Logo" class="h-14 mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
+            <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-14 mix-blend-screen brightness-200 contrast-200" />
           </NuxtLink>
         </div>
 
