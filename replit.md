@@ -79,7 +79,7 @@ The build outputs to `.output/` directory.
 - Mobile: Falls back to regular stacked layout (no sticky effect)
 
 ## Recent Changes
-- 2026-02-04: Implemented sticky scroll effect for feature sections (text pins while images scroll)
+- 2026-02-04: Implemented JavaScript-based sticky scroll with IntersectionObserver for feature sections
 - 2026-02-04: Refined all typography with precise pixel values to match Constructable.ai exactly (48px H1 font-bold, 18px subheading, tracking-[-0.02em])
 - 2026-02-04: Added black "See it in action" CTA button with arrow in hero section
 - 2026-02-04: Added blue highlight to "Simplified" word in H1
