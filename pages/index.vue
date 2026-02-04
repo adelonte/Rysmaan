@@ -96,26 +96,65 @@
 
     <!-- 5. All Features Section (Sticky Scroll) -->
     <div class="bg-gray-50 dark:bg-gray-950/50 py-20 md:py-28">
-      <div v-for="(feature, index) in detailedFeatures" :key="index" class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-20 md:mb-32 last:mb-0">
-          <!-- Text Content - Sticky on desktop -->
-          <div class="md:sticky md:top-32 md:h-fit" :class="index % 2 === 0 ? 'md:order-1' : 'md:order-2'">
+      <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
+        <!-- Mobile: Regular stacked layout -->
+        <div class="md:hidden flex flex-col gap-16">
+          <div v-for="(feature, index) in detailedFeatures" :key="index" class="flex flex-col gap-6">
             <div class="flex flex-col gap-4">
-              <h2 class="text-[24px] md:text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
+              <h2 class="text-[24px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
                 {{ feature.title }}
               </h2>
-              <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-lg">
+              <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400">
                 {{ feature.description }}
               </p>
             </div>
-          </div>
-          
-          <!-- Image Placeholder -->
-          <div :class="index % 2 === 0 ? 'md:order-2' : 'md:order-1'">
             <div class="aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8">
               <div class="text-center">
                 <UIcon :name="feature.icon" class="w-14 h-14 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
                 <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop: Sticky scroll effect -->
+        <div class="hidden md:grid md:grid-cols-2 gap-16">
+          <!-- Left: Sticky text that changes based on scroll -->
+          <div class="sticky top-32 h-fit self-start">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white transition-all duration-500">
+                {{ detailedFeatures[activeFeatureIndex].title }}
+              </h2>
+              <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-lg transition-all duration-500">
+                {{ detailedFeatures[activeFeatureIndex].description }}
+              </p>
+              <!-- Progress indicators -->
+              <div class="flex gap-2 mt-6">
+                <button 
+                  v-for="(_, idx) in detailedFeatures" 
+                  :key="idx"
+                  @click="scrollToFeature(idx)"
+                  class="w-2 h-2 rounded-full transition-all duration-300"
+                  :class="idx === activeFeatureIndex ? 'bg-primary-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
+                />
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right: Scrolling images -->
+          <div class="flex flex-col gap-32">
+            <div 
+              v-for="(feature, index) in detailedFeatures" 
+              :key="index"
+              :ref="el => featureRefs[index] = el"
+              class="min-h-[60vh] flex items-center"
+            >
+              <div class="w-full aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8 transition-all duration-500"
+                   :class="index === activeFeatureIndex ? 'scale-100 opacity-100' : 'scale-95 opacity-70'">
+                <div class="text-center">
+                  <UIcon :name="feature.icon" class="w-14 h-14 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
+                  <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -172,4 +211,47 @@ const detailedFeatures = [
     icon: "i-heroicons-folder-open"
   }
 ]
+
+const activeFeatureIndex = ref(0)
+const featureRefs = ref<(HTMLElement | null)[]>([])
+const observer = ref<IntersectionObserver | null>(null)
+
+const scrollToFeature = (index: number) => {
+  const element = featureRefs.value[index]
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    observer.value = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = featureRefs.value.findIndex((ref) => ref === entry.target)
+            if (index !== -1) {
+              activeFeatureIndex.value = index
+            }
+          }
+        })
+      },
+      {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0
+      }
+    )
+
+    featureRefs.value.forEach((ref) => {
+      if (ref && observer.value) observer.value.observe(ref)
+    })
+  })
+})
+
+onUnmounted(() => {
+  if (observer.value) {
+    observer.value.disconnect()
+  }
+})
 </script>

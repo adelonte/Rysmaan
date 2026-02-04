@@ -70,11 +70,13 @@ The build outputs to `.output/` directory.
 - **Highlighted Text**: `text-primary-500` for accent words
 - **Body Text**: `text-gray-500`
 
-### Sticky Scroll Feature
-- Feature sections use CSS `position: sticky` for engaging scroll experience
-- Text content pins at `top-32` while images scroll normally (desktop only)
-- Uses CSS Grid layout with `md:order-1/2` for alternating layout
-- Spacing between features: `mb-20 md:mb-32` for scroll distance
+### Sticky Scroll Feature (JavaScript-based)
+- Desktop: Text stays fixed on left while images scroll on right
+- Uses IntersectionObserver to detect which image is visible
+- Active feature text updates dynamically based on scroll position
+- Progress indicators (dots) show current feature and allow click navigation
+- Images have scale/opacity transitions when becoming active
+- Mobile: Falls back to regular stacked layout (no sticky effect)
 
 ## Recent Changes
 - 2026-02-04: Implemented sticky scroll effect for feature sections (text pins while images scroll)
