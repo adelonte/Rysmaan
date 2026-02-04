@@ -81,8 +81,8 @@ The build outputs to `.output/` directory.
 - Mobile: Falls back to regular stacked layout
 
 ## Recent Changes
+- 2026-02-04: Implemented JavaScript-based scroll locking (offerland-style) with 150px scroll threshold and edge case handling
 - 2026-02-04: Resized feature proportions: images take 3/5 width (col-span-3), text takes 2/5 width (col-span-2) using 5-column grid
-- 2026-02-04: Added CSS scroll-snap (snap-y snap-mandatory) for smooth section locking on feature sections
 - 2026-02-04: Refined all typography with precise pixel values to match Constructable.ai exactly (48px H1 font-bold, 18px subheading, tracking-[-0.02em])
 - 2026-02-04: Added black "See it in action" CTA button with arrow in hero section
 - 2026-02-04: Added blue highlight to "Simplified" word in H1
