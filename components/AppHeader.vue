@@ -6,11 +6,11 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess()
 <template>
   <header class="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
     <nav class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-      <div class="flex h-28 items-center justify-between">
+      <div class="flex h-32 items-center justify-between">
         <div class="flex items-center">
           <NuxtLink to="/" class="flex items-center space-x-2">
-            <img src="/logo.png" alt="Rysmaan Logo" class="h-24 mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
-            <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-24 mix-blend-screen brightness-200 contrast-200" />
+            <img src="/logo.png" alt="Rysmaan Logo" class="h-28 mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
+            <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-28 mix-blend-screen brightness-200 contrast-200" />
           </NuxtLink>
         </div>
 
