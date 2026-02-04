@@ -271,35 +271,60 @@ const handleFeatureWheel = (event: WheelEvent) => {
 
 const isInFeatureContainer = ref(false)
 const lastScrollY = ref(0)
+const hasSnappedOnEntry = ref(false)
 
-const updateActiveFeatureFromScroll = () => {
-  const viewportCenter = window.innerHeight / 2
-  let closestIndex = 0
-  let closestDistance = Infinity
-  
-  featureRefs.value.forEach((ref, index) => {
-    if (ref) {
-      const rect = ref.getBoundingClientRect()
-      const elementCenter = rect.top + rect.height / 2
-      const distance = Math.abs(elementCenter - viewportCenter)
-      if (distance < closestDistance) {
-        closestDistance = distance
-        closestIndex = index
-      }
-    }
-  })
-  
-  if (!isTransitioning.value) {
-    activeFeatureIndex.value = closestIndex
+const snapToFeature = (index: number) => {
+  const element = featureRefs.value[index]
+  if (element && !isTransitioning.value) {
+    isTransitioning.value = true
+    activeFeatureIndex.value = index
     scrollAccumulator.value = 0
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setTimeout(() => {
+      isTransitioning.value = false
+    }, 600)
   }
 }
 
 onMounted(() => {
+  const firstFeatureObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.boundingClientRect.top <= window.innerHeight && entry.boundingClientRect.top > 0) {
+          if (!hasSnappedOnEntry.value && !isTransitioning.value) {
+            hasSnappedOnEntry.value = true
+            activeFeatureIndex.value = 0
+            scrollAccumulator.value = 0
+            snapToFeature(0)
+          }
+        }
+        if (!entry.isIntersecting && entry.boundingClientRect.top > window.innerHeight) {
+          hasSnappedOnEntry.value = false
+        }
+      })
+    },
+    { threshold: [0.01, 0.1, 0.2] }
+  )
+
+  const lastFeatureObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.boundingClientRect.bottom >= 0 && entry.boundingClientRect.top < 0) {
+          if (!isTransitioning.value) {
+            activeFeatureIndex.value = detailedFeatures.length - 1
+            scrollAccumulator.value = 0
+            snapToFeature(detailedFeatures.length - 1)
+          }
+        }
+      })
+    },
+    { threshold: [0.01, 0.1, 0.2] }
+  )
+
   const featureObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           const index = featureRefs.value.findIndex((ref) => ref === entry.target)
           if (index !== -1 && !isTransitioning.value) {
             activeFeatureIndex.value = index
@@ -308,24 +333,15 @@ onMounted(() => {
         }
       })
     },
-    { threshold: [0.1, 0.3, 0.5, 0.7, 0.9], rootMargin: '-10% 0px -10% 0px' }
+    { threshold: [0.3, 0.5, 0.7] }
   )
 
   const containerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isInFeatureContainer.value = true
-          const scrollingDown = window.scrollY > lastScrollY.value
-          if (scrollingDown) {
-            activeFeatureIndex.value = 0
-          } else {
-            activeFeatureIndex.value = detailedFeatures.length - 1
-          }
-          scrollAccumulator.value = 0
-          updateActiveFeatureFromScroll()
-        } else {
-          isInFeatureContainer.value = false
+        isInFeatureContainer.value = entry.isIntersecting
+        if (!entry.isIntersecting) {
+          hasSnappedOnEntry.value = false
         }
         lastScrollY.value = window.scrollY
       })
@@ -334,8 +350,12 @@ onMounted(() => {
   )
 
   nextTick(() => {
-    featureRefs.value.forEach((ref) => {
-      if (ref) featureObserver.observe(ref)
+    featureRefs.value.forEach((ref, index) => {
+      if (ref) {
+        featureObserver.observe(ref)
+        if (index === 0) firstFeatureObserver.observe(ref)
+        if (index === detailedFeatures.length - 1) lastFeatureObserver.observe(ref)
+      }
     })
     if (featureContainerRef.value) {
       containerObserver.observe(featureContainerRef.value)
@@ -345,6 +365,8 @@ onMounted(() => {
   onUnmounted(() => {
     featureObserver.disconnect()
     containerObserver.disconnect()
+    firstFeatureObserver.disconnect()
+    lastFeatureObserver.disconnect()
   })
 })
 </script>
