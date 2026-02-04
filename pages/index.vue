@@ -95,33 +95,27 @@
     </div>
 
     <!-- 5. All Features Section (Sticky Scroll) -->
-    <div class="bg-gray-50 dark:bg-gray-950/50">
-      <div v-for="(feature, index) in detailedFeatures" :key="index" class="min-h-screen">
-        <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-          <div class="flex flex-col md:flex-row gap-10 md:gap-16 py-20 md:py-28" :class="index % 2 === 0 ? '' : 'md:flex-row-reverse'">
-            <!-- Text Content - Sticky on desktop -->
-            <div class="flex-1 md:sticky md:top-40 md:self-start">
-              <div class="flex flex-col gap-4">
-                <div class="inline-flex items-center gap-2 text-primary-500 text-sm font-medium mb-2">
-                  <span class="w-8 h-[2px] bg-primary-500"></span>
-                  <span>Feature {{ index + 1 }}</span>
-                </div>
-                <h2 class="text-[24px] md:text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
-                  {{ feature.title }}
-                </h2>
-                <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-lg">
-                  {{ feature.description }}
-                </p>
-              </div>
+    <div class="bg-gray-50 dark:bg-gray-950/50 py-20 md:py-28">
+      <div v-for="(feature, index) in detailedFeatures" :key="index" class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-20 md:mb-32 last:mb-0">
+          <!-- Text Content - Sticky on desktop -->
+          <div class="md:sticky md:top-32 md:h-fit" :class="index % 2 === 0 ? 'md:order-1' : 'md:order-2'">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-[24px] md:text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
+                {{ feature.title }}
+              </h2>
+              <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-lg">
+                {{ feature.description }}
+              </p>
             </div>
-            
-            <!-- Image Placeholder -->
-            <div class="flex-1 flex items-center">
-              <div class="w-full aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8">
-                <div class="text-center">
-                  <UIcon :name="feature.icon" class="w-14 h-14 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
-                  <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
-                </div>
+          </div>
+          
+          <!-- Image Placeholder -->
+          <div :class="index % 2 === 0 ? 'md:order-2' : 'md:order-1'">
+            <div class="aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8">
+              <div class="text-center">
+                <UIcon :name="feature.icon" class="w-14 h-14 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
+                <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
               </div>
             </div>
           </div>
