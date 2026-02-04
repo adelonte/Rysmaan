@@ -21,15 +21,3 @@ body {
   background-color: rgb(0, 75, 141) !important;
 }
 
-/* Feature section scroll snap */
-.feature-snap-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  height: 100vh;
-  scroll-behavior: smooth;
-}
-
-.feature-snap-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}

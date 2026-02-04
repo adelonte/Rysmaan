@@ -70,12 +70,14 @@ The build outputs to `.output/` directory.
 - **Highlighted Text**: `text-primary-500` for accent words
 - **Body Text**: `text-gray-500`
 
-### Sticky Scroll Feature
+### Sticky Scroll Feature (Offerland-style)
 - Desktop: Full-viewport sections with text (2/5 width) and images (3/5 width, 70vh height)
 - Each feature section takes up full screen height (h-screen)
+- **JavaScript-based scroll locking**: Sections stay completely still when scrolling
+- **Scroll threshold**: Requires accumulated scroll effort (150px delta) before transitioning
 - Progress indicators (dots) show current feature and allow click navigation
+- IntersectionObserver tracks which section is visible
 - Alternating left/right layout for visual variety
-- CSS scroll-snap (mandatory + scroll-snap-stop: always) locks viewport on each section
 - Mobile: Falls back to regular stacked layout
 
 ## Recent Changes

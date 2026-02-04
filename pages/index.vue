@@ -118,13 +118,17 @@
         </div>
       </div>
 
-      <!-- Desktop: Full-screen feature sections with scroll snap -->
-      <div class="hidden md:block feature-snap-container">
+      <!-- Desktop: Full-screen feature sections with JS scroll lock -->
+      <div 
+        ref="featureContainerRef"
+        class="hidden md:block"
+        @wheel="handleFeatureWheel"
+      >
         <div 
           v-for="(feature, index) in detailedFeatures" 
           :key="index"
           :ref="el => featureRefs[index] = el"
-          class="h-screen flex items-center feature-snap-section"
+          class="h-screen flex items-center"
         >
           <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
             <div class="grid grid-cols-5 gap-10 items-center w-full">
@@ -144,7 +148,7 @@
                       :key="idx"
                       @click="scrollToFeature(idx)"
                       class="w-2 h-2 rounded-full transition-all duration-300"
-                      :class="idx === index ? 'bg-primary-500 w-6' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
+                      :class="idx === activeFeatureIndex ? 'bg-primary-500 w-6' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
                     />
                   </div>
                 </div>
@@ -216,11 +220,76 @@ const detailedFeatures = [
 ]
 
 const featureRefs = ref<(HTMLElement | null)[]>([])
+const featureContainerRef = ref<HTMLElement | null>(null)
+const activeFeatureIndex = ref(0)
+const scrollAccumulator = ref(0)
+const isTransitioning = ref(false)
+const SCROLL_THRESHOLD = 150
 
 const scrollToFeature = (index: number) => {
+  if (index < 0 || index >= detailedFeatures.length) return
+  activeFeatureIndex.value = index
   const element = featureRefs.value[index]
   if (element) {
+    isTransitioning.value = true
     element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setTimeout(() => {
+      isTransitioning.value = false
+      scrollAccumulator.value = 0
+    }, 600)
   }
 }
+
+const handleFeatureWheel = (event: WheelEvent) => {
+  if (isTransitioning.value) {
+    event.preventDefault()
+    return
+  }
+  
+  const atFirstFeature = activeFeatureIndex.value === 0
+  const atLastFeature = activeFeatureIndex.value === detailedFeatures.length - 1
+  const scrollingUp = event.deltaY < 0
+  const scrollingDown = event.deltaY > 0
+  
+  if ((atFirstFeature && scrollingUp) || (atLastFeature && scrollingDown)) {
+    scrollAccumulator.value = 0
+    return
+  }
+  
+  event.preventDefault()
+  scrollAccumulator.value += event.deltaY
+  
+  if (Math.abs(scrollAccumulator.value) >= SCROLL_THRESHOLD) {
+    if (scrollingDown && !atLastFeature) {
+      scrollToFeature(activeFeatureIndex.value + 1)
+    } else if (scrollingUp && !atFirstFeature) {
+      scrollToFeature(activeFeatureIndex.value - 1)
+    }
+    scrollAccumulator.value = 0
+  }
+}
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          const index = featureRefs.value.findIndex((ref) => ref === entry.target)
+          if (index !== -1 && !isTransitioning.value) {
+            activeFeatureIndex.value = index
+          }
+        }
+      })
+    },
+    { threshold: 0.5 }
+  )
+
+  nextTick(() => {
+    featureRefs.value.forEach((ref) => {
+      if (ref) observer.observe(ref)
+    })
+  })
+
+  onUnmounted(() => observer.disconnect())
+})
 </script>
