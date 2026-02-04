@@ -131,7 +131,7 @@
           class="h-screen flex items-center"
         >
           <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-            <div class="grid grid-cols-5 gap-10 items-start w-full">
+            <div class="grid grid-cols-5 gap-10 items-center w-full">
               <!-- Text Content (2 cols for better fit) -->
               <div class="col-span-2" :class="index % 2 === 0 ? 'order-1' : 'order-2'">
                 <div class="flex flex-col gap-4">
@@ -224,7 +224,7 @@ const featureContainerRef = ref<HTMLElement | null>(null)
 const activeFeatureIndex = ref(0)
 const scrollAccumulator = ref(0)
 const isTransitioning = ref(false)
-const SCROLL_THRESHOLD = 350
+const SCROLL_THRESHOLD = 500
 
 const scrollToFeature = (index: number) => {
   if (index < 0 || index >= detailedFeatures.length) return
@@ -273,15 +273,16 @@ onMounted(() => {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
           const index = featureRefs.value.findIndex((ref) => ref === entry.target)
           if (index !== -1 && !isTransitioning.value) {
             activeFeatureIndex.value = index
+            scrollAccumulator.value = 0
           }
         }
       })
     },
-    { threshold: 0.5 }
+    { threshold: [0.3, 0.5, 0.7] }
   )
 
   nextTick(() => {
