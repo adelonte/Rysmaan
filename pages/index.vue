@@ -118,44 +118,44 @@
         </div>
       </div>
 
-      <!-- Desktop: Full-screen scroll snap sections -->
-      <div class="hidden md:block snap-y snap-mandatory overflow-y-auto h-screen" style="scroll-behavior: smooth;">
+      <!-- Desktop: Full-screen feature sections -->
+      <div class="hidden md:block">
         <div 
           v-for="(feature, index) in detailedFeatures" 
           :key="index"
           :ref="el => featureRefs[index] = el"
-          class="min-h-screen h-screen flex items-center py-20 snap-start snap-always"
+          class="min-h-screen flex items-center py-12"
         >
-          <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-            <div class="grid grid-cols-5 gap-12 items-center" :class="index % 2 === 0 ? '' : ''">
-              <!-- Text Content (1/3 width = 2 cols) -->
-              <div class="col-span-2" :class="index % 2 === 0 ? 'order-1' : 'order-2'">
-                <div class="flex flex-col gap-4">
-                  <h2 class="text-[28px] lg:text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
+          <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto h-full flex items-center">
+            <div class="grid grid-cols-6 gap-8 items-center w-full">
+              <!-- Text Content (compact - 1 col) -->
+              <div class="col-span-1" :class="index % 2 === 0 ? 'order-1' : 'order-2'">
+                <div class="flex flex-col gap-3">
+                  <h2 class="text-[24px] lg:text-[28px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
                     {{ feature.title }}
                   </h2>
-                  <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400">
+                  <p class="text-[14px] leading-[1.6] text-gray-500 dark:text-gray-400">
                     {{ feature.description }}
                   </p>
                   <!-- Progress indicators -->
-                  <div class="flex gap-2 mt-6">
+                  <div class="flex gap-2 mt-4">
                     <button 
                       v-for="(_, idx) in detailedFeatures" 
                       :key="idx"
                       @click="scrollToFeature(idx)"
                       class="w-2 h-2 rounded-full transition-all duration-300"
-                      :class="idx === index ? 'bg-primary-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
+                      :class="idx === index ? 'bg-primary-500 w-6' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
                     />
                   </div>
                 </div>
               </div>
               
-              <!-- Image Placeholder (2/3 width = 3 cols) -->
-              <div class="col-span-3" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
-                <div class="aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8">
+              <!-- Image Placeholder (prominent - 5 cols, tall) -->
+              <div class="col-span-5" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
+                <div class="h-[70vh] bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl flex items-center justify-center">
                   <div class="text-center">
-                    <UIcon :name="feature.icon" class="w-20 h-20 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
-                    <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
+                    <UIcon :name="feature.icon" class="w-32 h-32 text-gray-200 dark:text-gray-700 mb-6 mx-auto" />
+                    <p class="text-base text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
                   </div>
                 </div>
               </div>
@@ -220,7 +220,7 @@ const featureRefs = ref<(HTMLElement | null)[]>([])
 const scrollToFeature = (index: number) => {
   const element = featureRefs.value[index]
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
 </script>

@@ -71,11 +71,11 @@ The build outputs to `.output/` directory.
 - **Body Text**: `text-gray-500`
 
 ### Sticky Scroll Feature
-- Desktop: Full-viewport sections with text (2/5 width) and images (3/5 width)
-- Each feature section takes up minimum full screen height (min-h-screen)
+- Desktop: Full-viewport sections with compact text (1/6 width) and large images (5/6 width, 70vh height)
+- Each feature section takes up full screen height (h-screen)
 - Progress indicators (dots) show current feature and allow click navigation
 - Alternating left/right layout for visual variety
-- CSS scroll-snap (snap-y snap-mandatory) for smooth section locking
+- CSS scroll-snap with proximity mode for more deliberate scrolling
 - Mobile: Falls back to regular stacked layout
 
 ## Recent Changes
