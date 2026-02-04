@@ -70,13 +70,13 @@ The build outputs to `.output/` directory.
 - **Highlighted Text**: `text-primary-500` for accent words
 - **Body Text**: `text-gray-500`
 
-### Sticky Scroll Feature (JavaScript-based)
-- Desktop: Text stays fixed on left while images scroll on right
-- Uses IntersectionObserver to detect which image is visible
-- Active feature text updates dynamically based on scroll position
+### Sticky Scroll Feature
+- Desktop: Full-viewport sections with text (2/5 width) and images (3/5 width)
+- Each feature section takes up minimum full screen height (min-h-screen)
 - Progress indicators (dots) show current feature and allow click navigation
-- Images have scale/opacity transitions when becoming active
-- Mobile: Falls back to regular stacked layout (no sticky effect)
+- Alternating left/right layout for visual variety
+- CSS scroll-snap (snap-y snap-mandatory) for smooth section locking
+- Mobile: Falls back to regular stacked layout
 
 ## Recent Changes
 - 2026-02-04: Implemented JavaScript-based sticky scroll with IntersectionObserver for feature sections

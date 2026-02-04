@@ -94,11 +94,11 @@
       </div>
     </div>
 
-    <!-- 5. All Features Section (Sticky Scroll) -->
-    <div class="bg-gray-50 dark:bg-gray-950/50 py-20 md:py-28">
-      <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-        <!-- Mobile: Regular stacked layout -->
-        <div class="md:hidden flex flex-col gap-16">
+    <!-- 5. All Features Section (Scroll Snap) -->
+    <div class="bg-gray-50 dark:bg-gray-950/50">
+      <!-- Mobile: Regular stacked layout -->
+      <div class="md:hidden py-20">
+        <div class="container px-4 sm:mx-auto flex flex-col gap-16">
           <div v-for="(feature, index) in detailedFeatures" :key="index" class="flex flex-col gap-6">
             <div class="flex flex-col gap-4">
               <h2 class="text-[24px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
@@ -116,44 +116,47 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Desktop: Sticky scroll effect -->
-        <div class="hidden md:grid md:grid-cols-2 gap-16">
-          <!-- Left: Sticky text that changes based on scroll -->
-          <div class="sticky top-32 h-fit self-start">
-            <div class="flex flex-col gap-4">
-              <h2 class="text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white transition-all duration-500">
-                {{ detailedFeatures[activeFeatureIndex].title }}
-              </h2>
-              <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-lg transition-all duration-500">
-                {{ detailedFeatures[activeFeatureIndex].description }}
-              </p>
-              <!-- Progress indicators -->
-              <div class="flex gap-2 mt-6">
-                <button 
-                  v-for="(_, idx) in detailedFeatures" 
-                  :key="idx"
-                  @click="scrollToFeature(idx)"
-                  class="w-2 h-2 rounded-full transition-all duration-300"
-                  :class="idx === activeFeatureIndex ? 'bg-primary-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
-                />
+      <!-- Desktop: Full-screen scroll snap sections -->
+      <div class="hidden md:block snap-y snap-mandatory overflow-y-auto h-screen" style="scroll-behavior: smooth;">
+        <div 
+          v-for="(feature, index) in detailedFeatures" 
+          :key="index"
+          :ref="el => featureRefs[index] = el"
+          class="min-h-screen h-screen flex items-center py-20 snap-start snap-always"
+        >
+          <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
+            <div class="grid grid-cols-5 gap-12 items-center" :class="index % 2 === 0 ? '' : ''">
+              <!-- Text Content (1/3 width = 2 cols) -->
+              <div class="col-span-2" :class="index % 2 === 0 ? 'order-1' : 'order-2'">
+                <div class="flex flex-col gap-4">
+                  <h2 class="text-[28px] lg:text-[32px] leading-[1.2] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
+                    {{ feature.title }}
+                  </h2>
+                  <p class="text-[16px] leading-[1.6] text-gray-500 dark:text-gray-400">
+                    {{ feature.description }}
+                  </p>
+                  <!-- Progress indicators -->
+                  <div class="flex gap-2 mt-6">
+                    <button 
+                      v-for="(_, idx) in detailedFeatures" 
+                      :key="idx"
+                      @click="scrollToFeature(idx)"
+                      class="w-2 h-2 rounded-full transition-all duration-300"
+                      :class="idx === index ? 'bg-primary-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          
-          <!-- Right: Scrolling images -->
-          <div class="flex flex-col gap-32">
-            <div 
-              v-for="(feature, index) in detailedFeatures" 
-              :key="index"
-              :ref="el => featureRefs[index] = el"
-              class="min-h-[60vh] flex items-center"
-            >
-              <div class="w-full aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8 transition-all duration-500"
-                   :class="index === activeFeatureIndex ? 'scale-100 opacity-100' : 'scale-95 opacity-70'">
-                <div class="text-center">
-                  <UIcon :name="feature.icon" class="w-14 h-14 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
-                  <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
+              
+              <!-- Image Placeholder (2/3 width = 3 cols) -->
+              <div class="col-span-3" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
+                <div class="aspect-[16/10] bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg flex items-center justify-center p-8">
+                  <div class="text-center">
+                    <UIcon :name="feature.icon" class="w-20 h-20 text-gray-200 dark:text-gray-700 mb-4 mx-auto" />
+                    <p class="text-sm text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,9 +215,7 @@ const detailedFeatures = [
   }
 ]
 
-const activeFeatureIndex = ref(0)
 const featureRefs = ref<(HTMLElement | null)[]>([])
-const observer = ref<IntersectionObserver | null>(null)
 
 const scrollToFeature = (index: number) => {
   const element = featureRefs.value[index]
@@ -222,36 +223,4 @@ const scrollToFeature = (index: number) => {
     element.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 }
-
-onMounted(() => {
-  nextTick(() => {
-    observer.value = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = featureRefs.value.findIndex((ref) => ref === entry.target)
-            if (index !== -1) {
-              activeFeatureIndex.value = index
-            }
-          }
-        })
-      },
-      {
-        root: null,
-        rootMargin: '-40% 0px -40% 0px',
-        threshold: 0
-      }
-    )
-
-    featureRefs.value.forEach((ref) => {
-      if (ref && observer.value) observer.value.observe(ref)
-    })
-  })
-})
-
-onUnmounted(() => {
-  if (observer.value) {
-    observer.value.disconnect()
-  }
-})
 </script>
