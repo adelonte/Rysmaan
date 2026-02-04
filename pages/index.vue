@@ -122,7 +122,6 @@
       <div 
         ref="featureContainerRef"
         class="hidden md:block"
-        @wheel="handleFeatureWheel"
       >
         <div 
           v-for="(feature, index) in detailedFeatures" 
@@ -260,9 +259,13 @@ const handleFeatureWheel = (event: WheelEvent) => {
   scrollAccumulator.value += event.deltaY
   
   if (Math.abs(scrollAccumulator.value) >= SCROLL_THRESHOLD) {
-    if (scrollingDown && !atLastFeature) {
+    // Use accumulated direction, not current event direction
+    const accumulatedDown = scrollAccumulator.value > 0
+    const accumulatedUp = scrollAccumulator.value < 0
+    
+    if (accumulatedDown && !atLastFeature) {
       scrollToFeature(activeFeatureIndex.value + 1)
-    } else if (scrollingUp && !atFirstFeature) {
+    } else if (accumulatedUp && !atFirstFeature) {
       scrollToFeature(activeFeatureIndex.value - 1)
     }
     scrollAccumulator.value = 0
@@ -272,6 +275,12 @@ const handleFeatureWheel = (event: WheelEvent) => {
 const isInFeatureContainer = ref(false)
 const lastScrollY = ref(0)
 const hasSnappedOnEntry = ref(false)
+
+// Store observers as refs for cleanup in onUnmounted
+const featureObserverRef = ref<IntersectionObserver | null>(null)
+const containerObserverRef = ref<IntersectionObserver | null>(null)
+const firstFeatureObserverRef = ref<IntersectionObserver | null>(null)
+const lastFeatureObserverRef = ref<IntersectionObserver | null>(null)
 
 const snapToFeature = (index: number) => {
   const element = featureRefs.value[index]
@@ -287,7 +296,7 @@ const snapToFeature = (index: number) => {
 }
 
 onMounted(() => {
-  const firstFeatureObserver = new IntersectionObserver(
+  firstFeatureObserverRef.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.boundingClientRect.top <= window.innerHeight && entry.boundingClientRect.top > 0) {
@@ -306,7 +315,7 @@ onMounted(() => {
     { threshold: [0.01, 0.1, 0.2] }
   )
 
-  const lastFeatureObserver = new IntersectionObserver(
+  lastFeatureObserverRef.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.boundingClientRect.bottom >= 0 && entry.boundingClientRect.top < 0) {
@@ -321,7 +330,7 @@ onMounted(() => {
     { threshold: [0.01, 0.1, 0.2] }
   )
 
-  const featureObserver = new IntersectionObserver(
+  featureObserverRef.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
@@ -336,7 +345,7 @@ onMounted(() => {
     { threshold: [0.3, 0.5, 0.7] }
   )
 
-  const containerObserver = new IntersectionObserver(
+  containerObserverRef.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         isInFeatureContainer.value = entry.isIntersecting
@@ -352,21 +361,27 @@ onMounted(() => {
   nextTick(() => {
     featureRefs.value.forEach((ref, index) => {
       if (ref) {
-        featureObserver.observe(ref)
-        if (index === 0) firstFeatureObserver.observe(ref)
-        if (index === detailedFeatures.length - 1) lastFeatureObserver.observe(ref)
+        featureObserverRef.value?.observe(ref)
+        if (index === 0) firstFeatureObserverRef.value?.observe(ref)
+        if (index === detailedFeatures.length - 1) lastFeatureObserverRef.value?.observe(ref)
       }
     })
     if (featureContainerRef.value) {
-      containerObserver.observe(featureContainerRef.value)
+      containerObserverRef.value?.observe(featureContainerRef.value)
+      // Add wheel event listener with passive: false to enable preventDefault()
+      featureContainerRef.value.addEventListener('wheel', handleFeatureWheel, { passive: false })
     }
   })
+})
 
-  onUnmounted(() => {
-    featureObserver.disconnect()
-    containerObserver.disconnect()
-    firstFeatureObserver.disconnect()
-    lastFeatureObserver.disconnect()
-  })
+onUnmounted(() => {
+  featureObserverRef.value?.disconnect()
+  containerObserverRef.value?.disconnect()
+  firstFeatureObserverRef.value?.disconnect()
+  lastFeatureObserverRef.value?.disconnect()
+  // Clean up wheel event listener
+  if (featureContainerRef.value) {
+    featureContainerRef.value.removeEventListener('wheel', handleFeatureWheel)
+  }
 })
 </script>
