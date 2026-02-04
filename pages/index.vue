@@ -239,7 +239,113 @@ const scrollToFeature = (index: number) => {
   }
 }
 
+// Check if we're on desktop (for mobile, allow normal scrolling)
+const isDesktop = () => {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(min-width: 768px)').matches
+}
+
+// Real-time check if we're in the feature lock zone
+const isInLockZone = () => {
+  // Mobile should have normal scrolling - never lock
+  if (!isDesktop()) {
+    return { isLocked: false, mostVisibleIndex: -1, maxVisibility: 0 }
+  }
+  
+  // First check if container is substantially in viewport
+  if (featureContainerRef.value) {
+    const containerRect = featureContainerRef.value.getBoundingClientRect()
+    const viewportHeight = window.innerHeight
+    
+    // Calculate how much of the container is visible
+    const visibleTop = Math.max(0, containerRect.top)
+    const visibleBottom = Math.min(viewportHeight, containerRect.bottom)
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+    const containerVisibility = containerRect.height > 0 ? visibleHeight / viewportHeight : 0
+    
+    // Container must occupy at least 50% of viewport to engage lock
+    if (containerVisibility < 0.5) {
+      return { isLocked: false, mostVisibleIndex: -1, maxVisibility: 0 }
+    }
+  }
+  
+  // Find the most visible feature using bounding rects
+  let maxVisibility = 0
+  let mostVisibleIndex = -1
+  
+  featureRefs.value.forEach((ref, index) => {
+    if (ref) {
+      const rect = ref.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      
+      // Calculate visible portion of this feature
+      const visibleTop = Math.max(0, rect.top)
+      const visibleBottom = Math.min(viewportHeight, rect.bottom)
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+      const visibility = rect.height > 0 ? visibleHeight / rect.height : 0
+      
+      if (visibility > maxVisibility) {
+        maxVisibility = visibility
+        mostVisibleIndex = index
+      }
+    }
+  })
+  
+  return { isLocked: maxVisibility > 0.5, mostVisibleIndex, maxVisibility }
+}
+
+// State refs for scroll locking
+const lastScrollY = ref(0)
+const hasSnappedOnEntry = ref(false)
+const isExitingSection = ref(false) // Prevents snap logic during exit
+const isBodyLocked = ref(false) // Tracks if body overflow is hidden
+const touchStartY = ref(0) // For touch scroll handling
+
+// Lock/unlock body scroll to prevent any native scrolling
+const lockBody = () => {
+  if (!isBodyLocked.value && process.client) {
+    document.body.style.overflow = 'hidden'
+    isBodyLocked.value = true
+  }
+}
+
+const unlockBody = () => {
+  if (isBodyLocked.value && process.client) {
+    document.body.style.overflow = ''
+    isBodyLocked.value = false
+  }
+}
+
 const handleFeatureWheel = (event: WheelEvent) => {
+  // If we're in exiting mode, allow all scroll until we leave the section
+  if (isExitingSection.value) {
+    const { isLocked } = isInLockZone()
+    if (!isLocked) {
+      // Successfully exited, reset state
+      isExitingSection.value = false
+      hasSnappedOnEntry.value = false
+      unlockBody() // Release body lock on exit
+    }
+    return // Allow native scroll during exit
+  }
+  
+  // Real-time check: are we in the lock zone?
+  const { isLocked, mostVisibleIndex } = isInLockZone()
+  
+  if (!isLocked) {
+    scrollAccumulator.value = 0
+    unlockBody() // Not in lock zone, release body lock
+    return // Not in lock zone, allow normal scroll
+  }
+  
+  // ENGAGE BODY LOCK when in lock zone
+  lockBody()
+  
+  // Update active feature index in real-time
+  if (mostVisibleIndex !== -1) {
+    activeFeatureIndex.value = mostVisibleIndex
+  }
+  
   if (isTransitioning.value) {
     event.preventDefault()
     return
@@ -250,16 +356,19 @@ const handleFeatureWheel = (event: WheelEvent) => {
   const scrollingUp = event.deltaY < 0
   const scrollingDown = event.deltaY > 0
   
+  // At boundaries, enter exit mode and unlock body for exit
   if ((atFirstFeature && scrollingUp) || (atLastFeature && scrollingDown)) {
     scrollAccumulator.value = 0
-    return
+    isExitingSection.value = true // Enter exit mode
+    unlockBody() // Release lock to allow exit
+    return // Allow native scroll to exit
   }
   
+  // In lock zone (mid-section), block native scrolling
   event.preventDefault()
   scrollAccumulator.value += event.deltaY
   
   if (Math.abs(scrollAccumulator.value) >= SCROLL_THRESHOLD) {
-    // Use accumulated direction, not current event direction
     const accumulatedDown = scrollAccumulator.value > 0
     const accumulatedUp = scrollAccumulator.value < 0
     
@@ -272,17 +381,118 @@ const handleFeatureWheel = (event: WheelEvent) => {
   }
 }
 
-const isInFeatureContainer = ref(false)
-const lastScrollY = ref(0)
-const hasSnappedOnEntry = ref(false)
+// Touch event handlers for mobile scroll lock
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartY.value = event.touches[0].clientY
+}
+
+const handleTouchMove = (event: TouchEvent) => {
+  // If exiting, check if we've left the lock zone
+  if (isExitingSection.value) {
+    const { isLocked } = isInLockZone()
+    if (!isLocked) {
+      isExitingSection.value = false
+      hasSnappedOnEntry.value = false
+      unlockBody()
+    }
+    return // Allow native touch during exit
+  }
+  
+  const { isLocked, mostVisibleIndex } = isInLockZone()
+  
+  if (!isLocked) {
+    unlockBody()
+    return // Not in lock zone, allow native touch
+  }
+  
+  // ENGAGE BODY LOCK when in lock zone
+  lockBody()
+  
+  // Update active index
+  if (mostVisibleIndex !== -1) {
+    activeFeatureIndex.value = mostVisibleIndex
+  }
+  
+  const touchY = event.touches[0].clientY
+  const deltaY = touchStartY.value - touchY
+  
+  const atFirstFeature = activeFeatureIndex.value === 0
+  const atLastFeature = activeFeatureIndex.value === detailedFeatures.length - 1
+  const scrollingUp = deltaY < 0
+  const scrollingDown = deltaY > 0
+  
+  // At boundaries, enter exit mode and unlock for exit
+  if ((atFirstFeature && scrollingUp) || (atLastFeature && scrollingDown)) {
+    isExitingSection.value = true
+    unlockBody()
+    return // Allow native touch to exit
+  }
+  
+  // In lock zone, prevent touch scrolling and accumulate
+  event.preventDefault()
+  scrollAccumulator.value += deltaY
+  touchStartY.value = touchY // Update for continuous scroll
+  
+  const threshold = 100 // Lower threshold for touch
+  
+  if (Math.abs(scrollAccumulator.value) >= threshold && !isTransitioning.value) {
+    if (scrollAccumulator.value > 0 && activeFeatureIndex.value < detailedFeatures.length - 1) {
+      scrollToFeature(activeFeatureIndex.value + 1)
+    } else if (scrollAccumulator.value < 0 && activeFeatureIndex.value > 0) {
+      scrollToFeature(activeFeatureIndex.value - 1)
+    }
+    scrollAccumulator.value = 0
+  }
+}
+
+// Keyboard event handler for PageUp/PageDown/Arrow keys
+const handleKeydown = (event: KeyboardEvent) => {
+  const { isLocked, mostVisibleIndex } = isInLockZone()
+  
+  if (!isLocked || isExitingSection.value) return
+  
+  // Update active index
+  if (mostVisibleIndex !== -1) {
+    activeFeatureIndex.value = mostVisibleIndex
+  }
+  
+  const navigationKeys = ['PageUp', 'PageDown', 'ArrowUp', 'ArrowDown', ' ', 'Home', 'End']
+  if (!navigationKeys.includes(event.key)) return
+  
+  const atFirstFeature = activeFeatureIndex.value === 0
+  const atLastFeature = activeFeatureIndex.value === detailedFeatures.length - 1
+  const scrollingUp = event.key === 'PageUp' || event.key === 'ArrowUp' || event.key === 'Home' || (event.key === ' ' && event.shiftKey)
+  const scrollingDown = event.key === 'PageDown' || event.key === 'ArrowDown' || event.key === 'End' || (event.key === ' ' && !event.shiftKey)
+  
+  // At boundaries, enter exit mode and allow default behavior for leaving
+  if ((atFirstFeature && scrollingUp) || (atLastFeature && scrollingDown)) {
+    isExitingSection.value = true
+    unlockBody()
+    return // Allow native keyboard scroll to exit
+  }
+  
+  // Not at boundary - prevent default and engage lock
+  event.preventDefault()
+  lockBody()
+  
+  if (isTransitioning.value) return
+  
+  // Navigate between features
+  if (scrollingDown && !atLastFeature) {
+    scrollToFeature(activeFeatureIndex.value + 1)
+  } else if (scrollingUp && !atFirstFeature) {
+    scrollToFeature(activeFeatureIndex.value - 1)
+  }
+}
 
 // Store observers as refs for cleanup in onUnmounted
 const featureObserverRef = ref<IntersectionObserver | null>(null)
 const containerObserverRef = ref<IntersectionObserver | null>(null)
-const firstFeatureObserverRef = ref<IntersectionObserver | null>(null)
-const lastFeatureObserverRef = ref<IntersectionObserver | null>(null)
 
 const snapToFeature = (index: number) => {
+  // Don't snap if we're exiting the section
+  if (isExitingSection.value) return
+  
   const element = featureRefs.value[index]
   if (element && !isTransitioning.value) {
     isTransitioning.value = true
@@ -295,81 +505,102 @@ const snapToFeature = (index: number) => {
   }
 }
 
+// Scroll listener to handle non-wheel scroll (trackpad momentum, touch, etc.)
+// Also enforces lock behavior by snapping back if user drifts within lock zone
+const handleScroll = () => {
+  const { isLocked, mostVisibleIndex } = isInLockZone()
+  
+  // Handle exit mode
+  if (isExitingSection.value) {
+    if (!isLocked) {
+      // Successfully exited via non-wheel scroll
+      isExitingSection.value = false
+      hasSnappedOnEntry.value = false
+      unlockBody()
+    }
+    // Don't enforce lock during exit mode - let momentum carry user out
+    return
+  }
+  
+  // Manage body lock state based on lock zone
+  if (isLocked) {
+    lockBody()
+  } else {
+    unlockBody()
+    return // Not in lock zone, nothing to enforce
+  }
+  
+  // During transitions, keep lock active but don't snap (let smooth scroll complete)
+  if (isTransitioning.value) return
+  
+  // If in lock zone via non-wheel scroll (momentum), snap to nearest feature
+  if (mostVisibleIndex !== -1) {
+    // Debounce: only snap if we've drifted significantly from active feature
+    const activeRef = featureRefs.value[activeFeatureIndex.value]
+    if (activeRef) {
+      const rect = activeRef.getBoundingClientRect()
+      const distanceFromCenter = Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2)
+      
+      // If active feature is more than 20% off-center, snap to most visible
+      if (distanceFromCenter > window.innerHeight * 0.2) {
+        if (mostVisibleIndex !== activeFeatureIndex.value) {
+          activeFeatureIndex.value = mostVisibleIndex
+          scrollAccumulator.value = 0
+          snapToFeature(mostVisibleIndex)
+        }
+      }
+    }
+  }
+}
+
 onMounted(() => {
-  firstFeatureObserverRef.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.boundingClientRect.top <= window.innerHeight && entry.boundingClientRect.top > 0) {
-          if (!hasSnappedOnEntry.value && !isTransitioning.value) {
-            hasSnappedOnEntry.value = true
-            activeFeatureIndex.value = 0
-            scrollAccumulator.value = 0
-            snapToFeature(0)
-          }
-        }
-        if (!entry.isIntersecting && entry.boundingClientRect.top > window.innerHeight) {
-          hasSnappedOnEntry.value = false
-        }
-      })
-    },
-    { threshold: [0.01, 0.1, 0.2] }
-  )
+  // Add scroll listener for non-wheel scrolling
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  
+  // Add touch event listeners for mobile
+  window.addEventListener('touchstart', handleTouchStart, { passive: true })
+  window.addEventListener('touchmove', handleTouchMove, { passive: false })
 
-  lastFeatureObserverRef.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.boundingClientRect.bottom >= 0 && entry.boundingClientRect.top < 0) {
-          if (!isTransitioning.value) {
-            activeFeatureIndex.value = detailedFeatures.length - 1
-            scrollAccumulator.value = 0
-            snapToFeature(detailedFeatures.length - 1)
-          }
-        }
-      })
-    },
-    { threshold: [0.01, 0.1, 0.2] }
-  )
-
+  // Feature observer is now PASSIVE - no state mutations
+  // It only serves to track which features exist for intersection debugging
+  // All lock/index decisions are made in wheel handler's isInLockZone()
   featureObserverRef.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-          const index = featureRefs.value.findIndex((ref) => ref === entry.target)
-          if (index !== -1 && !isTransitioning.value) {
-            activeFeatureIndex.value = index
-            scrollAccumulator.value = 0
-          }
-        }
-      })
+    () => {
+      // Passive - no state changes
+      // Lock state is computed in real-time by wheel handler
     },
-    { threshold: [0.3, 0.5, 0.7] }
+    { threshold: [0.5] }
   )
 
   containerObserverRef.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        isInFeatureContainer.value = entry.isIntersecting
+        // Only use this to reset exit mode when we've LEFT the section entirely
         if (!entry.isIntersecting) {
+          isExitingSection.value = false
           hasSnappedOnEntry.value = false
+          unlockBody() // Ensure body is unlocked when leaving section
         }
         lastScrollY.value = window.scrollY
       })
     },
-    { threshold: 0.01 }
+    { threshold: 0 }
   )
 
+  // Add wheel event listener at window level with passive: false to enable preventDefault()
+  window.addEventListener('wheel', handleFeatureWheel, { passive: false })
+  
+  // Add keyboard event listener for PageUp/PageDown/Arrow navigation
+  window.addEventListener('keydown', handleKeydown)
+  
   nextTick(() => {
-    featureRefs.value.forEach((ref, index) => {
+    featureRefs.value.forEach((ref) => {
       if (ref) {
         featureObserverRef.value?.observe(ref)
-        if (index === 0) firstFeatureObserverRef.value?.observe(ref)
-        if (index === detailedFeatures.length - 1) lastFeatureObserverRef.value?.observe(ref)
       }
     })
     if (featureContainerRef.value) {
       containerObserverRef.value?.observe(featureContainerRef.value)
-      // Add wheel event listener with passive: false to enable preventDefault()
-      featureContainerRef.value.addEventListener('wheel', handleFeatureWheel, { passive: false })
     }
   })
 })
@@ -377,11 +608,13 @@ onMounted(() => {
 onUnmounted(() => {
   featureObserverRef.value?.disconnect()
   containerObserverRef.value?.disconnect()
-  firstFeatureObserverRef.value?.disconnect()
-  lastFeatureObserverRef.value?.disconnect()
-  // Clean up wheel event listener
-  if (featureContainerRef.value) {
-    featureContainerRef.value.removeEventListener('wheel', handleFeatureWheel)
-  }
+  // Clean up event listeners
+  window.removeEventListener('wheel', handleFeatureWheel)
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('touchstart', handleTouchStart)
+  window.removeEventListener('touchmove', handleTouchMove)
+  window.removeEventListener('keydown', handleKeydown)
+  // Ensure body is unlocked
+  unlockBody()
 })
 </script>
