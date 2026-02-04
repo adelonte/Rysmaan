@@ -74,7 +74,7 @@ The build outputs to `.output/` directory.
 - Desktop: Full-viewport sections with text (2/5 width) and images (3/5 width, 70vh height)
 - Each feature section takes up full screen height (h-screen)
 - **JavaScript-based scroll locking**: Sections stay completely still when scrolling
-- **Scroll threshold**: Requires accumulated scroll effort (150px delta) before transitioning
+- **Scroll threshold**: Requires accumulated scroll effort (350px delta) before transitioning
 - Progress indicators (dots) show current feature and allow click navigation
 - IntersectionObserver tracks which section is visible
 - Alternating left/right layout for visual variety
