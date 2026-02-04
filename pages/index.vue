@@ -269,11 +269,37 @@ const handleFeatureWheel = (event: WheelEvent) => {
   }
 }
 
+const isInFeatureContainer = ref(false)
+const lastScrollY = ref(0)
+
+const updateActiveFeatureFromScroll = () => {
+  const viewportCenter = window.innerHeight / 2
+  let closestIndex = 0
+  let closestDistance = Infinity
+  
+  featureRefs.value.forEach((ref, index) => {
+    if (ref) {
+      const rect = ref.getBoundingClientRect()
+      const elementCenter = rect.top + rect.height / 2
+      const distance = Math.abs(elementCenter - viewportCenter)
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestIndex = index
+      }
+    }
+  })
+  
+  if (!isTransitioning.value) {
+    activeFeatureIndex.value = closestIndex
+    scrollAccumulator.value = 0
+  }
+}
+
 onMounted(() => {
-  const observer = new IntersectionObserver(
+  const featureObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+        if (entry.isIntersecting) {
           const index = featureRefs.value.findIndex((ref) => ref === entry.target)
           if (index !== -1 && !isTransitioning.value) {
             activeFeatureIndex.value = index
@@ -282,15 +308,43 @@ onMounted(() => {
         }
       })
     },
-    { threshold: [0.3, 0.5, 0.7] }
+    { threshold: [0.1, 0.3, 0.5, 0.7, 0.9], rootMargin: '-10% 0px -10% 0px' }
+  )
+
+  const containerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isInFeatureContainer.value = true
+          const scrollingDown = window.scrollY > lastScrollY.value
+          if (scrollingDown) {
+            activeFeatureIndex.value = 0
+          } else {
+            activeFeatureIndex.value = detailedFeatures.length - 1
+          }
+          scrollAccumulator.value = 0
+          updateActiveFeatureFromScroll()
+        } else {
+          isInFeatureContainer.value = false
+        }
+        lastScrollY.value = window.scrollY
+      })
+    },
+    { threshold: 0.01 }
   )
 
   nextTick(() => {
     featureRefs.value.forEach((ref) => {
-      if (ref) observer.observe(ref)
+      if (ref) featureObserver.observe(ref)
     })
+    if (featureContainerRef.value) {
+      containerObserver.observe(featureContainerRef.value)
+    }
   })
 
-  onUnmounted(() => observer.disconnect())
+  onUnmounted(() => {
+    featureObserver.disconnect()
+    containerObserver.disconnect()
+  })
 })
 </script>
