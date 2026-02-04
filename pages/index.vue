@@ -128,10 +128,10 @@
           v-for="(feature, index) in detailedFeatures" 
           :key="index"
           :ref="el => featureRefs[index] = el"
-          class="h-screen flex items-center"
+          class="h-screen flex items-center pt-16"
         >
           <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-            <div class="grid grid-cols-5 gap-10 items-center w-full">
+            <div class="grid grid-cols-5 gap-10 items-start w-full">
               <!-- Text Content (2 cols for better fit) -->
               <div class="col-span-2" :class="index % 2 === 0 ? 'order-1' : 'order-2'">
                 <div class="flex flex-col gap-4">
@@ -156,7 +156,7 @@
               
               <!-- Image Placeholder (prominent - 3 cols, tall) -->
               <div class="col-span-3" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
-                <div class="h-[60vh] bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl flex items-center justify-center">
+                <div class="h-[65vh] bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl flex items-center justify-center">
                   <div class="text-center">
                     <UIcon :name="feature.icon" class="w-28 h-28 text-gray-200 dark:text-gray-700 mb-6 mx-auto" />
                     <p class="text-base text-gray-400 dark:text-gray-500 font-medium">Visual for {{ feature.title }}</p>
