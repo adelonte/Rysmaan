@@ -7,7 +7,7 @@ const links = [];
     <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
       <div class="py-8 flex flex-col-reverse md:flex-row items-center justify-between gap-6">
         <div class="text-sm text-gray-500 dark:text-gray-400">
-          &copy; {{ new Date().getFullYear() }} VendorGate (Rysmaan). All rights reserved.
+          &copy; 2026 Rysmaan. All rights reserved.
         </div>
         
         <NuxtLink to="/" class="flex items-center gap-2">
