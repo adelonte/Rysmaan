@@ -6,7 +6,7 @@
     <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto flex flex-col gap-20 md:gap-32 pt-8 md:pt-12">
       <div class="flex flex-col gap-6 text-left md:text-center max-w-5xl mx-auto">
         <h1 class="text-[32px] md:text-[48px] leading-[1.15] font-bold tracking-[-0.02em] text-gray-900 dark:text-white">
-          <span class="text-primary-500">Simplified</span> software for project managers in solo, small, and mid-sized firms, along with service providers across all engineering disciplines.
+          <span class="text-primary-500">Simplified</span> project management for firms and engineering vendors.
         </h1>
         <p class="text-[18px] leading-[1.6] text-gray-500 dark:text-gray-400 max-w-4xl mx-auto">
           Meet the next-generation system for modern project management and project discovery—designed to take your company to the next level.
@@ -22,10 +22,17 @@
 
     <!-- 2. Big visual -->
     <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-      <div class="aspect-[16/9] bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden flex items-center justify-center group cursor-pointer hover:border-primary-300 dark:hover:border-primary-700 transition-all">
-        <div class="text-center">
-          <UIcon name="i-heroicons-play-circle" class="w-16 h-16 text-gray-300 dark:text-gray-600 group-hover:text-primary-500 transition-colors mb-4 mx-auto" />
-          <p class="text-gray-400 dark:text-gray-500 font-medium">Main product interface</p>
+      <div class="hero-dashboard-figure max-w-6xl mx-auto w-full">
+        <div class="hero-dashboard-figure-inner rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg shadow-gray-900/10 dark:shadow-black/40 overflow-hidden bg-gray-50 dark:bg-gray-900 hover:border-primary-300 dark:hover:border-primary-700 transition-colors duration-300">
+          <img
+            src="/screenshots/Dashboard.png"
+            alt="Rysmaan product dashboard"
+            class="w-full h-auto block"
+            width="3254"
+            height="1936"
+            loading="eager"
+            decoding="async"
+          >
         </div>
       </div>
     </div>
@@ -190,12 +197,57 @@ const detailedFeatures = [
   {
     title: "Risk Identification",
     description: "Don't worry about missing deadlines to send out RFQs, submit quotes, or award contracts. Rysmaan has your back, helping both project managers and service providers stay on track while managing multiple projects.",
-    icon: "i-heroicons-exclamation-triangle"
+    icon: "i-heroicons-exclamation-triangle",
+    videoSrc: "/videos/Schedule.mp4"
   },
   {
     title: "Central Repository",
     description: "Gone are the days of storing contracts and important documents across a web of emails, shared drives, or project servers. Rysmaan enables you to centrally store contracts and supporting documents in one place.",
-    icon: "i-heroicons-folder-open"
+    icon: "i-heroicons-folder-open",
+    videoSrc: "/videos/Contracts.mp4"
   }
 ]
 </script>
+
+<style scoped>
+.hero-dashboard-figure {
+  opacity: 0;
+  animation: hero-dashboard-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-dashboard-figure-inner {
+  animation: hero-dashboard-float 5.5s ease-in-out 0.95s infinite;
+}
+
+@keyframes hero-dashboard-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-dashboard-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.45rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dashboard-figure,
+  .hero-dashboard-figure-inner {
+    animation: none;
+  }
+
+  .hero-dashboard-figure {
+    opacity: 1;
+  }
+}
+</style>
