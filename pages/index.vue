@@ -127,14 +127,9 @@
                 class="aspect-[16/10] md:aspect-auto md:min-h-[320px] lg:min-h-[380px] bg-white dark:bg-gray-900 rounded-xl md:rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg md:shadow-xl overflow-hidden flex items-center justify-center"
                 :class="feature.videoSrc ? 'p-0' : 'p-8'"
               >
-                <video
+                <FeaturePreviewVideo
                   v-if="feature.videoSrc"
                   :src="feature.videoSrc"
-                  class="w-full h-full min-h-[240px] md:min-h-[320px] lg:min-h-[380px] object-cover object-top"
-                  autoplay
-                  muted
-                  loop
-                  playsinline
                   :aria-label="`Product preview: ${feature.title}`"
                 />
                 <div v-else class="text-center">

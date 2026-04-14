@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nuxt dev --port 5000 --host 0.0.0.0",
     "build": "nuxt build",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "videos:encode": "bash scripts/encode-feature-videos.sh"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^2.0.55",
