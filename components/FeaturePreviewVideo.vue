@@ -1,13 +1,13 @@
 <template>
   <div
     ref="containerRef"
-    class="w-full h-full min-h-[240px] md:min-h-[320px] lg:min-h-[380px] bg-gray-100 dark:bg-gray-800"
+    class="w-full h-full min-h-0 bg-gray-100 dark:bg-gray-800"
   >
     <video
       v-if="shouldLoad"
       ref="videoRef"
       :src="src"
-      class="w-full h-full min-h-[240px] md:min-h-[320px] lg:min-h-[380px] object-cover object-top"
+      class="block size-full object-cover object-center"
       muted
       loop
       playsinline

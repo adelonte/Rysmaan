@@ -21,7 +21,6 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess()
           <UButton color="primary" size="sm" class="font-semibold px-4 rounded-full" @click="isEarlyAccessOpen = true">
             Get Early Access
           </UButton>
-          <UColorModeButton size="sm" />
         </div>
       </div>
     </nav>
