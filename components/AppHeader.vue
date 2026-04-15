@@ -14,12 +14,12 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess();
             <img
               src="/logo.png"
               alt="Rysmaan Logo"
-              class="h-16 mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden"
+              class="h-16 dark:hidden"
             />
             <img
               src="/logo.png"
               alt="Rysmaan Logo"
-              class="hidden dark:block h-16 mix-blend-screen brightness-200 contrast-200"
+              class="hidden dark:block h-16 invert brightness-200"
             />
           </NuxtLink>
         </div>

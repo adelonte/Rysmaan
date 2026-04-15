@@ -11,8 +11,8 @@ const links = [];
         </div>
         
         <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="Rysmaan Logo" class="h-28 w-auto mix-blend-multiply brightness-[1.1] contrast-[1.1] dark:hidden" />
-          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-28 w-auto mix-blend-screen brightness-200 contrast-200" />
+          <img src="/logo.png" alt="Rysmaan Logo" class="h-28 w-auto dark:hidden" />
+          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-28 w-auto invert brightness-200" />
         </NuxtLink>
       </div>
     </div>
