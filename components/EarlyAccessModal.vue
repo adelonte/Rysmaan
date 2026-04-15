@@ -12,13 +12,7 @@ const validate = (state: any) => {
   if (!state.name) errors.push({ path: 'name', message: 'Name is required' })
   if (!state.company) errors.push({ path: 'company', message: 'Company is required' })
   if (!state.email) {
-    errors.push({ path: 'email', message: 'Work email is required' })
-  } else {
-    const personalDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'me.com', 'aol.com', 'msn.com', 'live.com']
-    const domain = state.email.split('@')[1]?.toLowerCase()
-    if (personalDomains.includes(domain)) {
-      errors.push({ path: 'email', message: 'Please use a work email address' })
-    }
+    errors.push({ path: 'email', message: 'Email is required' })
   }
   return errors
 }
@@ -94,8 +88,8 @@ async function onSubmit() {
             <UInput v-model="state.company" placeholder="ACME Inc." size="lg" />
           </UFormGroup>
 
-          <UFormGroup label="Work Email" name="email">
-            <UInput v-model="state.email" type="email" placeholder="john@company.com" size="lg" />
+          <UFormGroup label="Email" name="email">
+            <UInput v-model="state.email" type="email" placeholder="you@example.com" size="lg" />
           </UFormGroup>
 
           <UAlert v-if="submitError" color="red" variant="soft" :title="submitError" />
@@ -114,7 +108,7 @@ async function onSubmit() {
           Request Received
         </p>
         <p class="text-gray-500 dark:text-gray-400">
-          Thank you for your interest! We'll review your request and get back to you shortly at your work email.
+          Thank you for your interest! We'll review your request and get back to you shortly via email.
         </p>
         <UButton class="mt-6" color="primary" block size="lg" @click="isOpen = false">
           Close
