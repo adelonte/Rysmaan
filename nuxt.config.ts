@@ -1,7 +1,15 @@
+const useTunnelHmr =
+  process.env.NUXT_DEV_TUNNEL === '1' || process.env.NUXT_DEV_HMR_WSS === '1'
+
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
   modules: ['@nuxt/ui', '@nuxt/fonts'],
   devtools: { enabled: true },
+  runtimeConfig: {
+    supabaseUrl: process.env.NUXT_SUPABASE_URL || process.env.SUPABASE_URL || '',
+    supabaseAnonKey:
+      process.env.NUXT_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
+  },
   ui: {
     primary: 'blue'
   },
@@ -44,14 +52,17 @@ export default defineNuxtConfig({
     storageKey: 'nuxt-color-mode'
   },
   css: ['~/assets/css/main.css'],
-  vite: {
-    server: {
-      hmr: {
-        protocol: 'wss',
-        clientPort: 443
+  // wss:443 HMR only for reverse-proxy / tunnel setups; it breaks normal http://localhost dev.
+  vite: useTunnelHmr
+    ? {
+        server: {
+          hmr: {
+            protocol: 'wss',
+            clientPort: 443
+          }
+        }
       }
-    }
-  },
+    : {},
   devServer: {
     host: '0.0.0.0',
     port: 5000

@@ -1,20 +1,46 @@
-import fs from 'node:fs'
-import path from 'node:path'
+import { createClient } from '@supabase/supabase-js'
+
+function isDuplicateEmailError(error: { code?: string; message?: string } | null) {
+  if (!error) return false
+  if (error.code === '23505') return true
+  const msg = (error.message || '').toLowerCase()
+  return msg.includes('duplicate') || msg.includes('unique')
+}
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const { name, email, company, location, role, interestType, phone } = body
+  const config = useRuntimeConfig(event)
+  const url = config.supabaseUrl as string
+  const key = config.supabaseAnonKey as string
 
-  const dataDir = path.join(process.cwd(), 'data')
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir)
+  if (!url || !key) {
+    throw createError({
+      statusCode: 503,
+      statusMessage: 'Sign-up is not configured'
+    })
   }
 
-  const filePath = path.join(dataDir, 'interested_users.txt')
-  const timestamp = new Date().toISOString()
-  const entry = `[${timestamp}] Name: ${name}, Email: ${email}, Company: ${company}, Location: ${location}, Role: ${role || 'N/A'}, Interest: ${interestType || 'N/A'}, Phone: ${phone || 'N/A'}\n`
+  const body = await readBody(event)
+  const name = typeof body?.name === 'string' ? body.name.trim() : ''
+  const company = typeof body?.company === 'string' ? body.company.trim() : ''
+  const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
 
-  fs.appendFileSync(filePath, entry)
+  if (!name || !company || !email) {
+    throw createError({ statusCode: 400, statusMessage: 'Missing required fields' })
+  }
 
-  return { success: true }
+  const supabase = createClient(url, key)
+  const { error } = await supabase.from('early_access_requests').insert({
+    name,
+    company,
+    email
+  })
+
+  if (error) {
+    if (isDuplicateEmailError(error)) {
+      throw createError({ statusCode: 409, statusMessage: 'Duplicate email' })
+    }
+    throw createError({ statusCode: 500, statusMessage: 'Insert failed' })
+  }
+
+  return { ok: true }
 })

@@ -11,11 +11,7 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess();
       <div class="flex sm:h-16 md:h-20 items-center justify-between">
         <div class="flex items-center">
           <NuxtLink to="/" class="flex items-center space-x-2">
-            <img
-              src="/logo.png"
-              alt="Rysmaan Logo"
-              class="h-16 dark:hidden"
-            />
+            <img src="/logo.png" alt="Rysmaan Logo" class="h-16 dark:hidden" />
             <img
               src="/logo.png"
               alt="Rysmaan Logo"
@@ -25,7 +21,7 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess();
         </div>
 
         <div class="flex items-center gap-4">
-          <UButton
+          <!-- <UButton
             variant="ghost"
             color="gray"
             size="sm"
@@ -33,7 +29,7 @@ const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess();
             @click="isSignInOpen = true"
           >
             Sign In
-          </UButton>
+          </UButton> -->
           <UButton
             color="primary"
             size="sm"

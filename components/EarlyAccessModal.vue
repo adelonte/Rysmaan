@@ -25,16 +25,47 @@ const validate = (state: any) => {
 
 const isSubmitted = ref(false)
 const loading = ref(false)
+const submitError = ref<string | null>(null)
+
+watch(isOpen, (open) => {
+  if (open) {
+    submitError.value = null
+    return
+  }
+  isSubmitted.value = false
+  loading.value = false
+  Object.assign(state, { name: '', company: '', email: '' })
+})
 
 async function onSubmit() {
+  submitError.value = null
   loading.value = true
   try {
-    // In a real app, this would be an API call
-    console.log('Submitted:', state)
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await $fetch('/api/early-access', {
+      method: 'POST',
+      body: {
+        name: state.name.trim(),
+        company: state.company.trim(),
+        email: state.email.trim().toLowerCase()
+      }
+    })
     isSubmitted.value = true
-  } catch (error) {
-    console.error('Submission failed', error)
+  } catch (err: unknown) {
+    const e = err as {
+      status?: number
+      statusCode?: number
+      response?: { status?: number }
+      data?: { statusCode?: number }
+    }
+    const status =
+      e.status ?? e.statusCode ?? e.response?.status ?? e.data?.statusCode ?? 0
+    if (status === 409) {
+      submitError.value = 'This email is already on the list.'
+    } else if (status === 503) {
+      submitError.value = 'Sign-up is not configured yet. Please try again later.'
+    } else {
+      submitError.value = 'Something went wrong. Please try again in a moment.'
+    }
   } finally {
     loading.value = false
   }
@@ -66,6 +97,8 @@ async function onSubmit() {
           <UFormGroup label="Work Email" name="email">
             <UInput v-model="state.email" type="email" placeholder="john@company.com" size="lg" />
           </UFormGroup>
+
+          <UAlert v-if="submitError" color="red" variant="soft" :title="submitError" />
 
           <div class="pt-4">
             <UButton type="submit" block size="xl" color="primary" :loading="loading">
