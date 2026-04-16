@@ -49,7 +49,8 @@ export default defineNuxtConfig({
     preference: 'light',
     fallback: 'light',
     classSuffix: '',
-    storageKey: 'nuxt-color-mode'
+    // Bump key so previously persisted dark preferences do not override new default.
+    storageKey: 'nuxt-color-mode-v2'
   },
   css: ['~/assets/css/main.css'],
   // wss:443 HMR only for reverse-proxy / tunnel setups; it breaks normal http://localhost dev.
