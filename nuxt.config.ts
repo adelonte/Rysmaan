@@ -4,6 +4,14 @@ const useTunnelHmr =
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
   modules: ['@nuxt/ui', '@nuxt/fonts'],
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon-48x48.png', sizes: '48x48' },
+        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '1024x1024' }
+      ]
+    }
+  },
   devtools: { enabled: true },
   runtimeConfig: {
     supabaseUrl: process.env.NUXT_SUPABASE_URL || process.env.SUPABASE_URL || '',
