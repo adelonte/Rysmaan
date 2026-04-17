@@ -4,11 +4,31 @@ const useTunnelHmr =
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
   modules: ['@nuxt/ui', '@nuxt/fonts'],
+  // Override Nitro default /favicon.ico when public/favicon.ico is absent.
+  routeRules: {
+    '/favicon.ico': {
+      redirect: { to: '/favicon-48x48.png', statusCode: 301 }
+    }
+  },
   app: {
     head: {
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon-48x48.png', sizes: '48x48' },
-        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '1024x1024' }
+        { rel: 'icon', type: 'image/png', href: '/logo.png', sizes: '1024x1024' },
+        {
+          rel: 'apple-touch-icon',
+          href: '/apple-touch-icon.png',
+          sizes: '180x180'
+        },
+        {
+          rel: 'manifest',
+          href: '/site.webmanifest',
+          type: 'application/manifest+json'
+        }
+      ],
+      meta: [
+        { name: 'theme-color', content: '#004B8D' },
+        { name: 'apple-mobile-web-app-title', content: 'Rysmaan' }
       ]
     }
   },
