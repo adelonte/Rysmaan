@@ -1,19 +1,34 @@
 <script setup lang="ts">
-const links = [];
+const { isModalOpen: isEarlyAccessOpen } = useEarlyAccess()
+
+const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
-    <div class="container px-4 md:px-8 xl:px-16 sm:mx-auto">
-      <div class="py-4 flex flex-col-reverse md:flex-row items-center justify-between gap-4">
-        <div class="text-sm text-gray-500 dark:text-gray-400">
-          &copy; 2026 Rysmaan. All rights reserved.
-        </div>
-        
-        <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="Rysmaan Logo" class="h-20 w-auto dark:hidden" />
-          <img src="/logo.png" alt="Rysmaan Logo" class="hidden dark:block h-20 w-auto invert brightness-200" />
+  <footer
+    class="border-t border-gray-200/80 bg-white dark:border-gray-800 dark:bg-gray-900"
+  >
+    <div class="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div
+        class="flex flex-col items-center gap-8 py-12 sm:flex-row sm:justify-between sm:gap-6"
+      >
+        <NuxtLink to="/" class="press -m-2 rounded-lg p-2" aria-label="Rysmaan home">
+          <AppLogo />
         </NuxtLink>
+
+        <div class="flex flex-col items-center gap-4 sm:items-end">
+          <UButton
+            color="primary"
+            variant="soft"
+            class="press px-4"
+            @click="isEarlyAccessOpen = true"
+          >
+            Request Early Access
+          </UButton>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            &copy; {{ year }} Rysmaan. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
   </footer>

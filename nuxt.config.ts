@@ -1,6 +1,11 @@
 const useTunnelHmr =
   process.env.NUXT_DEV_TUNNEL === '1' || process.env.NUXT_DEV_HMR_WSS === '1'
 
+const siteTitle =
+  'Rysmaan — Streamlined procurement for engineering firms and service providers'
+const siteDescription =
+  'The next-generation system for modern project management and project discovery. Run RFQs, keep vendor qualifications current, and centralise contracts in one platform.'
+
 export default defineNuxtConfig({
   extends: ['@nuxt/ui-pro'],
   modules: ['@nuxt/ui', '@nuxt/fonts'],
@@ -28,8 +33,20 @@ export default defineNuxtConfig({
       ],
       meta: [
         { name: 'theme-color', content: '#004B8D' },
-        { name: 'apple-mobile-web-app-title', content: 'Rysmaan' }
-      ]
+        { name: 'apple-mobile-web-app-title', content: 'Rysmaan' },
+        { name: 'description', content: siteDescription },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'Rysmaan' },
+        { property: 'og:title', content: siteTitle },
+        { property: 'og:description', content: siteDescription },
+        { property: 'og:image', content: '/screenshots/Dashboard.png' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: siteTitle },
+        { name: 'twitter:description', content: siteDescription },
+        { name: 'twitter:image', content: '/screenshots/Dashboard.png' }
+      ],
+      htmlAttrs: { lang: 'en' },
+      title: siteTitle
     }
   },
   devtools: { enabled: true },
@@ -38,40 +55,10 @@ export default defineNuxtConfig({
     supabaseAnonKey:
       process.env.NUXT_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
   },
-  ui: {
-    primary: 'blue'
-  },
+  // Palette lives in tailwind.config.ts; Nuxt UI maps `brand` onto `primary`
+  // via app.config.ts, which is what generates the full set of CSS variables.
   fonts: {
-    families: [
-      { name: 'Inter', provider: 'google' }
-    ]
-  },
-  tailwindcss: {
-    config: {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif']
-          },
-          colors: {
-            primary: {
-              50: '#f0f7ff',
-              100: '#e0effe',
-              200: '#bae0fd',
-              300: '#7cc8fb',
-              400: '#38acf8',
-              500: '#004B8D',
-              600: '#003d73',
-              700: '#002f5a',
-              800: '#002241',
-              900: '#001427',
-              950: '#082f49',
-              DEFAULT: '#004B8D'
-            }
-          }
-        }
-      }
-    }
+    families: [{ name: 'Inter', provider: 'google', weights: [400, 500, 600, 700] }]
   },
   colorMode: {
     preference: 'light',

@@ -7,13 +7,21 @@ const state = reactive({
   email: ''
 })
 
-const validate = (state: any) => {
-  const errors = []
-  if (!state.name) errors.push({ path: 'name', message: 'Name is required' })
-  if (!state.company) errors.push({ path: 'company', message: 'Company is required' })
-  if (!state.email) {
-    errors.push({ path: 'email', message: 'Email is required' })
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+const validate = (values: typeof state) => {
+  const errors: { path: string; message: string }[] = []
+
+  if (!values.name.trim()) errors.push({ path: 'name', message: 'Name is required' })
+  if (!values.company.trim()) {
+    errors.push({ path: 'company', message: 'Company is required' })
   }
+  if (!values.email.trim()) {
+    errors.push({ path: 'email', message: 'Email is required' })
+  } else if (!EMAIL_PATTERN.test(values.email.trim())) {
+    errors.push({ path: 'email', message: 'Enter a valid email address' })
+  }
+
   return errors
 }
 
@@ -26,6 +34,7 @@ watch(isOpen, (open) => {
     submitError.value = null
     return
   }
+
   isSubmitted.value = false
   loading.value = false
   Object.assign(state, { name: '', company: '', email: '' })
@@ -34,6 +43,7 @@ watch(isOpen, (open) => {
 async function onSubmit() {
   submitError.value = null
   loading.value = true
+
   try {
     await $fetch('/api/early-access', {
       method: 'POST',
@@ -53,6 +63,7 @@ async function onSubmit() {
     }
     const status =
       e.status ?? e.statusCode ?? e.response?.status ?? e.data?.statusCode ?? 0
+
     if (status === 409) {
       submitError.value = 'This email is already on the list.'
     } else if (status === 503) {
@@ -67,21 +78,40 @@ async function onSubmit() {
 </script>
 
 <template>
-  <UModal v-model="isOpen">
-    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-      <template #header>
-        <div class="flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-            {{ isSubmitted ? 'Request Sent' : 'Request Early Access' }}
-          </h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark" class="-my-1" @click="isOpen = false" />
-        </div>
-      </template>
+  <UModal v-model="isOpen" :ui="{ width: 'sm:max-w-md' }">
+    <div class="p-6 sm:p-7">
+      <div class="flex items-start justify-between gap-4">
+        <h2 class="text-h4 text-gray-900 dark:text-white">
+          {{ isSubmitted ? 'Request received' : 'Request early access' }}
+        </h2>
+        <UButton
+          color="gray"
+          variant="ghost"
+          icon="i-heroicons-x-mark-20-solid"
+          size="xs"
+          class="press -m-1"
+          aria-label="Close"
+          @click="isOpen = false"
+        />
+      </div>
 
-      <div v-if="!isSubmitted">
-        <UForm :state="state" :validate="validate" class="space-y-4 p-4" @submit="onSubmit">
+      <!-- Blur bridges the two states so the swap reads as one object changing,
+           rather than two panels crossing over each other. -->
+      <Transition name="swap" mode="out-in">
+        <!-- novalidate: the browser's native bubble would fire before the form's
+             own validation and swallow it. Inline, styled errors instead. -->
+        <UForm
+          v-if="!isSubmitted"
+          key="form"
+          novalidate
+          :state="state"
+          :validate="validate"
+          :validate-on="['submit']"
+          class="mt-6 space-y-4"
+          @submit="onSubmit"
+        >
           <UFormGroup label="Name" name="name">
-            <UInput v-model="state.name" placeholder="John Doe" size="lg" />
+            <UInput v-model="state.name" placeholder="Jane Doe" size="lg" autofocus />
           </UFormGroup>
 
           <UFormGroup label="Company" name="company">
@@ -89,31 +119,84 @@ async function onSubmit() {
           </UFormGroup>
 
           <UFormGroup label="Email" name="email">
-            <UInput v-model="state.email" type="email" placeholder="you@example.com" size="lg" />
+            <UInput
+              v-model="state.email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              size="lg"
+            />
           </UFormGroup>
 
-          <UAlert v-if="submitError" color="red" variant="soft" :title="submitError" />
+          <UAlert
+            v-if="submitError"
+            color="red"
+            variant="soft"
+            icon="i-heroicons-exclamation-triangle"
+            :title="submitError"
+          />
 
-          <div class="pt-4">
-            <UButton type="submit" block size="xl" color="primary" :loading="loading">
-              Submit Request
-            </UButton>
-          </div>
+          <UButton
+            type="submit"
+            block
+            size="lg"
+            color="primary"
+            class="press !mt-6"
+            :loading="loading"
+          >
+            {{ loading ? 'Sending' : 'Submit request' }}
+          </UButton>
         </UForm>
-      </div>
 
-      <div v-else class="p-8 text-center">
-        <UIcon name="i-heroicons-check-circle" class="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <p class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-          Request Received
-        </p>
-        <p class="text-gray-500 dark:text-gray-400">
-          Thank you for your interest! We'll review your request and get back to you shortly via email.
-        </p>
-        <UButton class="mt-6" color="primary" block size="lg" @click="isOpen = false">
-          Close
-        </UButton>
-      </div>
-    </UCard>
+        <div v-else key="done" class="mt-6 text-center">
+          <span
+            class="mx-auto flex size-12 items-center justify-center rounded-full bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400"
+          >
+            <UIcon name="i-heroicons-check-20-solid" class="size-6" />
+          </span>
+          <p class="mt-5 text-body text-pretty text-gray-500 dark:text-gray-400">
+            Thank you for your interest. We'll review your request and get back to you
+            shortly via email.
+          </p>
+          <UButton
+            block
+            size="lg"
+            color="gray"
+            variant="soft"
+            class="press mt-6"
+            @click="isOpen = false"
+          >
+            Close
+          </UButton>
+        </div>
+      </Transition>
+    </div>
   </UModal>
 </template>
+
+<style scoped>
+.swap-enter-active {
+  transition:
+    opacity 200ms var(--ease-out),
+    filter 200ms var(--ease-out);
+}
+
+.swap-leave-active {
+  transition:
+    opacity 120ms var(--ease-out),
+    filter 120ms var(--ease-out);
+}
+
+.swap-enter-from,
+.swap-leave-to {
+  opacity: 0;
+  filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swap-enter-from,
+  .swap-leave-to {
+    filter: none;
+  }
+}
+</style>
