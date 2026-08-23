@@ -229,6 +229,58 @@ const { copy, copied } = useClipboard()
       </div>
     </UPageSection>
 
+    <!-- Product -->
+    <UPageSection
+      id="product"
+      :ui="{
+        root: 'pb-24 sm:pb-32 scroll-mt-(--ui-header-height)',
+        container: 'max-w-6xl',
+        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        title: 'max-w-lg mx-auto',
+        description: 'max-w-xl mx-auto text-muted'
+      }"
+    >
+      <template #headline>
+        <Motion
+          as="span"
+          v-bind="scrollMotion()"
+          class="inline-block"
+        >
+          {{ page.product.headline }}
+        </Motion>
+      </template>
+
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.1)"
+          class="inline-block"
+        >
+          {{ page.product.title }}
+        </Motion>
+      </template>
+
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.2)"
+          class="inline-block"
+        >
+          {{ page.product.description }}
+        </Motion>
+      </template>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <Motion
+          v-for="(shot, index) in page.product.shots"
+          :key="shot.src"
+          v-bind="staggerMotion(index)"
+        >
+          <ProductShot v-bind="shot" />
+        </Motion>
+      </div>
+    </UPageSection>
+
     <!-- Results -->
     <UPageSection
       id="results"

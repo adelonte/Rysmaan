@@ -102,6 +102,23 @@ services:
       title: AI Estimation
       description: Draft estimates from drawings and your own award history, with every number traceable to where it came from.
       to: /solutions/ai-estimation
+product:
+  headline: The product
+  title: "Both sides of the same record."
+  description: Buyers run the package. Vendors see exactly what they have been asked for and where their quote stands. Neither side is emailing the other for a status update.
+  shots:
+    - src: /screenshots/Dashboard.png
+      alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
+      label: Owner & contractor workspace
+      width: 3254
+      height: 1936
+      crop: true
+    - src: /screenshots/pm-dashboard.png
+      alt: The Rysmaan vendor workspace, showing available RFQs to quote on, submitted quote counts and response-rate figures.
+      label: Vendor workspace
+      width: 3172
+      height: 1714
+      crop: true
 metrics:
   headline: Why teams switch
   title: "Less chasing. Faster awards."

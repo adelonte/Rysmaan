@@ -1,6 +1,6 @@
 order: 1
 navLabel: Project Management
-tagline: Packages, submittals and approvals on one record
+tagline: Packages, submittals and approvals
 icon: i-lucide-kanban
 seo:
   title: Project Management — Rysmaan
@@ -13,12 +13,18 @@ hero:
     - label: Book a demo
       color: primary
       size: xl
-      to: '#contact'
+      to: "#contact"
     - label: All solutions
       size: xl
       color: neutral
       variant: soft
-      to: '/#services'
+      to: "/#services"
+screenshot:
+  src: /screenshots/Dashboard.png
+  alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
+  label: Projects — workspace
+  width: 3254
+  height: 1936
 features:
   headline: What you get
   title: "One structure, start to finish."
@@ -43,4 +49,4 @@ cta:
   links:
     - label: Book a demo
       color: primary
-      to: 'mailto:hello@rysmaan.com'
+      to: "mailto:hello@rysmaan.com"

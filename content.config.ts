@@ -14,6 +14,15 @@ const createLinkSchema = () => z.object({
   variant: createEnum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional()
 })
 
+const createShotSchema = () => z.object({
+  src: z.string().nonempty(),
+  alt: z.string().nonempty(),
+  label: z.string().optional(),
+  width: z.number(),
+  height: z.number(),
+  crop: z.boolean().optional()
+})
+
 const createFeaturesSchema = () => z.object({
   headline: z.string().optional(),
   title: z.string().nonempty(),
@@ -52,6 +61,12 @@ export const collections = {
         items: z.array(z.string())
       }),
       services: createFeaturesSchema(),
+      product: z.object({
+        headline: z.string().optional(),
+        title: z.string().nonempty(),
+        description: z.string().nonempty(),
+        shots: z.array(createShotSchema())
+      }),
       metrics: z.object({
         headline: z.string().optional(),
         title: z.string().nonempty(),
@@ -84,6 +99,8 @@ export const collections = {
         headline: z.string().nonempty(),
         links: z.array(createLinkSchema())
       }),
+      // Only some solution pages have a screenshot worth showing.
+      screenshot: createShotSchema().optional(),
       features: createFeaturesSchema(),
       cta: z.object({
         title: z.string().nonempty(),

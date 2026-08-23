@@ -110,6 +110,16 @@ const { copy, copied } = useClipboard()
       </template>
     </UPageHero>
 
+    <!-- Screenshot -->
+    <UContainer
+      v-if="page.screenshot"
+      class="max-w-5xl pb-24 sm:pb-32"
+    >
+      <Motion v-bind="scrollMotion()">
+        <ProductShot v-bind="page.screenshot" />
+      </Motion>
+    </UContainer>
+
     <!-- Features -->
     <UPageSection
       :ui="{
