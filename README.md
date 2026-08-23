@@ -31,10 +31,24 @@ corepack pnpm preview
 
 ## Editing content
 
-All page copy lives in [`content/index.yml`](./content/index.yml) — hero,
-platform services, metrics and CTA. The shape of that file is enforced by the
-Zod schema in [`content.config.ts`](./content.config.ts), so adding a field
-means adding it there too.
+All page copy lives in `content/`:
+
+- [`content/index.yml`](./content/index.yml) — the landing page: hero, activity
+  panel, solutions grid, metrics and CTA.
+- [`content/solutions/*.yml`](./content/solutions) — one file per solution page,
+  rendered by `app/pages/solutions/[slug].vue` at `/solutions/<filename>`.
+
+The shape of both is enforced by the Zod schemas in
+[`content.config.ts`](./content.config.ts), so adding a field means adding it
+there too.
+
+### Adding a solution
+
+Drop a new file in `content/solutions/`. Its `order` places it in the header
+dropdown, which is generated from the collection — there is no second list to
+update. Then add its icons to `icon.clientBundle.icons` in
+[`nuxt.config.ts`](./nuxt.config.ts), or they will be fetched at runtime and
+pop in after hydration.
 
 ## Branding
 
@@ -61,6 +75,10 @@ app/
 │   ├── GradientGlow.vue
 │   ├── HeroActivity.vue        # Hero "live package feed" panel
 │   └── HeroShaders.client.vue  # WebGL plasma wash behind the hero
-└── pages/index.vue
-content/index.yml        # All page copy
+└── pages/
+    ├── index.vue
+    └── solutions/[slug].vue    # One template, six content files
+content/
+├── index.yml            # Landing page copy
+└── solutions/*.yml      # One file per solution page
 ```

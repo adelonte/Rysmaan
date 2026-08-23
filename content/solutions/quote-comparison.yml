@@ -1,0 +1,46 @@
+order: 4
+navLabel: Quote Comparison
+tagline: Compare bids like for like
+icon: i-lucide-scale
+seo:
+  title: Quote Comparison — Rysmaan
+  description: Normalise bids to a common scope and compare them line by line, with exclusions and qualifications surfaced rather than buried.
+title: "Quote Comparison"
+description: Bids normalised to a common scope and compared line by line — instead of six differently structured spreadsheets and a long afternoon.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '/#services'
+features:
+  headline: What you get
+  title: "The cheapest bid is rarely the lowest price."
+  description: Most of the risk in a tender hides in what a vendor left out. Normalising the scope is what makes the difference visible before you award.
+  items:
+    - icon: i-lucide-align-left
+      title: Normalised scope
+      description: Every bid mapped onto the same line items, so a missing allowance shows up as a gap rather than as a better price.
+    - icon: i-lucide-table-2
+      title: Line-by-line comparison
+      description: Rates, quantities and totals side by side, with outliers against the package budget flagged as you read.
+    - icon: i-lucide-triangle-alert
+      title: Exclusions surfaced
+      description: Qualifications, exclusions and assumptions pulled out of the covering letter and put next to the number they affect.
+    - icon: i-lucide-award
+      title: Award recommendation
+      description: The comparison, the reasoning and the approvals travel together — which is exactly what an auditor asks for later.
+cta:
+  title: "Compare your next\ntender properly."
+  description: Bring a package you are tendering now and we will run the comparison with you.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

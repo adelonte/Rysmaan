@@ -2,26 +2,50 @@
 import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
-const nuxtApp = useNuxtApp()
+const route = useRoute()
 const activeSection = ref<string>()
+
+// The dropdown is generated from the solutions collection rather than written
+// out here, so adding a page adds its nav entry and the two cannot drift.
+const { data: solutions } = await useAsyncData('solutions-nav', () =>
+  queryCollection('solutions')
+    .order('order', 'ASC')
+    .select('path', 'navLabel', 'tagline', 'icon')
+    .all()
+)
 
 const items = computed(() => [
   {
-    label: 'Platform',
-    to: '#services',
-    exactHash: true,
-    active: activeSection.value === 'services'
+    label: 'Solutions',
+    active: route.path.startsWith('/solutions'),
+    children: (solutions.value ?? []).map(solution => ({
+      label: solution.navLabel,
+      description: solution.tagline,
+      icon: solution.icon,
+      to: solution.path
+    }))
   },
   {
+    // Absolute, because this anchor only exists on the landing page and the
+    // solution pages need to travel back to it.
     label: 'Why Rysmaan',
-    to: '#results',
-    exactHash: true,
+    to: '/#results',
     active: activeSection.value === 'results'
   }
 ])
 
-nuxtApp.hooks.hookOnce('page:loading:end', () => {
-  const observer = new IntersectionObserver((entries) => {
+let observer: IntersectionObserver | undefined
+
+function observeSections() {
+  observer?.disconnect()
+  activeSection.value = undefined
+
+  const sections = document.querySelectorAll('#services, #results')
+  if (!sections.length) {
+    return
+  }
+
+  observer = new IntersectionObserver((entries) => {
     const visible = entries.find(e => e.isIntersecting)
     if (visible) {
       activeSection.value = visible.target.id
@@ -30,8 +54,22 @@ nuxtApp.hooks.hookOnce('page:loading:end', () => {
     }
   }, { rootMargin: '-50% 0px -50% 0px' })
 
-  document.querySelectorAll('#services, #results').forEach(el => observer.observe(el))
+  sections.forEach(el => observer!.observe(el))
+}
+
+// Re-attached on every navigation: the header outlives the page, and the
+// sections it watches only exist on the landing page.
+onMounted(async () => {
+  await nextTick()
+  observeSections()
 })
+
+watch(() => route.path, async () => {
+  await nextTick()
+  observeSections()
+})
+
+onBeforeUnmount(() => observer?.disconnect())
 
 const variants: Record<string, VariantType | ((custom: unknown) => VariantType)> = {
   normal: {
@@ -69,6 +107,16 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
     <UNavigationMenu
       :items="items"
       variant="link"
+      content-orientation="vertical"
+      :ui="{
+        // Reka never sets --reka-navigation-menu-viewport-width here, so the
+        // panel falls back to w-full of its wrapper — the width of the nav
+        // itself, which truncates every label. Sizing the wrapper is what the
+        // viewport actually follows.
+        viewportWrapper: 'w-80',
+        content: 'w-80',
+        childLinkDescription: 'text-xs leading-relaxed text-muted'
+      }"
     />
 
     <template #right>
@@ -82,7 +130,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
       <UButton
         label="Book a demo"
         class="hidden lg:flex"
-        to="#contact"
+        to="/#contact"
       />
     </template>
 
@@ -157,7 +205,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         />
         <UButton
           label="Book a demo"
-          to="#contact"
+          to="/#contact"
           block
         />
       </div>

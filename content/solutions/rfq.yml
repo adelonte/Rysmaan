@@ -1,0 +1,46 @@
+order: 5
+navLabel: RFQ
+tagline: Issue tenders and track every response
+icon: i-lucide-file-search
+seo:
+  title: RFQ — Rysmaan
+  description: Issue packages to prequalified vendors, track who has opened, queried and responded, and close the tender on a clear record.
+title: "RFQ"
+description: Issue packages to prequalified vendors, see who has opened, queried and responded, and close the tender on a record nobody has to reconstruct.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '/#services'
+features:
+  headline: What you get
+  title: "Tenders that answer their own questions."
+  description: An RFQ is mostly chasing — who got it, who opened it, who is going to bid, and who is quietly about to miss the date.
+  items:
+    - icon: i-lucide-send
+      title: Invite qualified vendors
+      description: Invite from your own list or the network. Vendors whose insurance or licences have lapsed do not make it onto it.
+    - icon: i-lucide-circle-help
+      title: Clarifications
+      description: Questions asked once and answered to every bidder at the same time, so no one bids off a different set of facts.
+    - icon: i-lucide-activity
+      title: Response tracking
+      description: Opened, in progress, declined, submitted. You know where the tender stands without sending a single follow-up email.
+    - icon: i-lucide-lock
+      title: Sealed close
+      description: Bids stay sealed until the deadline passes, then open together with the time each one arrived recorded.
+cta:
+  title: "Issue your next\npackage here."
+  description: Bring the vendors you already use. The first RFQ takes about ten minutes to set up.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

@@ -43,6 +43,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
+      crawlLinks: true,
       routes: [
         '/'
       ]
@@ -64,19 +65,42 @@ export default defineNuxtConfig({
   icon: {
     clientBundle: {
       icons: [
+        'lucide:activity',
+        'lucide:align-left',
+        'lucide:archive',
+        'lucide:award',
         'lucide:badge-check',
         'lucide:building-2',
-        'lucide:calendar-range',
+        'lucide:calendar-clock',
+        'lucide:chart-line',
+        'lucide:check-check',
+        'lucide:circle-help',
+        'lucide:clipboard-check',
+        'lucide:database',
+        'lucide:diff',
         'lucide:factory',
+        'lucide:file-output',
         'lucide:file-search',
         'lucide:file-signature',
         'lucide:file-text',
         'lucide:hard-hat',
+        'lucide:history',
         'lucide:inbox',
         'lucide:kanban',
+        'lucide:layers',
+        'lucide:lock',
+        'lucide:messages-square',
+        'lucide:milestone',
         'lucide:network',
         'lucide:route',
+        'lucide:ruler',
         'lucide:scale',
+        'lucide:search-check',
+        'lucide:send',
+        'lucide:sparkles',
+        'lucide:table-2',
+        'lucide:trending-up',
+        'lucide:triangle-alert',
         'lucide:truck',
         'lucide:zap'
       ]

@@ -10,7 +10,7 @@ hero:
       color: primary
       size: xl
       to: '#contact'
-    - label: Explore the platform
+    - label: Explore solutions
       size: xl
       color: neutral
       variant: soft
@@ -74,28 +74,34 @@ industries:
     - i-lucide-zap
     - i-lucide-route
 services:
-  headline: Platform
+  headline: Solutions
   title: "Everything a package touches."
   description: Procurement, qualification, contracts and delivery stop living in inboxes and spreadsheets, and start living on one record every party can see.
   items:
-    - icon: i-lucide-file-search
-      title: Tendering & RFQs
-      description: Issue packages to prequalified vendors, compare bids on a normalised scope, and award with a full audit trail behind every decision.
-    - icon: i-lucide-badge-check
-      title: Vendor Qualification
-      description: Licences, insurance, safety records and financials collected once, verified, and kept current — with expiry chased automatically.
-    - icon: i-lucide-file-signature
-      title: Contracts & Variations
-      description: Contracts generated straight from the awarded bid. Variations, milestones, retention and payment terms tracked on one ledger.
     - icon: i-lucide-kanban
-      title: Project Delivery
-      description: Scopes, submittals, RFIs and approvals tracked from kickoff to handover, with every action attributed and time-stamped.
-    - icon: i-lucide-calendar-range
-      title: Schedule & Lead Times
-      description: Vendor lead times tied to the programme, so a slipped delivery surfaces weeks before it reaches the critical path.
-    - icon: i-lucide-network
-      title: Vendor Network
-      description: Search a verified network of suppliers and subcontractors by trade, region, capacity and past performance — then invite them in one click.
+      title: Project Management
+      description: Break the works into packages once, then run every tender, contract and delivery against that same structure.
+      to: /solutions/project-management
+    - icon: i-lucide-badge-check
+      title: Vendor Management
+      description: Licences, insurance, safety records and financials collected once, verified, and chased before they expire.
+      to: /solutions/vendor-management
+    - icon: i-lucide-file-signature
+      title: Contracts
+      description: Contracts generated from the awarded bid, with variations, milestones and retention tracked on one ledger.
+      to: /solutions/contracts
+    - icon: i-lucide-scale
+      title: Quote Comparison
+      description: Bids normalised to a common scope and compared line by line, with exclusions surfaced rather than buried.
+      to: /solutions/quote-comparison
+    - icon: i-lucide-file-search
+      title: RFQ
+      description: Issue packages to prequalified vendors and see who has opened, queried and responded — without chasing.
+      to: /solutions/rfq
+    - icon: i-lucide-sparkles
+      title: AI Estimation
+      description: Draft estimates from drawings and your own award history, with every number traceable to where it came from.
+      to: /solutions/ai-estimation
 metrics:
   headline: Why teams switch
   title: "Less chasing. Faster awards."

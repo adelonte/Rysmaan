@@ -1,0 +1,46 @@
+order: 6
+navLabel: AI Estimation
+tagline: Draft estimates from drawings and history
+icon: i-lucide-sparkles
+seo:
+  title: AI Estimation — Rysmaan
+  description: Draft estimates from drawings and your own award history in minutes, with every number traceable to the line item it came from.
+title: "AI Estimation"
+description: Draft an estimate from drawings and your own award history in minutes — with every number traceable back to the line item and the project it came from.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '/#services'
+features:
+  headline: What you get
+  title: "A first pass, not a black box."
+  description: An estimate you cannot explain is worthless in a tender review. Every line here points back at the drawing it was measured from and the award it was priced against.
+  items:
+    - icon: i-lucide-ruler
+      title: Takeoff assist
+      description: Quantities drafted from the drawing set, presented for you to correct rather than dropped into the total unchecked.
+    - icon: i-lucide-database
+      title: Priced from your history
+      description: Rates drawn from what you actually awarded on comparable packages, not from a generic national price book.
+    - icon: i-lucide-search-check
+      title: Traceable numbers
+      description: Every line shows the drawing it came from and the past award that priced it. Nothing in the total is unattributable.
+    - icon: i-lucide-trending-up
+      title: Estimate against award
+      description: When the tender closes, the estimate is compared with the bids — and the gap feeds back into the next one.
+cta:
+  title: "Try it on a package\nyou have already priced."
+  description: The fastest way to judge an estimator is to point it at a job where you know the answer.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

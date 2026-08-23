@@ -1,0 +1,46 @@
+order: 3
+navLabel: Contracts
+tagline: From awarded bid to signed contract
+icon: i-lucide-file-signature
+seo:
+  title: Contracts — Rysmaan
+  description: Generate contracts straight from the awarded bid, then track variations, milestones, retention and payment terms on one ledger.
+title: "Contracts"
+description: Contracts generated straight from the awarded bid, with variations, milestones, retention and payment terms tracked on a single ledger.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '/#services'
+features:
+  headline: What you get
+  title: "No re-keying the award."
+  description: The contract is built from the bid you accepted, so the scope, rates and terms in it are the ones you actually agreed to.
+  items:
+    - icon: i-lucide-file-output
+      title: Generated from the award
+      description: Scope, rates and programme carry across from the winning bid. Nobody retypes a schedule of rates into a Word template.
+    - icon: i-lucide-diff
+      title: Variations
+      description: Every variation priced, approved and stamped against the original, so the contract value is current rather than reconstructed.
+    - icon: i-lucide-milestone
+      title: Milestones & retention
+      description: Payment milestones, retention percentages and release dates tracked against actual progress on the package.
+    - icon: i-lucide-history
+      title: Audit trail
+      description: Who changed what, when, and on whose approval — sealed at the point of award and kept for the life of the contract.
+cta:
+  title: "Award it once.\nTrack it properly."
+  description: Run your next package end to end and see what the ledger looks like.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

@@ -14,6 +14,18 @@ const createLinkSchema = () => z.object({
   variant: createEnum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional()
 })
 
+const createFeaturesSchema = () => z.object({
+  headline: z.string().optional(),
+  title: z.string().nonempty(),
+  description: z.string().nonempty(),
+  items: z.array(z.object({
+    icon: z.string().editor({ input: 'icon' }),
+    title: z.string().nonempty(),
+    description: z.string().nonempty(),
+    to: z.string().optional()
+  }))
+})
+
 export const collections = {
   content: defineCollection({
     source: 'index.yml',
@@ -39,16 +51,7 @@ export const collections = {
         title: z.string().nonempty(),
         items: z.array(z.string())
       }),
-      services: z.object({
-        headline: z.string().optional(),
-        title: z.string().nonempty(),
-        description: z.string().nonempty(),
-        items: z.array(z.object({
-          icon: z.string(),
-          title: z.string().nonempty(),
-          description: z.string().nonempty()
-        }))
-      }),
+      services: createFeaturesSchema(),
       metrics: z.object({
         headline: z.string().optional(),
         title: z.string().nonempty(),
@@ -59,6 +62,29 @@ export const collections = {
           class: z.string().nonempty()
         }))
       }),
+      cta: z.object({
+        title: z.string().nonempty(),
+        description: z.string().nonempty(),
+        contact: z.string().nonempty(),
+        links: z.array(createLinkSchema())
+      })
+    })
+  }),
+  solutions: defineCollection({
+    source: 'solutions/*.yml',
+    type: 'page',
+    schema: z.object({
+      // Drives the order of the Solutions dropdown, which is generated from
+      // this collection so the nav cannot drift from the pages that exist.
+      order: z.number(),
+      navLabel: z.string().nonempty(),
+      tagline: z.string().nonempty(),
+      icon: z.string().editor({ input: 'icon' }),
+      hero: z.object({
+        headline: z.string().nonempty(),
+        links: z.array(createLinkSchema())
+      }),
+      features: createFeaturesSchema(),
       cta: z.object({
         title: z.string().nonempty(),
         description: z.string().nonempty(),
