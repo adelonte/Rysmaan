@@ -8,8 +8,9 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   /* Rysmaan navy. #004B8D is pinned at 500 so solid buttons render the exact
-     brand colour in light mode; 400 is lifted well clear of it because dark
-     mode resolves --ui-primary to 400 and navy has no contrast on near-black. */
+     brand colour. 400 is lifted well clear of it for the dark surfaces that
+     remain (error pages), which resolve --ui-primary to 400 — navy has no
+     contrast on near-black. */
   --color-brand-50: #f2f8fd;
   --color-brand-100: #e2eff9;
   --color-brand-200: #b7d5ee;

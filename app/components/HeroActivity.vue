@@ -34,7 +34,7 @@ function lineMotion(index: number) {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-xl border border-default bg-elevated/50 text-left backdrop-blur-sm ring-1 ring-white/2">
+  <div class="overflow-hidden rounded-xl border border-default bg-default/80 text-left shadow-sm backdrop-blur-sm">
     <div class="flex items-center gap-3 border-b border-default p-4 sm:px-6">
       <div class="flex items-center gap-1.5">
         <span class="size-2.5 rounded-full border border-default bg-muted" />

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  colorMode: 'dark'
-})
-
 const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -83,7 +79,7 @@ const { copy, copied } = useClipboard()
             color="neutral"
             variant="soft"
             :label="page.hero.headline"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm"
+            class="rounded-full px-3 py-1.5 gap-1.5 backdrop-blur-sm"
           >
             <template #leading>
               <UChip
@@ -108,7 +104,7 @@ const { copy, copied } = useClipboard()
             v-if="heroTitle.secondary"
             class="animate-shimmer bg-size-[200%_auto] bg-clip-text text-transparent"
             :style="{
-              backgroundImage: 'linear-gradient(135deg, var(--color-primary-400), var(--color-primary-300), var(--color-primary-200), var(--color-primary-100), var(--color-primary-200), var(--color-primary-300), var(--color-primary-400))',
+              backgroundImage: 'linear-gradient(135deg, var(--color-primary-700), var(--color-primary-600), var(--color-primary-500), var(--color-primary-400), var(--color-primary-500), var(--color-primary-600), var(--color-primary-700))',
               animationDuration: '10s'
             }"
           >
@@ -160,7 +156,7 @@ const { copy, copied } = useClipboard()
           :title="page.industries.title"
           :items="page.industries.items"
           :ui="{
-            title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
+            title: 'font-mono uppercase text-xs tracking-[0.12em] text-muted',
             logos: 'gap-0',
             logo: 'text-muted size-6'
           }"
@@ -176,7 +172,7 @@ const { copy, copied } = useClipboard()
         container: 'max-w-5xl',
         headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
+        description: 'max-w-md mx-auto text-muted'
       }"
     >
       <template #headline>
@@ -224,7 +220,7 @@ const { copy, copied } = useClipboard()
               :ui="{
                 leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
                 title: 'text-sm tracking-tight',
-                description: 'text-sm leading-relaxed text-dimmed'
+                description: 'text-sm leading-relaxed text-muted'
               }"
             />
           </Motion>
@@ -240,7 +236,7 @@ const { copy, copied } = useClipboard()
         container: 'max-w-5xl',
         headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
+        description: 'max-w-md mx-auto text-muted'
       }"
     >
       <template #headline>
@@ -288,7 +284,7 @@ const { copy, copied } = useClipboard()
                 root: 'text-center',
                 wrapper: 'items-center',
                 title: ['text-4xl font-bold tracking-tight leading-none', metric.class],
-                description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
+                description: 'font-mono text-xs uppercase tracking-[0.06em] text-muted mt-3'
               }"
             />
           </Motion>
@@ -304,7 +300,7 @@ const { copy, copied } = useClipboard()
         root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-3xl text-center',
         title: 'lg:text-5xl tracking-tighter whitespace-pre-line',
-        description: 'mx-auto max-w-sm leading-relaxed text-dimmed'
+        description: 'mx-auto max-w-sm leading-relaxed text-muted'
       }"
     >
       <template #top>

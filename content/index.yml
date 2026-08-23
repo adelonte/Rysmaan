@@ -109,7 +109,7 @@ metrics:
       class: "text-secondary"
     - value: "1 record"
       label: Per package
-      class: "text-info"
+      class: "text-highlighted"
     - value: "100%"
       label: Audit ready
       class: "text-success"

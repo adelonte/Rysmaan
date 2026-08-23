@@ -16,7 +16,7 @@ const links = [
     }"
   >
     <template #left>
-      <p class="text-sm text-dimmed">
+      <p class="text-sm text-muted">
         © {{ new Date().getFullYear() }} Rysmaan. All rights reserved.
       </p>
     </template>

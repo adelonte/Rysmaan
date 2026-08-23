@@ -19,11 +19,11 @@ import { Shader, Pixelate, Plasma, SineWave } from 'shaders/vue'
       :scale="68"
       :transform="{ rotation: 180 }"
     >
-      <!-- The teal end of the Rysmaan logo gradient, washed out to near-black. -->
+      <!-- The teal end of the Rysmaan logo gradient, washed out to the page. -->
       <Plasma
         :balance="57"
         color-a="#2ab5c9"
-        color-b="#020617"
+        color-b="#ffffff"
         :contrast="1.6"
         :density="3.3"
         :intensity="1.8"
