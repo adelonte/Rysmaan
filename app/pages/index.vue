@@ -139,12 +139,11 @@ const { copy, copied } = useClipboard()
       <Motion
         as-child
         v-bind="enterMotion(0.85)"
-        class="max-w-2xl mx-auto w-full"
+        class="max-w-5xl mx-auto w-full"
       >
-        <HeroActivity
-          :project="page.activity.project"
-          :reference="page.activity.reference"
-          :lines="page.activity.lines"
+        <ProductShot
+          v-bind="page.hero.shot"
+          eager
         />
       </Motion>
 
@@ -270,7 +269,10 @@ const { copy, copied } = useClipboard()
         </Motion>
       </template>
 
-      <div class="grid gap-6 lg:grid-cols-2">
+      <div
+        class="grid gap-6"
+        :class="page.product.shots.length > 1 ? 'lg:grid-cols-2' : 'max-w-4xl mx-auto'"
+      >
         <Motion
           v-for="(shot, index) in page.product.shots"
           :key="shot.src"

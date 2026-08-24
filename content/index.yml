@@ -15,56 +15,12 @@ hero:
       color: neutral
       variant: soft
       to: '#services'
-activity:
-  project: Marina Towers — Phase 2
-  reference: RFQ-2481 · MEP Package
-  lines:
-    - icon: i-lucide-file-text
-      time: "09:12"
-      segments:
-        - text: "RFQ-2481 "
-          style: strong
-        - text: "issued to "
-          style: dim
-        - text: "14 prequalified vendors"
-          style: accent
-    - icon: i-lucide-badge-check
-      time: "09:12"
-      segments:
-        - text: "Licences, insurance and safety records "
-          style: dim
-        - text: "verified"
-          style: success
-    - icon: i-lucide-inbox
-      time: "14:38"
-      segments:
-        - text: "9 bids "
-          style: strong
-        - text: "received · normalised to a common scope"
-          style: dim
-    - icon: i-lucide-scale
-      time: "14:39"
-      segments:
-        - text: "Lowest compliant bid "
-          style: dim
-        - text: "6.2% under budget"
-          style: success
-    - icon: i-lucide-truck
-      time: "16:04"
-      segments:
-        - text: "Switchgear lead time "
-          style: dim
-        - text: "11 weeks"
-          style: warn
-        - text: " — flagged against the programme"
-          style: dim
-    - icon: i-lucide-file-signature
-      time: "17:20"
-      segments:
-        - text: "Award approved · contract generated · "
-          style: dim
-        - text: "audit trail sealed"
-          style: accent
+  shot:
+    src: /screenshots/Dashboard.png
+    alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
+    label: Owner & contractor workspace
+    width: 3254
+    height: 1936
 industries:
   title: Built for the teams that deliver projects
   items:
@@ -103,16 +59,10 @@ services:
       description: Draft estimates from drawings and your own award history, with every number traceable to where it came from.
       to: /solutions/ai-estimation
 product:
-  headline: The product
-  title: "Both sides of the same record."
-  description: Buyers run the package. Vendors see exactly what they have been asked for and where their quote stands. Neither side is emailing the other for a status update.
+  headline: The other side
+  title: "Vendors work the same record."
+  description: Suppliers and subcontractors get their own workspace — what they have been invited to quote, what is closing, and where a submitted price stands. Neither side has to email the other for a status update.
   shots:
-    - src: /screenshots/Dashboard.png
-      alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
-      label: Owner & contractor workspace
-      width: 3254
-      height: 1936
-      crop: true
     - src: /screenshots/pm-dashboard.png
       alt: The Rysmaan vendor workspace, showing available RFQs to quote on, submitted quote counts and response-rate figures.
       label: Vendor workspace

@@ -82,10 +82,8 @@ export default defineNuxtConfig({
         'lucide:file-output',
         'lucide:file-search',
         'lucide:file-signature',
-        'lucide:file-text',
         'lucide:hard-hat',
         'lucide:history',
-        'lucide:inbox',
         'lucide:kanban',
         'lucide:layers',
         'lucide:lock',
@@ -101,7 +99,6 @@ export default defineNuxtConfig({
         'lucide:table-2',
         'lucide:trending-up',
         'lucide:triangle-alert',
-        'lucide:truck',
         'lucide:zap'
       ]
     }

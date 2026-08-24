@@ -42,19 +42,8 @@ export const collections = {
     schema: z.object({
       hero: z.object({
         headline: z.string().optional(),
-        links: z.array(createLinkSchema())
-      }),
-      activity: z.object({
-        project: z.string().nonempty(),
-        reference: z.string().nonempty(),
-        lines: z.array(z.object({
-          icon: z.string(),
-          time: z.string().nonempty(),
-          segments: z.array(z.object({
-            text: z.string(),
-            style: z.string()
-          }))
-        }))
+        links: z.array(createLinkSchema()),
+        shot: createShotSchema()
       }),
       industries: z.object({
         title: z.string().nonempty(),

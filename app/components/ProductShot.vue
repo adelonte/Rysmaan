@@ -1,10 +1,11 @@
 <script setup lang="ts">
 /**
- * A product screenshot in the same window chrome as HeroActivity, so the real
- * screens and the illustrative one read as one system.
+ * A product screenshot in a window chrome.
  *
  * `crop` trims the foot of the image by rendering it into a box wider than the
  * source — used where a screenshot has scratch data at the bottom of the page.
+ *
+ * `eager` is for the hero shot, which is the LCP element and must not be lazy.
  */
 withDefaults(defineProps<{
   src: string
@@ -13,7 +14,8 @@ withDefaults(defineProps<{
   width: number
   height: number
   crop?: boolean
-}>(), { label: undefined, crop: false })
+  eager?: boolean
+}>(), { label: undefined, crop: false, eager: false })
 </script>
 
 <template>
@@ -36,7 +38,8 @@ withDefaults(defineProps<{
       :alt="alt"
       :width="width"
       :height="height"
-      loading="lazy"
+      :loading="eager ? 'eager' : 'lazy'"
+      :fetchpriority="eager ? 'high' : undefined"
       decoding="async"
       class="w-full"
       :class="crop ? 'aspect-2/1 object-cover object-top' : undefined"
