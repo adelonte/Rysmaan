@@ -1,0 +1,46 @@
+order: 2
+navLabel: Vendor Management
+tagline: Qualify vendors once, keep them current
+icon: i-lucide-badge-check
+seo:
+  title: Vendor Management — Rysmaan
+  description: Collect licences, insurance, safety records and financials once, verify them, and keep them current with expiry chased automatically.
+title: "Vendor Management"
+description: Licences, insurance, safety records and financials collected once, verified, and kept current — so a vendor is either qualified to bid or they are not.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '/#services'
+features:
+  headline: What you get
+  title: "Qualification that stays true."
+  description: Most prequalification goes stale the week after it is collected. This one chases its own expiry dates and blocks bids from vendors who have lapsed.
+  items:
+    - icon: i-lucide-clipboard-check
+      title: Prequalification
+      description: One questionnaire per trade, scored against your own thresholds, with supporting documents attached to the answers.
+    - icon: i-lucide-calendar-clock
+      title: Expiry tracking
+      description: Insurance and licences carry their own dates. Vendors are chased before they lapse, and lapsed vendors drop out of invite lists.
+    - icon: i-lucide-chart-line
+      title: Performance history
+      description: Delivery, quality and responsiveness scored across projects, so the next award reflects how the last one actually went.
+    - icon: i-lucide-network
+      title: Vendor network
+      description: Search a verified network of suppliers and subcontractors by trade, region, capacity and past performance.
+cta:
+  title: "Bring your vendors.\nOr use ours."
+  description: Import the vendors you already work with, or start from the verified network.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

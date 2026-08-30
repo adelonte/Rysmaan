@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@source "../../../content/**/*";
+
+@theme static {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Rysmaan navy. #004B8D is pinned at 500 so solid buttons render the exact
+     brand colour. 400 is lifted well clear of it for the dark surfaces that
+     remain (error pages), which resolve --ui-primary to 400 — navy has no
+     contrast on near-black. */
+  --color-brand-50: #f2f8fd;
+  --color-brand-100: #e2eff9;
+  --color-brand-200: #b7d5ee;
+  --color-brand-300: #7ab0dd;
+  --color-brand-400: #3a92d4;
+  --color-brand-500: #004b8d;
+  --color-brand-600: #004078;
+  --color-brand-700: #003563;
+  --color-brand-800: #002a4e;
+  --color-brand-900: #00203b;
+  --color-brand-950: #001527;
+
+  /* The teal end of the logo gradient. Accents only — never a whole surface. */
+  --color-ocean-50: #effcfd;
+  --color-ocean-100: #d3f5f9;
+  --color-ocean-200: #ace9f2;
+  --color-ocean-300: #72d7e7;
+  --color-ocean-400: #38bcd4;
+  --color-ocean-500: #2ab5c9;
+  --color-ocean-600: #178599;
+  --color-ocean-700: #166b7c;
+  --color-ocean-800: #185866;
+  --color-ocean-900: #184a57;
+  --color-ocean-950: #08303b;
+
+  --animate-shimmer: shimmer 8s ease-in-out infinite alternate;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+}
+
+.dark {
+  --ui-bg: var(--ui-color-neutral-950);
+  --ui-bg-muted: var(--ui-color-neutral-900);
+  --ui-bg-elevated: var(--ui-color-neutral-900);
+  --ui-bg-accented: var(--ui-color-neutral-800);
+  --ui-border: var(--ui-color-neutral-900);
+}

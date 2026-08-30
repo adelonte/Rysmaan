@@ -1,0 +1,96 @@
+seo:
+  title: Rysmaan — The construction platform for procurement, vendors and delivery
+  description: Rysmaan brings tendering, vendor qualification, contracts and delivery tracking into one platform, so owners, engineering firms, contractors and suppliers work from the same record.
+title: "Run the project.\nNot the paperwork."
+description: Rysmaan is the construction platform where packages get tendered, vendors get qualified, contracts get awarded and deliveries get tracked — in one place, on one record.
+hero:
+  headline: "Now in early access — the vendor network is open"
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: '#contact'
+    - label: Explore solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: '#services'
+  shot:
+    src: /screenshots/Dashboard.png
+    alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
+    label: Owner & contractor workspace
+    width: 3254
+    height: 1936
+industries:
+  title: Built for the teams that deliver projects
+  items:
+    - i-lucide-hard-hat
+    - i-lucide-building-2
+    - i-lucide-factory
+    - i-lucide-zap
+    - i-lucide-route
+services:
+  headline: Solutions
+  title: "Everything a package touches."
+  description: Procurement, qualification, contracts and delivery stop living in inboxes and spreadsheets, and start living on one record every party can see.
+  items:
+    - icon: i-lucide-kanban
+      title: Project Management
+      description: Break the works into packages once, then run every tender, contract and delivery against that same structure.
+      to: /solutions/project-management
+    - icon: i-lucide-badge-check
+      title: Vendor Management
+      description: Licences, insurance, safety records and financials collected once, verified, and chased before they expire.
+      to: /solutions/vendor-management
+    - icon: i-lucide-file-signature
+      title: Contracts
+      description: Contracts generated from the awarded bid, with variations, milestones and retention tracked on one ledger.
+      to: /solutions/contracts
+    - icon: i-lucide-scale
+      title: Quote Comparison
+      description: Bids normalised to a common scope and compared line by line, with exclusions surfaced rather than buried.
+      to: /solutions/quote-comparison
+    - icon: i-lucide-file-search
+      title: RFQ
+      description: Issue packages to prequalified vendors and see who has opened, queried and responded — without chasing.
+      to: /solutions/rfq
+    - icon: i-lucide-sparkles
+      title: AI Estimation
+      description: Draft estimates from drawings and your own award history, with every number traceable to where it came from.
+      to: /solutions/ai-estimation
+product:
+  headline: The other side
+  title: "Vendors work the same record."
+  description: Suppliers and subcontractors get their own workspace — what they have been invited to quote, what is closing, and where a submitted price stands. Neither side has to email the other for a status update.
+  shots:
+    - src: /screenshots/pm-dashboard.png
+      alt: The Rysmaan vendor workspace, showing available RFQs to quote on, submitted quote counts and response-rate figures.
+      label: Vendor workspace
+      width: 3172
+      height: 1714
+      crop: true
+metrics:
+  headline: Why teams switch
+  title: "Less chasing. Faster awards."
+  description: Procurement is where projects quietly lose weeks. Rysmaan removes the chasing, the re-keying and the version control, and gives the time back to delivery.
+  items:
+    - value: "60%"
+      label: Faster to award
+      class: "text-primary"
+    - value: "3,400+"
+      label: Verified vendors
+      class: "text-secondary"
+    - value: "1 record"
+      label: Per package
+      class: "text-highlighted"
+    - value: "100%"
+      label: Audit ready
+      class: "text-success"
+cta:
+  title: "Start with one\npackage."
+  description: Bring your own vendors or use ours. No rollout programme, no data migration — just your next tender, run properly.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: 'mailto:hello@rysmaan.com'

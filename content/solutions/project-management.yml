@@ -1,0 +1,52 @@
+order: 1
+navLabel: Project Management
+tagline: Packages, submittals and approvals
+icon: i-lucide-kanban
+seo:
+  title: Project Management — Rysmaan
+  description: Track scopes, packages, submittals, RFIs and approvals from kickoff to handover, with every action attributed and time-stamped.
+title: "Project Management"
+description: Break the project into packages once, then run every tender, contract and delivery against that same structure — from kickoff to handover.
+hero:
+  headline: Solutions
+  links:
+    - label: Book a demo
+      color: primary
+      size: xl
+      to: "#contact"
+    - label: All solutions
+      size: xl
+      color: neutral
+      variant: soft
+      to: "/#services"
+screenshot:
+  src: /screenshots/Dashboard.png
+  alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
+  label: Projects — workspace
+  width: 3254
+  height: 1936
+features:
+  headline: What you get
+  title: "One structure, start to finish."
+  description: The package breakdown you set up on day one is the same structure that tenders, contracts, deliveries and handover documents hang off.
+  items:
+    - icon: i-lucide-layers
+      title: Package breakdown
+      description: Split the works into packages once. Every RFQ, award, contract and delivery afterwards is tied back to that structure.
+    - icon: i-lucide-messages-square
+      title: Submittals & RFIs
+      description: Route technical queries to the party who can answer them, with a due date attached, so nothing stalls in somebody's inbox.
+    - icon: i-lucide-check-check
+      title: Threshold approvals
+      description: Approval steps that follow value. A variation over your limit routes upward on its own instead of waiting to be noticed.
+    - icon: i-lucide-archive
+      title: Handover pack
+      description: O&M manuals, warranties and as-builts collected as the work completes, rather than chased from twelve vendors at the end.
+cta:
+  title: "See it on your\nnext project."
+  description: Start with a single package. No rollout programme, no data migration.
+  contact: hello@rysmaan.com
+  links:
+    - label: Book a demo
+      color: primary
+      to: "mailto:hello@rysmaan.com"
