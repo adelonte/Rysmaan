@@ -7,6 +7,10 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
+  /* v2 only. The editorial display face for /v2 — the live site stays on Inter
+     throughout, so nothing here changes unless a `font-display` class is used. */
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+
   /* Rysmaan navy. #004B8D is pinned at 500 so solid buttons render the exact
      brand colour. 400 is lifted well clear of it for the dark surfaces that
      remain (error pages), which resolve --ui-primary to 400 — navy has no
