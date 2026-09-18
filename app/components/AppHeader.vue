@@ -29,7 +29,7 @@ const items = computed(() => [
     // Absolute, because this anchor only exists on the landing page and the
     // solution pages need to travel back to it.
     label: 'Why Rysmaan',
-    to: '/#results',
+    to: '/v2#results',
     active: activeSection.value === 'results'
   }
 ])
@@ -97,7 +97,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
   <UHeader>
     <template #left>
       <NuxtLink
-        to="/"
+        to="/v2"
         class="focus-visible:outline-3 outline-primary/25 rounded-md p-1 -ms-1"
       >
         <AppLogo />
@@ -130,7 +130,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
       <UButton
         label="Book a demo"
         class="hidden lg:flex"
-        to="/#contact"
+        to="/v2#contact"
       />
     </template>
 
@@ -205,7 +205,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         />
         <UButton
           label="Book a demo"
-          to="/#contact"
+          to="/v2#contact"
           block
         />
       </div>

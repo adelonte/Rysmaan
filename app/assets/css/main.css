@@ -7,8 +7,8 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* v2 only. The editorial display face for /v2 — the live site stays on Inter
-     throughout, so nothing here changes unless a `font-display` class is used. */
+  /* The editorial display face for the home page. The previous site at /v2 and
+     the solution pages stay on Inter; nothing changes unless `font-display` is used. */
   --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
 
   /* Rysmaan navy. #004B8D is pinned at 500 so solid buttons render the exact

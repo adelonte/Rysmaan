@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
- * Standalone shell for the v2 site. It shares nothing with the default layout
- * — no AppHeader, no AppFooter — so v2 can be reshaped, or deleted, without
- * touching the live site.
+ * Standalone shell for the home page. It shares nothing with the default layout
+ * — no AppHeader, no AppFooter — so the previous site at /v2 and the solution
+ * pages keep their chrome untouched.
  *
  * v2 is full-bleed scene-first, so the shell only sets the base ink colour and
  * gets out of the way; each section paints its own background.

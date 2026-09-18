@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const links = [
-  { label: 'Solutions', to: '/#services' },
-  { label: 'Why Rysmaan', to: '/#results' },
+  { label: 'Solutions', to: '/v2#services' },
+  { label: 'Why Rysmaan', to: '/v2#results' },
   { label: 'Contact', to: 'mailto:hello@rysmaan.com' },
   { label: 'Privacy', to: '#' },
   { label: 'Terms', to: '#' }
