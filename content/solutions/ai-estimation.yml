@@ -18,7 +18,7 @@ hero:
       size: xl
       color: neutral
       variant: soft
-      to: '/#services'
+      to: '/v2#services'
 features:
   headline: What you get
   title: "A first pass, not a black box."

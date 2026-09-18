@@ -1,202 +1,413 @@
 <script setup lang="ts">
-/**
- * v2 — an alternate version of the site that says what Rysmaan is and nothing
- * more, built in the full-bleed scene + glass card language of the reference
- * design. It lives beside the live site rather than replacing it; see
- * app/layouts/v2.vue for why it shares no chrome.
- *
- * Copy is inline rather than in content/ so this page can be deleted in one
- * move without leaving an orphaned collection entry behind.
- */
-definePageMeta({ layout: 'v2' })
-useV2SmoothScroll()
+const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
 
-const title = 'Rysmaan — A construction technology startup in Calgary'
-const description = 'Rysmaan is an early-stage construction technology startup in Calgary, working on something new for the owners, contractors and suppliers who deliver projects.'
+const title = page.value?.seo?.title || page.value?.title
+const description = page.value?.seo?.description || page.value?.description
 
 useSeoMeta({
   title,
   ogTitle: title,
   description,
   ogDescription: description,
-  // v2 is a parallel draft, not a second front door — keep it out of search.
+  // The previous landing page, kept reachable but not a second front door.
   robots: 'noindex, nofollow'
 })
 
-const facts = [
-  {
-    label: 'The company',
-    body: 'A small team of engineers and construction people, building software full-time for an industry that has mostly been handed tools built for someone else.'
-  },
-  {
-    label: 'The industry',
-    body: 'Energy, infrastructure and industrial construction — where one project can touch hundreds of vendors and tens of thousands of documents before anything is built.'
-  },
-  {
-    label: 'What we\'re sure of',
-    body: 'That the hard part isn\'t the building. It\'s everything around it — the approvals, the revisions, the drawing that turned out not to be the latest one. That\'s the part we\'re going after.'
-  },
-  {
-    label: 'The stage',
-    body: 'Early, and honest about it. We spend more time in project offices than in our own right now, because the shape of this comes from those conversations rather than from us.'
+const heroTitle = computed(() => {
+  const [primary = '', ...secondaryParts] = (page.value?.title ?? '').split('\n')
+
+  return {
+    primary,
+    secondary: secondaryParts.join(' ').trim()
   }
-]
+})
 
-const footerLinks = [
-  { label: 'About', to: '#about' },
-  { label: 'Calgary', to: '#calgary' },
-  { label: 'Contact', to: 'mailto:hello@rysmaan.com' },
-  { label: 'Current site', to: '/' }
-]
-
-const reducedMotion = usePreferredReducedMotion()
-const aboutSection = useTemplateRef('aboutSection')
-const calgarySection = useTemplateRef('calgarySection')
-const { top: aboutTop, bottom: aboutBottom } = useElementBounding(aboutSection)
-const { top: calgaryTop, height: calgaryHeight } = useElementBounding(calgarySection)
-const onPaper = computed(() => aboutTop.value <= 96 && aboutBottom.value > 96)
-const activeSection = computed(() => onPaper.value ? 'about' : calgaryHeight.value > 0 && calgaryTop.value <= 96 ? 'calgary' : '')
+function enterMotion(delay: number = 0) {
+  return {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay }
+  }
+}
 
 function scrollMotion(delay: number = 0) {
   return {
-    initial: { opacity: reducedMotion.value === 'reduce' ? 1 : 0, y: reducedMotion.value === 'reduce' ? 0 : 20 },
+    initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
-    inViewOptions: { once: true, amount: 0.15 },
-    transition: { duration: reducedMotion.value === 'reduce' ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: reducedMotion.value === 'reduce' ? 0 : delay }
+    inViewOptions: { once: true, amount: 1 },
+    transition: { duration: 0.6, delay }
   }
 }
+
+function staggerMotion(index: number = 0) {
+  return {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    inViewOptions: { once: true, amount: 1 },
+    transition: { duration: 0.6, delay: index * 0.08 }
+  }
+}
+
+const { copy, copied } = useClipboard()
 </script>
 
 <template>
-  <div class="v2-page">
-    <V2Nav
-      :on-paper="onPaper"
-      :active-section="activeSection"
-    />
-    <main>
-      <V2Hero />
+  <div v-if="page">
+    <!-- Hero -->
+    <UPageHero
+      :ui="{
+        root: 'pb-24 sm:pb-32',
+        container: 'relative z-10 lg:py-32',
+        wrapper: 'flex flex-col items-center',
+        title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
+        description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-default',
+        links: 'gap-3'
+      }"
+    >
+      <template #top>
+        <Motion v-bind="staggerMotion(0)">
+          <HeroShaders class="absolute top-0 inset-x-0 opacity-15 h-full" />
+        </Motion>
 
-      <!-- About -->
-      <section
-        id="about"
-        ref="aboutSection"
-        class="about-paper bg-[#f5f2ea] px-6 py-24 sm:px-10 sm:py-32"
-      >
-        <div class="mx-auto max-w-5xl">
-          <Motion v-bind="scrollMotion()">
-            <p class="font-mono text-xs uppercase tracking-[0.18em] text-[#14161a]/45">
-              Who we are
-            </p>
+        <GradientGlow class="top-0 w-2/3 h-1/2" />
+      </template>
 
-            <h2 class="mt-6 max-w-3xl font-display text-4xl leading-[1.05] tracking-tight text-balance sm:text-6xl">
-              A technology company for the industry that builds everything else.
-            </h2>
-
-            <p class="mt-8 max-w-xl text-lg leading-relaxed text-[#14161a]/70">
-              Projects worth billions still run on spreadsheets, inbox threads and
-              PDFs nobody can find twice. We think that's a software problem,
-              and a far more interesting one than it sounds.
-            </p>
-          </Motion>
-
-          <dl class="mt-16 border-t border-[#14161a]/10">
-            <Motion
-              v-for="fact in facts"
-              :key="fact.label"
-              v-bind="scrollMotion()"
-              class="grid gap-3 border-b border-[#14161a]/10 py-10 sm:grid-cols-[10rem_1fr] sm:gap-10"
-            >
-              <dt class="font-mono text-xs uppercase tracking-[0.12em] text-[#14161a]/45 sm:pt-1.5">
-                {{ fact.label }}
-              </dt>
-              <dd class="max-w-2xl text-lg leading-relaxed text-[#14161a]/80">
-                {{ fact.body }}
-              </dd>
-            </Motion>
-          </dl>
-        </div>
-      </section>
-
-      <!-- Calgary -->
-      <section
-        id="calgary"
-        ref="calgarySection"
-        class="relative flex h-svh min-h-[38rem] flex-col overflow-hidden"
-      >
-        <CalgaryBackdrop
-          variant="dusk"
-          class="absolute inset-0"
-        />
-
-        <div class="relative flex flex-1 items-start px-4 pt-24 sm:items-center sm:px-10 sm:pt-20">
-          <Motion
-            v-bind="scrollMotion()"
-            class="w-full sm:max-w-lg"
+      <template #headline>
+        <Motion v-bind="enterMotion(0.2)">
+          <UBadge
+            color="neutral"
+            variant="soft"
+            :label="page.hero.headline"
+            class="rounded-full px-3 py-1.5 gap-1.5 backdrop-blur-sm"
           >
-            <div class="rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-md sm:p-8">
-              <h2 class="font-display text-3xl leading-[1.08] tracking-tight text-white sm:text-[2.4rem]">
-                Our mission is to take the paperwork out of building.
-              </h2>
+            <template #leading>
+              <UChip
+                inset
+                standalone
+                :ui="{ base: 'animate-pulse ring-0' }"
+              />
+            </template>
+          </UBadge>
+        </Motion>
+      </template>
 
-              <p class="mt-4 text-sm leading-relaxed text-white/70">
-                Rysmaan was founded in Calgary, Alberta — close enough to the
-                energy and infrastructure projects it serves that we can stand on
-                them. It's the right place to build this, and we're early
-                enough that the next decisions are still ours to make.
-              </p>
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="enterMotion(0.35)"
+          class="inline-block"
+        >
+          {{ heroTitle.primary }}
+          <br v-if="heroTitle.secondary">
+          <span
+            v-if="heroTitle.secondary"
+            class="animate-shimmer bg-size-[200%_auto] bg-clip-text text-transparent"
+            :style="{
+              backgroundImage: 'linear-gradient(135deg, var(--color-primary-700), var(--color-primary-600), var(--color-primary-500), var(--color-primary-400), var(--color-primary-500), var(--color-primary-600), var(--color-primary-700))',
+              animationDuration: '10s'
+            }"
+          >
+            {{ heroTitle.secondary }}
+          </span>
+        </Motion>
+      </template>
 
-              <p class="mt-3 text-xs text-white/45">
-                If you build in this industry, or want to build for it, we'd
-                like to hear from you.
-              </p>
-            </div>
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="enterMotion(0.5)"
+          class="inline-block"
+        >
+          {{ page.description }}
+        </Motion>
+      </template>
+
+      <template #links>
+        <Motion
+          class="flex flex-wrap justify-center gap-6"
+          v-bind="enterMotion(0.65)"
+        >
+          <UButton
+            v-for="link in page.hero.links"
+            :key="link.label"
+            v-bind="link"
+          />
+        </Motion>
+      </template>
+
+      <Motion
+        as-child
+        v-bind="enterMotion(0.85)"
+        class="max-w-5xl mx-auto w-full"
+      >
+        <ProductShot
+          v-bind="page.hero.shot"
+          eager
+        />
+      </Motion>
+
+      <Motion
+        class="max-w-lg mx-auto w-full"
+        v-bind="scrollMotion(0.95)"
+      >
+        <UPageLogos
+          :title="page.industries.title"
+          :items="page.industries.items"
+          :ui="{
+            title: 'font-mono uppercase text-xs tracking-[0.12em] text-muted',
+            logos: 'gap-0',
+            logo: 'text-muted size-6'
+          }"
+        />
+      </Motion>
+    </UPageHero>
+
+    <!-- Services -->
+    <UPageSection
+      id="services"
+      :ui="{
+        root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
+        container: 'max-w-5xl',
+        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        title: 'max-w-lg mx-auto',
+        description: 'max-w-md mx-auto text-muted'
+      }"
+    >
+      <template #headline>
+        <Motion
+          as="span"
+          v-bind="scrollMotion()"
+          class="inline-block"
+        >
+          {{ page.services.headline }}
+        </Motion>
+      </template>
+
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.1)"
+          class="inline-block"
+        >
+          {{ page.services.title }}
+        </Motion>
+      </template>
+
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.2)"
+          class="inline-block"
+        >
+          {{ page.services.description }}
+        </Motion>
+      </template>
+
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px">
+          <Motion
+            v-for="(service, index) in page.services.items"
+            :key="service.title"
+            v-bind="staggerMotion(index)"
+          >
+            <UPageCard
+              :icon="service.icon"
+              :title="service.title"
+              :description="service.description"
+              :to="service.to"
+              class="rounded-none h-full duration-300"
+              :ui="{
+                leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
+                title: 'text-sm tracking-tight',
+                description: 'text-sm leading-relaxed text-muted'
+              }"
+            />
           </Motion>
         </div>
+      </div>
+    </UPageSection>
 
-        <!-- Footer, overlaid on the scene -->
-        <footer class="relative px-4 pb-6 sm:px-10 sm:pb-8">
-          <div class="flex flex-wrap items-end justify-between gap-6 border-t border-white/15 pt-6">
-            <nav class="flex flex-wrap gap-x-6 gap-y-2">
-              <NuxtLink
-                v-for="link in footerLinks"
-                :key="link.label"
-                :to="link.to"
-                class="font-mono text-xs uppercase tracking-[0.12em] text-white/60 transition-colors hover:text-white"
-              >
-                {{ link.label }}
-              </NuxtLink>
-            </nav>
+    <!-- Product -->
+    <UPageSection
+      id="product"
+      :ui="{
+        root: 'pb-24 sm:pb-32 scroll-mt-(--ui-header-height)',
+        container: 'max-w-6xl',
+        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        title: 'max-w-lg mx-auto',
+        description: 'max-w-xl mx-auto text-muted'
+      }"
+    >
+      <template #headline>
+        <Motion
+          as="span"
+          v-bind="scrollMotion()"
+          class="inline-block"
+        >
+          {{ page.product.headline }}
+        </Motion>
+      </template>
 
-            <a
-              href="mailto:hello@rysmaan.com"
-              class="group flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm text-white transition-colors hover:bg-white/20"
-            >
-              hello@rysmaan.com
-              <span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
-            </a>
-          </div>
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.1)"
+          class="inline-block"
+        >
+          {{ page.product.title }}
+        </Motion>
+      </template>
 
-          <p class="mt-6 font-mono text-xs uppercase tracking-[0.12em] text-white/40">
-            &copy; Rysmaan {{ new Date().getFullYear() }}
-          </p>
-        </footer>
-      </section>
-    </main>
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.2)"
+          class="inline-block"
+        >
+          {{ page.product.description }}
+        </Motion>
+      </template>
+
+      <div
+        class="grid gap-6"
+        :class="page.product.shots.length > 1 ? 'lg:grid-cols-2' : 'max-w-4xl mx-auto'"
+      >
+        <Motion
+          v-for="(shot, index) in page.product.shots"
+          :key="shot.src"
+          v-bind="staggerMotion(index)"
+        >
+          <ProductShot v-bind="shot" />
+        </Motion>
+      </div>
+    </UPageSection>
+
+    <!-- Results -->
+    <UPageSection
+      id="results"
+      :ui="{
+        root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
+        container: 'max-w-5xl',
+        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        title: 'max-w-lg mx-auto',
+        description: 'max-w-md mx-auto text-muted'
+      }"
+    >
+      <template #headline>
+        <Motion
+          as="span"
+          v-bind="scrollMotion()"
+          class="inline-block"
+        >
+          {{ page.metrics.headline }}
+        </Motion>
+      </template>
+
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.1)"
+          class="inline-block"
+        >
+          {{ page.metrics.title }}
+        </Motion>
+      </template>
+
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.2)"
+          class="inline-block"
+        >
+          {{ page.metrics.description }}
+        </Motion>
+      </template>
+
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
+          <Motion
+            v-for="(metric, index) in page.metrics.items"
+            :key="metric.label"
+            v-bind="staggerMotion(index)"
+          >
+            <UPageCard
+              :title="metric.value"
+              :description="metric.label"
+              class="rounded-none h-full"
+              :ui="{
+                root: 'text-center',
+                wrapper: 'items-center',
+                title: ['text-4xl font-bold tracking-tight leading-none', metric.class],
+                description: 'font-mono text-xs uppercase tracking-[0.06em] text-muted mt-3'
+              }"
+            />
+          </Motion>
+        </div>
+      </div>
+    </UPageSection>
+
+    <!-- CTA -->
+    <UPageCTA
+      id="contact"
+      variant="naked"
+      :ui="{
+        root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
+        container: 'max-w-3xl text-center',
+        title: 'lg:text-5xl tracking-tighter whitespace-pre-line',
+        description: 'mx-auto max-w-sm leading-relaxed text-muted'
+      }"
+    >
+      <template #top>
+        <GradientGlow class="bottom-0 w-2/3 h-1/2" />
+      </template>
+
+      <template #title>
+        <Motion
+          as="span"
+          v-bind="scrollMotion()"
+          class="inline-block"
+        >
+          {{ page.cta.title }}
+        </Motion>
+      </template>
+
+      <template #description>
+        <Motion
+          as="span"
+          v-bind="scrollMotion(0.1)"
+          class="inline-block"
+        >
+          {{ page.cta.description }}
+        </Motion>
+      </template>
+
+      <template #links>
+        <Motion
+          class="flex flex-col items-center justify-center gap-6"
+          v-bind="scrollMotion(0.2)"
+        >
+          <UButton
+            v-for="link in page.cta.links"
+            :key="link.label"
+            v-bind="link"
+            size="xl"
+          />
+
+          <UButton
+            :label="page.cta.contact"
+            :trailing-icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            color="neutral"
+            variant="subtle"
+            class="font-mono font-light text-toned gap-4"
+            size="xl"
+            :ui="{ trailingIcon: 'size-5' }"
+            @click="copy(page.cta.contact)"
+          />
+        </Motion>
+      </template>
+    </UPageCTA>
   </div>
 </template>
-
-<style>
-html:has(.v2-page) { scroll-behavior: smooth; }
-html.lenis:has(.v2-page) { scroll-behavior: auto; }
-.v2-page .about-paper {
-  position: relative;
-  z-index: 1;
-  margin-top: -24px;
-  border-radius: 24px 24px 0 0;
-  box-shadow: 0 -12px 36px rgb(8 25 28 / 8%);
-}
-.v2-page #about, .v2-page #calgary { scroll-margin-top: 88px; }
-@media (prefers-reduced-motion: reduce) {
-  html:has(.v2-page) { scroll-behavior: auto; }
-}
-</style>

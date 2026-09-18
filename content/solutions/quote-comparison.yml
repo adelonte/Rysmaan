@@ -18,7 +18,7 @@ hero:
       size: xl
       color: neutral
       variant: soft
-      to: '/#services'
+      to: '/v2#services'
 features:
   headline: What you get
   title: "The cheapest bid is rarely the lowest price."

@@ -18,7 +18,7 @@ hero:
       size: xl
       color: neutral
       variant: soft
-      to: "/#services"
+      to: "/v2#services"
 screenshot:
   src: /screenshots/Dashboard.png
   alt: The Rysmaan project workspace, showing urgent items, recent quote activity across a gas transmission project, and shortcuts to create a project or an RFQ.
