@@ -1,0 +1,4 @@
+[build.environment]
+  # Nitro's Netlify server bundle exceeds Node's default 2 GiB heap.
+  # Keep headroom for bundling after prerendering the marketing pages.
+  NODE_OPTIONS = "--max-old-space-size=4096"
