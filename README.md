@@ -82,3 +82,35 @@ content/
 ├── index.yml            # Landing page copy
 └── solutions/*.yml      # One file per solution page
 ```
+
+## Version 3
+
+The engineering data pipeline landing site is available at `/v3`. It was
+integrated from the standalone `landing/` site with its pipeline animation,
+comparison, pilot application, FAQ, and captioned overview video.
+
+- Page: `app/pages/v3/index.vue`; standalone layout: `app/layouts/v3.vue`.
+- Components: `app/components/v3/`; scoped theme: `app/assets/css/v3.css`.
+- Contact email and pilot link: `v3` in `app/app.config.ts`.
+- Video, captions, poster, favicon, and licensed Figtree font: `public/v3/`.
+- Reveal animations: `app/plugins/v3-reveal.ts`, registered as `v-v3-reveal`.
+
+The route is prerendered and marked `noindex, nofollow` while it is an alternate
+version. Its theme is scoped to the v3 layout; `/`, `/v2`, and the solution pages
+continue using their existing layouts.
+
+### Pilot applications
+
+The imported form uses Netlify Forms. Online submission is disabled by default,
+with an email fallback, to avoid reporting success from an unconfigured server.
+Development mode always uses this fallback.
+
+For a Netlify deployment, enable form detection and set
+`NUXT_PUBLIC_V3_FORMS_ENABLED=true` **before building** (the form is prerendered).
+The generated `/v3` HTML includes the `pilot` form, hidden form name, and honeypot.
+Enhanced submissions POST to `/v3`; native submissions use `/v3/thanks/`.
+The thank-you page links back to `/v3`.
+
+Confirm `hello@rysmaan.com`, then verify a real application arrives in Netlify
+Forms before sharing publicly. Other hosts need a form backend before enabling
+submission. Keep the flag disabled until that integration is in place.

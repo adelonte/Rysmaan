@@ -31,6 +31,13 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    public: {
+      // Enable only on a Netlify deployment with form detection configured.
+      v3FormsEnabled: false
+    }
+  },
+
   // Nitro serves its own placeholder at /favicon.ico when the file is absent;
   // the Rysmaan mark is a PNG, so point that request at it.
   routeRules: {
@@ -45,7 +52,8 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: [
-        '/'
+        '/',
+        '/v3'
       ]
     }
   },
@@ -65,6 +73,34 @@ export default defineNuxtConfig({
   icon: {
     clientBundle: {
       icons: [
+        // V3 includes data-driven icons in its pipeline and sample records.
+        'logos:claude-icon',
+        'logos:microsoft-icon',
+        'logos:microsoft-power-bi',
+        'logos:postgresql',
+        'lucide:arrow-down',
+        'lucide:arrow-up-right',
+        'lucide:check',
+        'lucide:circle-alert',
+        'lucide:clock',
+        'lucide:download',
+        'lucide:eye',
+        'lucide:file-spreadsheet',
+        'lucide:file-text',
+        'lucide:git-merge',
+        'lucide:key-round',
+        'lucide:link',
+        'lucide:menu',
+        'lucide:play',
+        'lucide:plus',
+        'lucide:scan-text',
+        'lucide:sheet',
+        'lucide:shield-check',
+        'lucide:user-round',
+        'lucide:workflow',
+        'lucide:x',
+        'simple-icons:microsoftsharepoint',
+
         'lucide:activity',
         'lucide:align-left',
         'lucide:archive',
