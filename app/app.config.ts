@@ -1,4 +1,8 @@
 export default defineAppConfig({
+  v3: {
+    email: 'hello@rysmaan.com',
+    bookingUrl: '#pilot'
+  },
   ui: {
     colors: {
       primary: 'brand',
