@@ -30,8 +30,7 @@ const { v3: site } = useAppConfig()
             You’ve already done<br>the work. Put it to use.
           </h2>
           <p class="final-description mt-6 max-w-md text-base leading-relaxed">
-            Thirty minutes, no slides. Tell us what you rebuild by hand, and we’ll explore what a
-            connected history could do for your firm.
+            Thirty minutes, no slides. Tell us about your company, and we’ll explore solutions.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-4">
             <UButton
@@ -55,7 +54,7 @@ const { v3: site } = useAppConfig()
 
 <style scoped>
 .final-section {
-  padding-bottom: 48px;
+  padding-bottom: 80px;
 }
 .final-card {
   position: relative;

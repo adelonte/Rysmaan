@@ -29,7 +29,7 @@ async function play() {
   <section
     id="overview"
     aria-labelledby="overview-title"
-    class="section-space border-t border-default"
+    class="section-space"
   >
     <div class="section-shell overview-layout">
       <div
@@ -46,7 +46,7 @@ async function play() {
           id="overview-description"
           class="mt-5 max-w-sm text-base leading-relaxed text-muted"
         >
-          See how scattered project files become a connected history your whole team can use.
+          See how project files from your file systems and SharePoint become a connected history your whole team can use.
         </p>
       </div>
       <div class="overview-media">

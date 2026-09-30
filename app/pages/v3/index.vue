@@ -1,11 +1,12 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'v3', colorMode: 'light' })
+const { v3: site } = useAppConfig()
 
 useSeoMeta({
   title: 'Rysmaan — Your project history. Finally connected.',
-  description: 'Rysmaan turns an engineering firm’s accounting exports and project files into one set of checked records for Power BI and AI assistants.',
+  description: 'Rysmaan turns engineering project files from file systems and SharePoint into checked, connected records for Power BI and AI assistants.',
   ogTitle: 'Your project history. Finally connected.',
-  ogDescription: 'Connected project records for clearer reports and more useful AI answers. Built for engineering firms.',
+  ogDescription: 'Connect the project knowledge in your file systems and SharePoint. Checked records for clearer reports and more useful AI answers.',
   ogImage: '/v3/video/rysmaan-overview-poster.jpg',
   twitterImage: '/v3/video/rysmaan-overview-poster.jpg',
   robots: 'noindex, nofollow'
@@ -24,9 +25,15 @@ useSeoMeta({
       tabindex="-1"
     >
       <V3HeroPipeline />
-      <V3VideoOverview />
-      <V3ProblemReconcile />
-      <V3UnlocksCards />
+      <template v-if="site.showChallengeSections">
+        <V3FirmChallenges />
+        <V3PipelineSteps />
+      </template>
+      <template v-if="site.showOverviewSections">
+        <V3VideoOverview />
+        <V3ProblemReconcile />
+        <V3UnlocksCards />
+      </template>
       <V3PilotApply />
       <V3YourData />
       <V3FaqList />

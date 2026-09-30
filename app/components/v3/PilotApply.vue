@@ -7,20 +7,12 @@ const form = reactive({
   'email': '',
   'firm': '',
   'staff': '',
-  'accounting': '',
   'files': '',
   'notes': '',
   'bot-field': ''
 })
 const staffOptions = ['Under 30', '30 to 75', '76 to 150', 'Over 150']
-const accountingOptions = [
-  'Deltek Vantagepoint',
-  'Deltek Ajera',
-  'BQE CORE',
-  'QuickBooks',
-  'Something else'
-]
-const fileOptions = ['SharePoint or OneDrive', 'Network drive', 'Egnyte', 'Something else']
+const fileOptions = ['File system (local or shared drive)', 'SharePoint', 'Both']
 const status = ref<'idle' | 'sending' | 'sent' | 'error' | 'unavailable'>(formsEnabled ? 'idle' : 'unavailable')
 const feedback = ref<HTMLElement>()
 
@@ -56,15 +48,11 @@ async function submit() {
 const scope = [
   {
     term: 'Focused scope',
-    detail: 'One accounting source and one document library, for one service line.'
+    detail: 'One folder collection or SharePoint document library, for one service line.'
   },
   {
     term: 'Three to four weeks',
     detail: 'From access to delivery, with your team helping confirm unclear details.'
-  },
-  {
-    term: 'Price on application',
-    detail: 'A fixed setup fee, agreed upfront. Monthly updates are optional.'
   }
 ]
 </script>
@@ -90,10 +78,10 @@ const scope = [
             id="pilot-title"
             class="section-title mt-5"
           >
-            Start with your own history.
+            We’ll help integrate Rysmaan into your system.
           </h2>
           <p class="pilot-description mt-5 max-w-md text-base leading-relaxed">
-            A focused first project to see what connected records can do for your firm.
+            Start with a collection of project files from your file system or SharePoint.
           </p>
           <dl class="pilot-scope mt-8">
             <div
@@ -254,28 +242,6 @@ const scope = [
                     </select>
                   </div>
                   <div>
-                    <label
-                      for="pilot-accounting"
-                      class="mb-2 block text-sm font-medium"
-                    >Accounting system</label><select
-                      id="pilot-accounting"
-                      v-model="form.accounting"
-                      name="accounting"
-                      class="pilot-select"
-                    >
-                      <option value="">
-                        Select system
-                      </option>
-                      <option
-                        v-for="option in accountingOptions"
-                        :key="option"
-                        :value="option"
-                      >
-                        {{ option }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="sm:col-span-2">
                     <label
                       for="pilot-files"
                       class="mb-2 block text-sm font-medium"

@@ -13,7 +13,7 @@ const { v3: site } = useAppConfig()
           class="flex items-center gap-2"
         ><V3RysmaanMark class="size-6" /><span class="text-lg font-semibold tracking-[-0.05em]">rysmaan</span></a>
         <p class="mt-2 text-xs text-muted">
-          A connected foundation for what comes next.
+          Project knowledge from your file systems and SharePoint.
         </p>
       </div>
       <nav
