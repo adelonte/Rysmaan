@@ -2,115 +2,34 @@
 const { v3: site } = useAppConfig()
 
 const sources = [
-  {
-    name: 'Accounting export',
-    detail: 'Deltek, BQE, QuickBooks',
-    icon: 'i-lucide-sheet',
-    tint: 'bg-brand-50 text-brand-600'
-  },
-  {
-    name: 'Timesheets',
-    detail: 'Hours by project and phase',
-    icon: 'i-lucide-clock',
-    tint: 'bg-aqua-50 text-aqua-600'
-  },
-  {
-    name: 'SharePoint and drives',
-    detail: 'Project folders',
-    icon: 'i-simple-icons-microsoftsharepoint',
-    tint: 'bg-teal-50 text-[#038387]'
-  },
-  {
-    name: 'Proposals and CVs',
-    detail: 'PDF and Word',
-    icon: 'i-lucide-file-text',
-    tint: 'bg-amber-50 text-amber-600'
-  }
+  { name: 'File systems', icon: 'i-lucide-folder-open' },
+  { name: 'Cloud drives', icon: 'i-lucide-cloud' }
 ]
-
-const stages = [
-  { name: 'Extract', detail: 'AI reads documents into set fields', icon: 'i-lucide-scan-text' },
-  { name: 'Match', detail: 'Same project, person and client, merged', icon: 'i-lucide-git-merge' },
-  { name: 'Check', detail: 'Conflicts go to you to confirm', icon: 'i-lucide-shield-check' }
+const services = [
+  { name: 'LLMs', icon: 'i-lucide-sparkles', tone: 'violet' },
+  { name: 'Analytics', icon: 'i-lucide-chart-no-axes-combined', tone: 'blue' },
+  { name: 'Knowledge hub', icon: 'i-lucide-library-big', tone: 'amber' }
 ]
-
-const outputs = [
-  { name: 'Your database', detail: 'Yours to keep', icon: 'i-logos-postgresql' },
-  { name: 'Power BI', detail: 'Reports and dashboards', icon: 'i-logos-microsoft-power-bi' },
-  { name: 'Claude or Copilot', detail: 'Answers through MCP', icon: 'i-logos-claude-icon' }
-]
-
-// Draw the pipes between the cards. Positions come from the rendered cards,
-// so the curves stay attached at any width.
-const stage = ref<HTMLElement>()
-const hub = ref<HTMLElement>()
-const sourceEls = ref<HTMLElement[]>([])
-const outputEls = ref<HTMLElement[]>([])
-const size = reactive({ w: 0, h: 0 })
-const pipes = ref<string[]>([])
-
-function curve(x1: number, y1: number, x2: number, y2: number) {
-  const dx = (x2 - x1) / 2
-  return `M${x1} ${y1} C${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`
-}
-
-function layout() {
-  if (!stage.value || !hub.value) return
-  const box = stage.value.getBoundingClientRect()
-  const h = hub.value.getBoundingClientRect()
-  size.w = box.width
-  size.h = box.height
-  const hubY = h.top + h.height / 2 - box.top
-  const spread = (i: number, n: number) => (i - (n - 1) / 2) * 16
-
-  pipes.value = [
-    ...sourceEls.value.map((el, i) => {
-      const r = el.getBoundingClientRect()
-      return curve(
-        r.right - box.left,
-        r.top + r.height / 2 - box.top,
-        h.left - box.left,
-        hubY + spread(i, sourceEls.value.length)
-      )
-    }),
-    ...outputEls.value.map((el, i) => {
-      const r = el.getBoundingClientRect()
-      return curve(
-        h.right - box.left,
-        hubY + spread(i, outputEls.value.length),
-        r.left - box.left,
-        r.top + r.height / 2 - box.top
-      )
-    })
-  ]
-}
-
-const flowing = ref(true)
-let inViewport = true
+const canvas = ref<HTMLElement>()
+const motionPaused = ref(false)
+const inView = ref(false)
+const tabVisible = ref(true)
+const motionRunning = computed(() => !motionPaused.value && inView.value && tabVisible.value)
 let visibilityObserver: IntersectionObserver | undefined
-const updateFlow = () => {
-  flowing.value = inViewport && !document.hidden
+function updateVisibility() {
+  tabVisible.value = !document.hidden
 }
-let observer: ResizeObserver | undefined
 onMounted(() => {
-  layout()
-  document.fonts?.ready.then(layout)
-  observer = new ResizeObserver(layout)
-  if (stage.value) {
-    observer.observe(stage.value)
-    visibilityObserver = new IntersectionObserver(([entry]) => {
-      inViewport = entry?.isIntersecting ?? false
-      updateFlow()
-    })
-    visibilityObserver.observe(stage.value)
-  }
-  document.addEventListener('visibilitychange', updateFlow)
-  updateFlow()
+  updateVisibility()
+  document.addEventListener('visibilitychange', updateVisibility)
+  visibilityObserver = new IntersectionObserver(([entry]) => {
+    inView.value = entry?.isIntersecting ?? false
+  }, { threshold: 0.15 })
+  if (canvas.value) visibilityObserver.observe(canvas.value)
 })
 onBeforeUnmount(() => {
-  observer?.disconnect()
   visibilityObserver?.disconnect()
-  document.removeEventListener('visibilitychange', updateFlow)
+  document.removeEventListener('visibilitychange', updateVisibility)
 })
 </script>
 
@@ -119,9 +38,8 @@ onBeforeUnmount(() => {
     id="top"
     aria-labelledby="hero-title"
     class="hero-section"
-    :class="{ 'flow-paused': !flowing }"
   >
-    <div class="section-shell">
+    <div class="section-shell hero-shell">
       <div class="hero-copy">
         <a
           href="#pilot"
@@ -133,11 +51,11 @@ onBeforeUnmount(() => {
             aria-hidden="true"
           /></a>
         <h1 id="hero-title">
-          Your project history.<br><span>Finally connected.</span>
+          All your documents,<br><span>Finally Connected.</span>
         </h1>
         <p class="hero-description">
-          Turn scattered accounting exports and project files into checked, connected records. Ready
-          for Power BI and AI. Built for engineering firms.
+          Rysmaan brings order to your firm’s information,
+          making it ready for the tools you work with.
         </p>
         <div class="mt-7 flex flex-wrap justify-center gap-3">
           <V3GradientButton
@@ -147,6 +65,7 @@ onBeforeUnmount(() => {
             size="xl"
           />
           <UButton
+            v-if="site.showOverviewSections"
             to="#overview"
             label="Watch the overview"
             trailing-icon="i-lucide-play"
@@ -157,151 +76,236 @@ onBeforeUnmount(() => {
           />
         </div>
       </div>
-      <figure class="pipeline-canvas">
-        <div class="canvas-body">
-          <div
-            class="pipeline-labels"
-            aria-hidden="true"
-          >
-            <span>01 / Your sources</span><span>02 / Connected by Rysmaan</span><span>03 / Ready to use</span>
-          </div>
-          <div
-            ref="stage"
-            class="relative"
-          >
-            <svg
-              v-if="pipes.length"
-              class="pointer-events-none absolute inset-0 hidden lg:block"
-              :width="size.w"
-              :height="size.h"
-              :viewBox="`0 0 ${size.w} ${size.h}`"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient
-                  id="pipe"
-                  x1="0"
-                  y1="0"
-                  :x2="size.w"
-                  y2="0"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#2A6FC2" />
-                  <stop
-                    offset="1"
-                    stop-color="#13A7B5"
-                  />
-                </linearGradient>
-              </defs>
-              <path
-                v-for="(d, i) in pipes"
-                :key="`p${i}`"
-                :d="d"
-                class="pipe"
-              />
-              <path
-                v-for="(d, i) in pipes"
-                :key="`f${i}`"
-                :d="d"
-                class="flow"
-              />
-            </svg>
-            <div class="pipeline-grid">
-              <div>
-                <p class="eyebrow mb-3 lg:hidden">
-                  01 / Your sources
-                </p>
-                <ul class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
-                  <li
-                    v-for="s in sources"
-                    :key="s.name"
-                    ref="sourceEls"
-                    class="pipeline-node"
-                  >
-                    <span class="node-icon"><UIcon
-                      :name="s.icon"
-                      class="size-5"
-                      aria-hidden="true"
-                    /></span>
-                    <span class="text-sm leading-snug"><span class="block font-medium">{{ s.name }}</span><span class="text-xs text-muted">{{ s.detail }}</span></span>
-                  </li>
-                </ul>
-              </div>
-              <UIcon
-                name="i-lucide-arrow-down"
-                class="mx-auto size-5 text-primary lg:hidden"
-                aria-hidden="true"
-              />
-              <div
-                ref="hub"
-                class="pipeline-hub"
+      <figure
+        ref="canvas"
+        class="pipeline-canvas"
+        :class="{ 'motion-running': motionRunning }"
+        aria-label="File systems and cloud drives flow through Rysmaan’s custom algorithms and AI into structured, connected data for LLMs, analytics and a knowledge hub."
+      >
+        <div class="pipeline-grid">
+          <div class="sources-column">
+            <p class="stage-label">
+              Your sources
+            </p>
+            <ul class="source-list">
+              <li
+                v-for="source in sources"
+                :key="source.name"
+                class="source-card"
               >
-                <div class="hub-heading">
-                  <div class="flex items-center gap-2.5">
-                    <V3RysmaanMark class="size-7" /><span class="text-lg font-medium tracking-tight">Rysmaan</span>
-                  </div>
-                  <span class="hub-badge">Runs monthly</span>
-                </div>
-                <p class="hub-description">
-                  A clearer picture, every run.
-                </p>
-                <ol class="mt-5 space-y-1">
-                  <li
-                    v-for="st in stages"
-                    :key="st.name"
-                    class="hub-step"
-                  >
-                    <span class="hub-step-icon"><UIcon
-                      :name="st.icon"
-                      class="size-4"
-                      aria-hidden="true"
-                    /></span><span class="text-sm leading-snug"><span class="block font-medium">{{ st.name }}</span><span class="hub-detail">{{ st.detail }}</span></span>
-                  </li>
-                </ol>
-                <div class="hub-footer">
-                  <UIcon
-                    name="i-lucide-check-check"
-                    class="size-3.5"
-                    aria-hidden="true"
-                  />Every
-                  record keeps its source
-                </div>
+                <span class="source-icon"><UIcon
+                  :name="source.icon"
+                  aria-hidden="true"
+                /></span>
+                <span>{{ source.name }}</span>
+                <span
+                  class="source-port"
+                  aria-hidden="true"
+                />
+              </li>
+            </ul>
+          </div>
+
+          <div class="rysmaan-column">
+            <p class="stage-label">
+              Organized by Rysmaan
+            </p>
+            <a
+              href="#challenge-discovery"
+              class="pipeline-hub stage-link"
+              aria-label="Rysmaan — explore the challenge of finding project experience"
+            >
+              <div class="hub-brand">
+                <span class="hub-logo"><V3RysmaanMark class="size-8" /></span>
+                <span>rysmaan</span>
               </div>
-              <UIcon
-                name="i-lucide-arrow-down"
-                class="mx-auto size-5 text-primary lg:hidden"
+              <div
+                class="hub-organization"
                 aria-hidden="true"
-              />
-              <div>
-                <p class="eyebrow mb-3 lg:hidden">
-                  03 / Ready to use
-                </p>
-                <ul class="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1 lg:gap-5">
-                  <li
-                    v-for="o in outputs"
-                    :key="o.name"
-                    ref="outputEls"
-                    class="pipeline-node"
-                  >
-                    <span class="node-icon"><UIcon
-                      :name="o.icon"
-                      class="size-5"
-                      aria-hidden="true"
-                    /></span>
-                    <span class="text-sm leading-snug"><span class="block font-medium">{{ o.name }}</span><span class="text-xs text-muted">{{ o.detail }}</span></span>
-                  </li>
-                </ul>
+              >
+                <span
+                  v-for="i in 9"
+                  :key="i"
+                  :style="{ '--i': i }"
+                />
               </div>
-            </div>
+              <p class="hub-purpose">
+                Bring order to your information.
+              </p>
+              <span class="stage-action">
+                <UIcon
+                  name="i-lucide-arrow-down"
+                  aria-hidden="true"
+                />Why it’s hard today
+              </span>
+            </a>
+          </div>
+
+          <div class="data-column">
+            <p class="stage-label">
+              Your connected data
+            </p>
+            <a
+              href="#challenge-consistency"
+              class="data-card stage-link"
+              aria-label="Connected knowledge — explore the challenge of conflicting project details"
+            >
+              <span
+                class="data-connection"
+                aria-hidden="true"
+              ><span class="connection-packet" /></span>
+              <svg
+                class="data-illustration"
+                viewBox="0 0 160 76"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M27 20H133M27 56H133M27 20V56M80 20V56M133 20V56"
+                  stroke="#8edbcd"
+                  stroke-width="1.5"
+                />
+                <circle
+                  class="graph-packet"
+                  cx="40"
+                  cy="20"
+                  r="2.5"
+                  fill="#d6fff0"
+                />
+                <circle
+                  class="graph-packet graph-packet-bottom"
+                  cx="40"
+                  cy="56"
+                  r="2.5"
+                  fill="#d6fff0"
+                />
+                <g
+                  v-for="(x, i) in [13, 66, 119]"
+                  :key="x"
+                  :style="{ '--record-delay': `${i * 160}ms` }"
+                >
+                  <g
+                    v-for="y in [8, 44]"
+                    :key="y"
+                  >
+                    <rect
+                      :x="x"
+                      :y="y"
+                      width="28"
+                      height="24"
+                      rx="5"
+                      fill="#effdf9"
+                      stroke="#b0e7db"
+                    />
+                    <rect
+                      class="record-highlight"
+                      :x="x"
+                      :y="y"
+                      width="28"
+                      height="24"
+                      rx="5"
+                      fill="#c5f8e7"
+                      stroke="#effff8"
+                    />
+                    <rect
+                      :x="x + 6"
+                      :y="y + 6"
+                      width="5"
+                      height="5"
+                      rx="1.5"
+                      :fill="['#397ccb', '#139a8c', '#8c64cb'][i]"
+                    />
+                    <path
+                      :d="`M${x + 6} ${y + 17}h16`"
+                      stroke="#9ecfc4"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </g>
+                </g>
+              </svg>
+              <div class="data-heading">
+                <h2>Connected<br><span>knowledge</span></h2>
+                <p>Structured. Ready to use.</p>
+              </div>
+              <span class="stage-action">
+                <UIcon
+                  name="i-lucide-arrow-down"
+                  aria-hidden="true"
+                />Why structure matters
+              </span>
+            </a>
+          </div>
+          <div class="outputs-column">
+            <p class="stage-label">
+              Ready to use
+            </p>
+            <ul
+              class="service-list"
+              aria-label="Connect your data to"
+            >
+              <li
+                v-for="(service, i) in services"
+                :key="service.name"
+                class="service-card"
+                :class="`service-card--${service.tone}`"
+                :style="{ '--service-delay': `${i * 180}ms` }"
+              >
+                <span
+                  class="service-signal"
+                  aria-hidden="true"
+                />
+                <div
+                  class="service-preview"
+                  aria-hidden="true"
+                >
+                  <div
+                    v-if="service.name === 'LLMs'"
+                    class="answer-preview"
+                  >
+                    <UIcon name="i-lucide-sparkles" />
+                    <div><span /><span /><span /></div>
+                  </div>
+                  <div
+                    v-else-if="service.name === 'Analytics'"
+                    class="chart-preview"
+                  >
+                    <span
+                      v-for="height in [35, 62, 48, 85, 70, 100]"
+                      :key="height"
+                      :style="{ height: `${height}%` }"
+                    />
+                  </div>
+                  <div
+                    v-else
+                    class="library-preview"
+                  >
+                    <span
+                      v-for="n in 3"
+                      :key="n"
+                    ><i /><i /></span>
+                  </div>
+                </div>
+                <span class="service-name"><UIcon
+                  :name="service.icon"
+                  aria-hidden="true"
+                />{{ service.name }}</span>
+              </li>
+            </ul>
           </div>
         </div>
         <figcaption class="canvas-caption">
-          <UIcon
-            name="i-lucide-workflow"
-            class="size-4"
-            aria-hidden="true"
-          />A pipeline that works
-          in the background. Your team stays in the tools they know.
+          <button
+            class="motion-toggle"
+            type="button"
+            :aria-label="motionPaused ? 'Play pipeline animation' : 'Pause pipeline animation'"
+            @click="motionPaused = !motionPaused"
+          >
+            <UIcon
+              :name="motionPaused ? 'i-lucide-play' : 'i-lucide-pause'"
+              aria-hidden="true"
+            />
+          </button>
         </figcaption>
       </figure>
     </div>
@@ -311,8 +315,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .hero-section {
   padding-top: 44px;
-  background: linear-gradient(180deg, #fff 50%, #fafcfc);
 }
+.hero-shell { max-width: 1480px; }
 .hero-copy {
   max-width: 840px;
   margin: 0 auto;
@@ -345,7 +349,10 @@ h1 {
   text-wrap: balance;
 }
 h1 > span {
-  color: #277a86;
+  color: #146bb0;
+  background: linear-gradient(105deg, #2659b5 12%, #087f79 88%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero-description {
   margin: 22px auto 0;
@@ -356,197 +363,240 @@ h1 > span {
   text-wrap: pretty;
 }
 .pipeline-canvas {
-  margin-top: 40px;
-  border: 1px solid var(--ui-border);
-  border-radius: 16px;
-  background: #f8fafa;
-  box-shadow: 0 12px 32px -24px #172c3b33;
+  margin-top: 56px;
   overflow: hidden;
+  border: 1px solid #d5e0ef;
+  border-radius: 18px;
+  background: #f7faff;
+  box-shadow: 0 16px 40px -26px #24549b40;
 }
-.canvas-body {
-  padding: 22px 28px 26px;
-  background-image: radial-gradient(#ccd7dd 0.65px, transparent 0.65px);
-  background-size: 16px 16px;
-}
-.pipeline-labels,
 .pipeline-grid {
+  --connector: #90afce;
+  --gap: clamp(28px, 3vw, 48px);
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  column-gap: 64px;
-  align-items: center;
-  position: relative;
-}
-.pipeline-labels {
-  margin-bottom: 18px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ui-text-muted);
-}
-.pipeline-labels > :nth-child(2) {
-  text-align: center;
-}
-.pipeline-node {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 12px;
-  border: 1px solid #dee5e8;
-  border-radius: 9px;
-  background: white;
-  box-shadow: 0 2px 2px #172c3b04;
-}
-.node-icon {
-  display: flex;
-  align-items: center;
+  grid-template-columns: 1fr 1.15fr 1.15fr 1.3fr;
   justify-content: center;
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
-  background: #f5f7f8;
-  color: #506a7b;
+  gap: var(--gap);
+  padding: 44px 40px 42px;
+  background: radial-gradient(ellipse at 34% 50%, #d8e7ffb3, transparent 52%),
+    radial-gradient(ellipse at 71% 60%, #d4f1e9b3, transparent 48%),
+    radial-gradient(#bacbe2 0.65px, transparent 0.65px);
+  background-size: auto, auto, 16px 16px;
 }
+.pipeline-grid > div { min-width: 0; }
+.rysmaan-column, .data-column { display: flex; flex-direction: column; }
+.stage-label {
+  margin-bottom: 28px;
+  color: #64717b;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.rysmaan-column .stage-label, .data-column .stage-label { text-align: center; }
+.rysmaan-column .stage-label { color: #2e60a8; }
+.data-column .stage-label { color: #14776c; }
+.source-list {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 28px;
+  height: 348px;
+}
+.source-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 76px;
+  padding: 14px 16px;
+  border: 1px solid #cbdcf1;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 8px #315da308;
+  font-size: 15px;
+  font-weight: 500;
+}
+.source-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 7px;
+  color: #3d64bc;
+  background: #e8efff;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.source-card:last-child .source-icon { color: #057d9d; background: #ddf4fc; }
+.source-port { position: absolute; right: -3px; width: 5px; height: 5px; border-radius: 50%; background: #6b9ccc; }
+.source-card::after { content: ''; position: absolute; left: 100%; top: 50%; width: calc(var(--gap) / 2); height: 52px; border-top: 1px solid var(--connector); border-right: 1px solid var(--connector); border-top-right-radius: 12px; }
+.source-card:last-child::after { top: auto; bottom: 50%; border-top: 0; border-bottom: 1px solid var(--connector); border-top-right-radius: 0; border-bottom-right-radius: 12px; }
 .pipeline-hub {
   position: relative;
-  padding: 22px;
-  background: #172e3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 270px;
+  margin-top: 39px;
+  padding: 16px 12px;
+  border: 1px solid #326cc2;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #173e88, #216bc0);
+  box-shadow: 0 10px 24px -12px #1e56aa88, inset 0 1px 0 #ffffff30;
+  color: white;
+  text-align: center;
+}
+.pipeline-hub::before { content: ''; position: absolute; top: 50%; right: 100%; width: calc(var(--gap) / 2); border-top: 1px solid var(--connector); }
+.hub-brand { display: flex; align-items: center; gap: 10px; font-size: 28px; font-weight: 600; letter-spacing: -.055em; }
+.hub-logo { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: #f7fbfc; }
+.hub-logo svg { width: 36px; height: 36px; }
+.hub-organization { display: grid; grid-template-columns: repeat(3, 9px); gap: 5px; margin: 24px 0 20px; transform: rotate(-8deg); }
+.hub-organization span { width: 9px; height: 9px; border-radius: 2px; background: #7ce6d6; }
+.hub-organization span:nth-child(3n + 1) { background: #c1dcff; }
+.hub-purpose { max-width: 185px; font-size: 16px; line-height: 1.45; color: #f4f8ff; }
+.stage-link { text-decoration: none; cursor: pointer; }
+.stage-link:focus-visible { outline: 3px solid #287bc3; outline-offset: 5px; }
+.stage-action { display: flex; align-items: center; gap: 7px; margin-top: 18px; padding: 7px 10px; border: 1px solid #ffffff38; border-radius: 6px; background: #ffffff0d; color: #fff; font-size: 11px; line-height: 1.3; }
+.stage-action > :first-child { font-size: 13px; flex-shrink: 0; transition: transform 180ms var(--ease-out); }
+.stage-link:active .stage-action { background: #ffffff26; }
+@media (hover: hover) and (pointer: fine) {
+  .stage-link:hover .stage-action { background: #ffffff20; border-color: #ffffff80; }
+  .stage-link:hover .stage-action > :first-child { transform: translateY(2px); }
+}
+.data-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 270px;
+  margin-top: 39px;
+  padding: 15px 12px;
+  border: 1px solid #238f82;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #105f5c, #087368);
   color: #fff;
-  border: 1px solid #2b4656;
-  border-radius: 13px;
-  box-shadow:
-    0 12px 24px -12px #172c3b66,
-    inset 0 1px 0 #ffffff14;
+  box-shadow: 0 10px 24px -12px #13756877, inset 0 1px 0 #ffffff30;
+  text-align: center;
 }
-.hub-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-.hub-badge {
-  color: #a9e2d5;
-  font-size: 9px;
-  white-space: nowrap;
-  border: 1px solid #ffffff20;
-  padding: 4px 6px;
-  border-radius: 4px;
-}
-.hub-description {
-  margin-top: 12px;
-  font-size: 12px;
-  color: #adbdc7;
-}
-.hub-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 0;
-}
-.hub-step-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  border: 1px solid #ffffff16;
-  background: #ffffff07;
-  border-radius: 6px;
-  color: #a3d5d6;
-}
-.hub-detail {
-  display: block;
-  font-size: 11px;
-  color: #b6c5cf;
-  margin-top: 2px;
-}
-.hub-footer {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  border-top: 1px solid #ffffff18;
-  padding-top: 13px;
-  margin-top: 13px;
-  color: #9ed5c8;
-  font-size: 10px;
-}
-.canvas-caption {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 20px;
-  border-top: 1px solid var(--ui-border);
-  color: var(--ui-text-muted);
-  font-size: 12px;
-  background: white;
-}
-.pipe {
-  fill: none;
-  stroke: #d8e3e8;
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-.flow {
-  fill: none;
-  stroke: url(#pipe);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 5 9;
-}
+.data-heading p { margin-top: 14px; font-size: 13px; color: #e0fff5; }
+.data-card h2 { font-size: 28px; font-weight: 500; letter-spacing: -.035em; line-height: 1.15; }
+.data-card h2 span { color: #bdffe6; }
+.data-illustration { display: block; width: 100%; max-width: 190px; height: 76px; margin-bottom: 14px; flex-shrink: 0; }
+.data-connection { position: absolute; top: 50%; right: 100%; width: var(--gap); height: 1px; background: var(--connector); }
+.data-connection::after { content: ''; position: absolute; top: -3px; right: 3px; width: 6px; height: 6px; border-top: 1px solid #428bac; border-right: 1px solid #428bac; transform: rotate(45deg); }
+.connection-packet { position: absolute; left: 0; top: -1px; width: 12px; height: 3px; border-radius: 3px; background: #237cdc; opacity: 0; }
+.graph-packet, .record-highlight { opacity: 0; }
+.service-list { position: relative; display: grid; gap: 18px; }
+.service-list::before { content: ''; position: absolute; top: 52px; bottom: 52px; left: calc(var(--gap) / -2); width: 12px; border: 1px solid var(--connector); border-right: 0; border-radius: 12px 0 0 12px; }
+.service-list::after { content: ''; position: absolute; top: 50%; right: 100%; width: var(--gap); border-top: 1px solid var(--connector); }
+.service-card--violet { --service-accent: #7950c6; --service-ink: #5c3f8c; --service-tint: #f6f1ff; --service-border: #dbcbef; --service-soft: #ede2ff; --service-mid: #ba9ae2; }
+.service-card--blue { --service-accent: #307bd4; --service-ink: #255b96; --service-tint: #eff6ff; --service-border: #c6dcf4; --service-soft: #e0edff; --service-mid: #8cb6e6; }
+.service-card--amber { --service-accent: #b47720; --service-ink: #86591e; --service-tint: #fff8ed; --service-border: #ecd8b6; --service-soft: #fff0d5; --service-mid: #d8b170; }
+.service-card { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 104px; min-width: 0; padding: 16px; border: 1px solid var(--service-border); border-radius: 10px; background: linear-gradient(110deg, #fff, var(--service-tint)); box-shadow: 0 4px 12px #25446d08; }
+.service-card::before { content: ''; position: absolute; top: 50%; right: 100%; width: calc(var(--gap) / 2 - 12px); border-top: 1px solid var(--connector); }
+.service-signal { position: absolute; inset: -1px; border: 1px solid var(--service-accent); border-radius: inherit; box-shadow: 0 0 12px var(--service-soft); opacity: 0; pointer-events: none; }
+.service-preview { order: 2; flex-shrink: 0; width: clamp(56px, 6vw, 88px); height: 48px; display: flex; align-items: center; }
+.service-name { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--service-ink); white-space: nowrap; }
+.service-name > :first-child { font-size: 18px; color: var(--service-accent); }
+.answer-preview { display: flex; gap: 7px; width: 100%; padding: 9px; border: 1px solid var(--service-border); border-radius: 6px; background: var(--service-soft); color: var(--service-accent); }
+.answer-preview > :first-child { flex-shrink: 0; font-size: 12px; }
+.answer-preview div { flex: 1; padding-top: 3px; }
+.answer-preview div span { display: block; height: 3px; margin-bottom: 4px; border-radius: 3px; background: var(--service-mid); }
+.answer-preview div span:nth-child(2) { width: 85%; }
+.answer-preview div span:last-child { width: 58%; margin-bottom: 0; }
+.chart-preview { display: flex; align-items: flex-end; gap: 5px; width: 100%; height: 100%; padding: 0 8px 2px; border-bottom: 1px solid var(--service-border); }
+.chart-preview span { flex: 1; max-height: 48px; border-radius: 3px 3px 0 0; background: linear-gradient(var(--service-accent), var(--service-mid)); }
+.library-preview { display: flex; gap: 5px; width: 100%; }
+.library-preview > span { flex: 1; height: 46px; padding: 9px 6px; border: 1px solid var(--service-border); border-radius: 5px; background: var(--service-soft); }
+.library-preview i { display: block; height: 3px; margin-bottom: 5px; border-radius: 2px; background: var(--service-mid); }
+.library-preview i:first-child { width: 8px; height: 8px; border-radius: 2px; background: var(--service-accent); }
+.canvas-caption { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 18px 48px; border-top: 1px solid #e0e7e9; background: #ffffffb3; text-align: center; font-size: 13px; color: #64717b; }
+.motion-toggle { position: absolute; right: 12px; display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid #dce6e5; border-radius: 6px; background: white; color: #628185; cursor: pointer; }
+.motion-toggle:focus-visible { outline: 2px solid #277a86; outline-offset: 3px; }
+.motion-toggle:active { transform: scale(.96); }
 @media (prefers-reduced-motion: no-preference) {
-  .flow {
-    animation: flow 1.1s linear infinite;
-  }
+  .connection-packet { animation: feed-data 7s cubic-bezier(.4, 0, .2, 1) infinite; }
+  .hub-organization { animation: organize 7s cubic-bezier(.4, 0, .2, 1) infinite; }
+  .graph-packet { animation: connect-records 7s cubic-bezier(.4, 0, .2, 1) infinite; }
+  .graph-packet-bottom { animation-delay: 350ms; }
+  .record-highlight { animation: highlight-record 7s ease infinite; animation-delay: var(--record-delay); }
+  .service-signal { animation: highlight-service 7s ease infinite; animation-delay: var(--service-delay); }
+  .pipeline-canvas :is(.connection-packet, .hub-organization, .graph-packet, .record-highlight, .service-signal) { animation-play-state: paused; }
+  .motion-running :is(.connection-packet, .hub-organization, .graph-packet, .record-highlight, .service-signal) { animation-play-state: running; }
 }
-@keyframes flow {
-  from {
-    stroke-dashoffset: 14;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+@keyframes feed-data {
+  0%, 8% { opacity: 0; transform: translateX(0); }
+  12% { opacity: 1; }
+  25% { opacity: 1; transform: translateX(calc(var(--gap) - 14px)); }
+  28%, 100% { opacity: 0; transform: translateX(calc(var(--gap) - 14px)); }
+}
+@keyframes organize { 0%, 5%, 90%, 100% { transform: rotate(-8deg); } 15%, 75% { transform: rotate(0); } }
+@keyframes connect-records { 0%, 28% { opacity: 0; transform: translateX(0); } 32% { opacity: 1; } 48% { opacity: 1; transform: translateX(26px); } 50%, 100% { opacity: 0; transform: translateX(26px); } }
+@keyframes highlight-record { 0%, 25%, 65%, 100% { opacity: 0; } 38%, 50% { opacity: 1; } }
+@keyframes highlight-service { 0%, 52%, 88%, 100% { opacity: 0; } 63%, 73% { opacity: 1; } }
+@media (min-width: 1024px) and (max-width: 1150px) {
+  .pipeline-grid { --gap: 24px; grid-template-columns: 1fr 1.15fr 1.15fr 1.3fr; padding-inline: 24px; }
+  .stage-label { font-size: 10px; }
+  .source-card { font-size: 12px; }
+  .source-icon { width: 32px; height: 32px; font-size: 19px; }
+  .hub-brand { font-size: 24px; gap: 7px; }
+  .hub-logo { width: 34px; height: 34px; }
+  .hub-purpose { font-size: 14px; }
+  .stage-action { font-size: 10px; padding-inline: 7px; }
+  .data-card h2 { font-size: 25px; }
+  .data-heading p { font-size: 11px; }
+  .service-name { font-size: 11px; gap: 5px; }
+  .source-card { gap: 7px; padding-inline: 9px; }
+  .service-card { padding-inline: 10px; gap: 6px; }
+  .service-preview { width: 55px; }
 }
 @media (max-width: 1023px) {
-  .pipeline-labels {
-    display: none;
-  }
-  .pipeline-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .pipeline-hub {
-    max-width: 400px;
-    width: 100%;
-    margin-inline: auto;
-  }
+  .pipeline-grid { grid-template-columns: 1fr; gap: 36px; padding: 36px 24px; }
+  .pipeline-grid > div { width: 100%; max-width: 440px; margin-inline: auto; }
+  .stage-label { text-align: center; margin-bottom: 14px; }
+  .source-list { height: auto; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .source-card { justify-content: center; }
+  .source-port, .source-card::after, .pipeline-hub::before { display: none; }
+  .pipeline-hub, .data-card { width: min(100%, 290px); height: 270px; padding: 20px 16px; }
+  .pipeline-hub { margin: 28px auto 12px; }
+  .data-card { margin: 0 auto; }
+  .pipeline-hub::after { content: ''; position: absolute; bottom: calc(100% + 1px); left: 50%; height: 20px; border-left: 1px solid var(--connector); }
+  .rysmaan-column .stage-label, .outputs-column .stage-label { display: none; }
+  .data-connection { top: -68px; right: auto; left: 50%; width: 1px; height: 28px; }
+  .data-connection::after { top: auto; bottom: 0; left: -3px; transform: rotate(135deg); }
+  .connection-packet { display: none; }
+  .service-list { grid-template-columns: 1fr 1fr 1.15fr; gap: 10px; padding-top: 14px; }
+  .service-list::before { top: -36px; bottom: auto; left: 50%; height: 37px; width: 0; border: 0; border-left: 1px solid var(--connector); border-radius: 0; }
+  .service-list::after { top: 0; right: 18%; left: 16%; width: auto; }
+  .service-card { height: auto; flex-direction: column; gap: 10px; padding: 12px 8px; }
+  .service-card::before { top: auto; bottom: 100%; right: auto; left: 50%; width: 0; height: 15px; border: 0; border-left: 1px solid var(--connector); }
+  .service-preview { order: 0; width: 100%; max-width: 90px; }
 }
 @media (max-width: 640px) {
-  .hero-section {
-    padding-top: 38px;
-  }
-  .hero-description {
-    font-size: 16px;
-  }
-  .pipeline-canvas {
-    margin-top: 36px;
-  }
-  .canvas-body {
-    padding: 24px 18px;
-  }
-  .canvas-caption {
-    align-items: flex-start;
-    font-size: 11px;
-  }
-  .canvas-caption > :first-child {
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .hero-section { padding-top: 38px; }
+  .hero-description { font-size: 16px; }
+  .pipeline-canvas { margin-top: 44px; }
+  .pipeline-grid { padding: 24px 14px; }
+  .source-card { gap: 7px; padding-inline: 7px; font-size: 11px; }
+  .stage-label { font-size: 11px; }
+  .hub-purpose { font-size: 15px; }
+  .source-icon { width: 25px; height: 28px; font-size: 16px; }
+  .service-list { gap: 7px; }
+  .service-card { padding: 10px 6px; }
+  .service-name { flex-direction: column; gap: 5px; font-size: 10px; }
+  .service-preview { height: 33px; }
+  .chart-preview { gap: 3px; padding-inline: 2px; }
+  .chart-preview span { max-height: 30px; }
+  .answer-preview { padding: 6px 4px; gap: 4px; }
+  .library-preview { gap: 3px; }
+  .library-preview > span { padding: 5px 3px; height: 30px; }
+  .canvas-caption { font-size: 11px; padding-inline: 25px 48px; text-wrap: balance; }
 }
-.flow-paused .flow {
-  animation-play-state: paused;
+@media (prefers-reduced-motion: reduce) { .motion-toggle { display: none; } }
+@media (forced-colors: active) {
+  h1 > span { background: none; -webkit-text-fill-color: currentColor; }
 }
 </style>

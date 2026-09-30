@@ -101,7 +101,7 @@ html.v3-page {
     padding-inline: 32px;
   }
   .v3-site .section-space {
-    padding-block: 80px;
+    padding-block: 112px;
   }
   .v3-site .eyebrow {
     display: flex;
@@ -183,7 +183,7 @@ html.v3-page {
     padding-inline: 20px;
   }
   .v3-site .section-space {
-    padding-block: 56px;
+    padding-block: 80px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

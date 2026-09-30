@@ -1,11 +1,6 @@
 <script setup lang="ts">
 const commitments = [
   {
-    title: 'Read-only access',
-    icon: 'i-lucide-eye',
-    body: 'We work from your exports and files. Your existing systems stay as they are.'
-  },
-  {
     title: 'Private to your firm',
     icon: 'i-lucide-shield-check',
     body: 'Your records live in a separate database. Access and confidentiality are agreed before you share files.'
@@ -13,7 +8,7 @@ const commitments = [
   {
     title: 'Yours to keep',
     icon: 'i-lucide-key-round',
-    body: 'You own the database and Power BI model, even if you stop working with us.'
+    body: 'You own the database, even if you stop working with us.'
   }
 ]
 </script>
@@ -22,7 +17,7 @@ const commitments = [
   <section
     id="data"
     aria-labelledby="data-title"
-    class="section-space border-y border-default bg-muted"
+    class="section-space bg-muted"
   >
     <div class="section-shell">
       <div
@@ -43,7 +38,7 @@ const commitments = [
         <div
           v-for="(c, index) in commitments"
           :key="c.title"
-          v-v3-reveal="(index % 3) * 70"
+          v-v3-reveal="index * 70"
           class="commitment"
         >
           <UIcon
@@ -72,7 +67,7 @@ const commitments = [
 }
 .commitments {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 48px;
   gap: 32px 48px;
 }

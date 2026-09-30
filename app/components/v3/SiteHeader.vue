@@ -6,11 +6,22 @@ function closeMenu() {
   menuOpen.value = false
   menuButton.value?.focus()
 }
-const links = [
-  { label: 'Overview', to: '#overview' },
-  { label: 'Results', to: '#unlocks' },
-  { label: 'Your data', to: '#data' }
-]
+const links = computed(() => [
+  ...(site.showChallengeSections
+    ? [
+        { label: 'The challenge', to: '#challenges' },
+        { label: 'How it works', to: '#how-it-works' }
+      ]
+    : []),
+  ...(site.showOverviewSections
+    ? [
+        { label: 'Overview', to: '#overview' },
+        { label: 'Results', to: '#unlocks' }
+      ]
+    : []),
+  { label: 'Your data', to: '#data' },
+  { label: 'FAQ', to: '#faq' }
+])
 </script>
 
 <template>

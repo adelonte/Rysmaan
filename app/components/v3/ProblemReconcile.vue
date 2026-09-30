@@ -14,35 +14,37 @@ type Fact = { label: string, value: string, flag?: boolean }
 
 const found: { source: string, icon: string, tint: string, name: string, facts: Fact[] }[] = [
   {
-    source: 'Accounting export',
-    icon: 'i-lucide-sheet',
+    source: 'Project brief (Word)',
+    icon: 'i-lucide-file-text',
     tint: 'bg-brand-50 text-brand-600',
     name: '2021-044',
     facts: [
-      { label: 'Fee', value: '$1,310,000', flag: true },
-      { label: 'Hours', value: '9,420', flag: true }
+      { label: 'Start', value: 'March 11, 2021', flag: true }
     ]
   },
   {
-    source: 'Proposal (PDF)',
+    source: 'Project plan (PDF)',
     icon: 'i-lucide-file-text',
     tint: 'bg-amber-50 text-amber-600',
     name: 'St. Mary’s Hospital Expansion',
-    facts: [{ label: 'Fee', value: '$1,240,000', flag: true }]
+    facts: [{ label: 'Start', value: 'March 4, 2021', flag: true }]
   },
   {
-    source: 'Timesheets',
-    icon: 'i-lucide-clock',
+    source: 'Closeout report (PDF)',
+    icon: 'i-lucide-file-text',
     tint: 'bg-aqua-50 text-aqua-600',
     name: 'SMH Ph II',
-    facts: [{ label: 'Hours', value: '9,386', flag: true }]
+    facts: [{ label: 'Completed', value: 'June 2023', flag: true }]
   },
   {
     source: 'Project sheet',
     icon: 'i-lucide-file-spreadsheet',
     tint: 'bg-violet-50 text-violet-600',
     name: 'St Marys Hosp. Phase 2',
-    facts: [{ label: 'Lead', value: 'J. Okafor' }]
+    facts: [
+      { label: 'Lead', value: 'J. Okafor' },
+      { label: 'Completed', value: 'May 2023', flag: true }
+    ]
   },
   {
     source: 'CV, R. Singh',
@@ -56,8 +58,8 @@ const found: { source: string, icon: string, tint: string, name: string, facts: 
 const record = [
   { label: 'Number', value: '2021-044' },
   { label: 'Client', value: 'Bow River Health' },
-  { label: 'Fee', value: '$1,310,000', confirm: 1 },
-  { label: 'Hours', value: '9,420', confirm: 2 },
+  { label: 'Start', value: 'March 11, 2021', confirm: 1 },
+  { label: 'Completed', value: 'June 2023', confirm: 2 },
   { label: 'People', value: 'J. Okafor (project manager), R. Singh' },
   { label: 'Sources', value: '5 files, each linked' }
 ]
@@ -67,7 +69,7 @@ const record = [
   <section
     id="difference"
     aria-labelledby="problem-title"
-    class="section-space border-t border-default"
+    class="section-space"
   >
     <div class="section-shell difference-layout">
       <div
@@ -81,11 +83,12 @@ const record = [
           :center="false"
         >
           <p>
-            Your accounting system says 2021-044. The proposal says St. Mary’s. Your timesheets say
-            SMH Ph II.
+            Your project folder says 2021-044. The project plan says St. Mary’s. A report in SharePoint
+            says SMH Ph II.
           </p>
           <p class="mt-4">
-            Rysmaan connects the pieces, keeps the sources, and brings the disagreements to you.
+            Rysmaan connects documents across your file systems and SharePoint, keeps the sources,
+            and brings the disagreements to you.
           </p>
         </V3SectionHeading>
         <div class="difference-note">
@@ -179,7 +182,7 @@ const record = [
                 class="size-4 shrink-0"
                 aria-hidden="true"
               />Five
-              sources. Two conflicting figures.
+              files. Two conflicting dates.
             </div>
           </div>
           <div
@@ -223,8 +226,8 @@ const record = [
                 Two details for you to confirm
               </p>
               <ol class="mt-2 space-y-1.5">
-                <li>1. Accounting lists $1,310,000; the proposal lists $1,240,000.</li>
-                <li>2. Accounting and timesheets differ by 34 hours.</li>
+                <li>1. The project brief starts March 11; the project plan starts March 4.</li>
+                <li>2. The closeout report says June 2023; the project sheet says May 2023.</li>
               </ol>
             </div>
           </div>

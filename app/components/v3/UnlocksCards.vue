@@ -1,26 +1,26 @@
 <script setup lang="ts">
-const overruns = [
-  { line: 'Buildings', pct: 18 },
-  { line: 'Transportation', pct: 11 },
-  { line: 'Healthcare', pct: 7 },
-  { line: 'Water', pct: 4 }
+const projectCounts = [
+  { line: 'Buildings', count: 168 },
+  { line: 'Transportation', count: 112 },
+  { line: 'Healthcare', count: 76 },
+  { line: 'Water', count: 56 }
 ]
 
 const answer = [
   {
     person: 'Dana Whitford',
-    project: 'Foothills Water Treatment Upgrade, $860,000',
-    sources: ['Accounting export', 'Project sheet']
+    project: 'Foothills Water Treatment Upgrade, 2022',
+    sources: ['Project brief', 'CV']
   },
   {
     person: 'Marc Tremblay',
-    project: 'Red Deer Intake Pump Station, $620,000',
-    sources: ['Contract, p. 3']
+    project: 'Red Deer Water Treatment Plant, 2021',
+    sources: ['Project sheet', 'CV']
   },
   {
     person: 'Aisha Rahman',
-    project: 'Cochrane Lagoon Upgrade, $540,000',
-    sources: ['Proposal, p. 9', 'CV']
+    project: 'Cochrane Wastewater Treatment Upgrade, 2023',
+    sources: ['Project report, p. 9', 'CV']
   }
 ]
 </script>
@@ -29,7 +29,7 @@ const answer = [
   <section
     id="unlocks"
     aria-labelledby="unlocks-title"
-    class="section-space bg-muted border-y border-default"
+    class="section-space bg-muted"
   >
     <div class="section-shell">
       <div
@@ -43,8 +43,8 @@ const answer = [
           :center="false"
         />
         <p class="max-w-sm text-base leading-relaxed text-muted">
-          The same checked records power your reports and AI assistants. Every answer has somewhere
-          to point back to.
+          Put the knowledge in your folders and SharePoint to work in reports and AI answers.
+          Every record points back to its source document.
         </p>
       </div>
 
@@ -64,12 +64,12 @@ const answer = [
             </h3>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted">
-            Budget against actual by phase, service line, client or project manager. The totals hold
-            up in a partners’ meeting because the records already agree with each other.
+            See your past projects by sector, client, location or project lead. Build a picture of
+            your firm’s experience from the documents you already have.
           </p>
           <figure class="mt-8 rounded-lg bg-muted p-5 ring-1 ring-default">
             <figcaption>
-              <span class="block text-sm font-semibold">Fee overrun by service line</span>
+              <span class="block text-sm font-semibold">Project experience by sector</span>
               <span class="text-xs text-muted">Projects completed 2019 to 2024</span>
             </figcaption>
             <div class="tnum mt-4 grid grid-cols-2 gap-3">
@@ -78,25 +78,25 @@ const answer = [
                 <span class="display text-2xl">412</span>
               </div>
               <div class="rounded-md bg-default px-3 py-2.5">
-                <span class="block text-xs text-muted">Average overrun</span>
-                <span class="display text-2xl">9%</span>
+                <span class="block text-xs text-muted">Sectors</span>
+                <span class="display text-2xl">4</span>
               </div>
             </div>
             <ul class="tnum mt-5 space-y-3.5">
               <li
-                v-for="(o, index) in overruns"
-                :key="o.line"
+                v-for="(project, index) in projectCounts"
+                :key="project.line"
                 class="grid grid-cols-[7rem_1fr_2.5rem] items-center gap-3 text-sm"
               >
-                <span class="text-toned">{{ o.line }}</span>
+                <span class="text-toned">{{ project.line }}</span>
                 <span class="h-2 rounded-sm bg-elevated">
                   <span
                     v-v3-reveal="{ preset: 'bar', delay: index * 70 }"
                     class="chart-bar block h-full rounded-sm bg-primary"
-                    :style="{ width: `${(o.pct / 20) * 100}%` }"
+                    :style="{ width: `${(project.count / 180) * 100}%` }"
                   />
                 </span>
-                <span class="text-right font-semibold">{{ o.pct }}%</span>
+                <span class="text-right font-semibold">{{ project.count }}</span>
               </li>
             </ul>
             <p class="mt-5 text-xs text-muted">
@@ -125,8 +125,8 @@ const answer = [
             </h3>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-muted">
-            Ask questions across your project history. We connect your AI assistant to your records
-            through MCP, so answers come with sources you can open.
+            Find relevant projects and people for your next project. Ask your AI assistant about
+            your project history, with source documents you can open.
           </p>
           <figure class="mt-8 rounded-lg bg-muted p-5 ring-1 ring-default">
             <figcaption class="sr-only">
@@ -136,7 +136,7 @@ const answer = [
               v-v3-reveal
               class="ml-auto max-w-xs rounded-lg rounded-br-none bg-inverted px-4 py-2.5 text-sm text-white"
             >
-              Who has led water treatment projects over $500K in Alberta since 2019?
+              Who has led water treatment projects in Alberta since 2019?
             </p>
             <div class="mt-4 text-sm leading-relaxed">
               <p>Three people have:</p>

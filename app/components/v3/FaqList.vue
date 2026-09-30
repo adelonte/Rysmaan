@@ -3,28 +3,18 @@ const items = [
   {
     label: 'Does our team need to learn a new app?',
     content:
-      'No. Your team keeps using its accounting and project tools. Rysmaan connects the history behind them, and the results appear in Power BI and your AI assistant.'
+      'No. Your team keeps working in its folders and SharePoint. Rysmaan connects the project history in those documents, and the results appear in Power BI and your AI assistant.'
   },
   {
-    label: 'Which systems do you work with?',
+    label: 'Which sources do you work with?',
     content:
-      'We start with exports from Deltek, BQE CORE, QuickBooks or spreadsheets, plus project files from SharePoint, OneDrive or a shared drive. Tell us what you use when you apply.'
+      'We focus on file systems (local folders and shared drives) and SharePoint document libraries. We work with project documents such as project briefs, project sheets, reports and CVs. We agree on the folders and file types to include before starting your pilot.'
   },
   {
     label: 'How is this different from searching our files?',
     content:
       'Searching helps you find a document. Rysmaan connects differently named files to the same project, joins related information, and flags conflicting details for your team to confirm.'
   },
-  {
-    label: 'What does it cost?',
-    content:
-      'Pricing is on application. After a conversation about your sources and history, we quote a fixed setup fee. Monthly updates are optional.'
-  },
-  {
-    label: 'What happens if we stop?',
-    content:
-      'You keep your database and Power BI model. We agree on the handover and deletion of our copy with you.'
-  }
 ]
 </script>
 
@@ -32,7 +22,7 @@ const items = [
   <section
     id="faq"
     aria-labelledby="faq-title"
-    class="section-space border-t border-default"
+    class="section-space"
   >
     <div class="section-shell faq-layout">
       <div v-v3-reveal>
