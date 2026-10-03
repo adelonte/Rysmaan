@@ -16,6 +16,11 @@ const { data: solutions } = await useAsyncData('solutions-nav', () =>
 
 const items = computed(() => [
   {
+    label: 'About',
+    to: '/about',
+    active: route.path === '/about'
+  },
+  {
     label: 'Solutions',
     active: route.path.startsWith('/solutions'),
     children: (solutions.value ?? []).map(solution => ({
