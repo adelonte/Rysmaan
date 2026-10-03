@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const links = [
+  { label: 'About', to: '/about' },
   { label: 'Solutions', to: '/v2#services' },
   { label: 'Why Rysmaan', to: '/v2#results' },
   { label: 'Contact', to: 'mailto:hello@rysmaan.com' },

@@ -38,7 +38,7 @@ const facts = [
 ]
 
 const footerLinks = [
-  { label: 'About', to: '#about' },
+  { label: 'About', to: '/about' },
   { label: 'Calgary', to: '#calgary' },
   { label: 'Contact', to: 'mailto:hello@rysmaan.com' },
   { label: 'Previous site', to: '/v2' }
