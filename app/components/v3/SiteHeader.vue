@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { v3: site } = useAppConfig()
+const route = useRoute()
+const bookingUrl = computed(() => site.bookingUrl.startsWith('#') ? `/v3${site.bookingUrl}` : site.bookingUrl)
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement>()
 function closeMenu() {
@@ -9,18 +11,19 @@ function closeMenu() {
 const links = computed(() => [
   ...(site.showChallengeSections
     ? [
-        { label: 'The challenge', to: '#challenges' },
-        { label: 'How it works', to: '#how-it-works' }
+        { label: 'The challenge', to: '/v3#challenges' },
+        { label: 'How it works', to: '/v3#how-it-works' }
       ]
     : []),
   ...(site.showOverviewSections
     ? [
-        { label: 'Overview', to: '#overview' },
-        { label: 'Results', to: '#unlocks' }
+        { label: 'Overview', to: '/v3#overview' },
+        { label: 'Results', to: '/v3#unlocks' }
       ]
     : []),
-  { label: 'Your data', to: '#data' },
-  { label: 'FAQ', to: '#faq' }
+  { label: 'Your data', to: '/v3#data' },
+  { label: 'FAQ', to: '/v3#faq' },
+  { label: 'About', to: '/about' }
 ])
 </script>
 
@@ -30,15 +33,15 @@ const links = computed(() => [
     @keydown.esc.prevent="closeMenu"
   >
     <div class="section-shell flex h-18 items-center justify-between gap-4">
-      <a
-        href="#top"
+      <NuxtLink
+        to="/v3#top"
         aria-label="Rysmaan home"
         class="flex items-center gap-2.5"
         @click="menuOpen = false"
       >
         <V3RysmaanMark class="size-8" />
         <span class="text-[23px] font-semibold tracking-[-0.06em]">rysmaan</span>
-      </a>
+      </NuxtLink>
       <nav
         aria-label="Main navigation"
         class="hidden md:block"
@@ -48,16 +51,17 @@ const links = computed(() => [
             v-for="link in links"
             :key="link.to"
           >
-            <a
-              :href="link.to"
+            <NuxtLink
+              :to="link.to"
+              :aria-current="route.path === link.to ? 'page' : undefined"
               class="nav-link"
-            >{{ link.label }}</a>
+            >{{ link.label }}</NuxtLink>
           </li>
         </ul>
       </nav>
       <div class="flex items-center gap-2">
         <UButton
-          :to="site.bookingUrl"
+          :to="bookingUrl"
           label="Discuss a pilot"
           trailing-icon="i-lucide-arrow-up-right"
           color="neutral"
@@ -86,15 +90,16 @@ const links = computed(() => [
       aria-label="Mobile navigation"
       class="border-t border-default bg-default px-5 py-3 md:hidden"
     >
-      <a
+      <NuxtLink
         v-for="link in links"
         :key="link.to"
-        :href="link.to"
+        :to="link.to"
+        :aria-current="route.path === link.to ? 'page' : undefined"
         class="block rounded-lg px-2 py-3 text-sm text-toned"
         @click="menuOpen = false"
-      >{{ link.label }}</a>
+      >{{ link.label }}</NuxtLink>
       <V3GradientButton
-        :to="site.bookingUrl"
+        :to="bookingUrl"
         label="Discuss a pilot"
         class="mt-2 w-full justify-center sm:hidden"
         @click="menuOpen = false"
@@ -114,6 +119,9 @@ const links = computed(() => [
 }
 .nav-link {
   transition: color 160ms ease;
+}
+.nav-link[aria-current="page"] {
+  color: var(--ui-primary);
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover {

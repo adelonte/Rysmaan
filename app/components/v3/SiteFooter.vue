@@ -8,19 +8,19 @@ const { v3: site } = useAppConfig()
       class="flex flex-col gap-6 border-t border-default pt-8 sm:flex-row sm:items-center sm:justify-between"
     >
       <div>
-        <a
-          href="#top"
+        <NuxtLink
+          to="/v3#top"
           class="flex items-center gap-2"
-        ><V3RysmaanMark class="size-6" /><span class="text-lg font-semibold tracking-[-0.05em]">rysmaan</span></a>
+        ><V3RysmaanMark class="size-6" /><span class="text-lg font-semibold tracking-[-0.05em]">rysmaan</span></NuxtLink>
         <p class="mt-2 text-xs text-muted">
-          Project knowledge from your file systems and SharePoint.
+          Company knowledge from your file systems, SharePoint or drives.
         </p>
       </div>
       <nav
         aria-label="Footer"
         class="flex flex-wrap items-center gap-6 text-xs text-muted"
       >
-        <a href="#pilot">Founding pilot</a><a href="#faq">FAQ</a><a :href="`mailto:${site.email}`">Contact</a><span>© 2026 Rysmaan</span>
+        <NuxtLink to="/v3#pilot">Founding pilot</NuxtLink><NuxtLink to="/v3#faq">FAQ</NuxtLink><NuxtLink to="/about">About</NuxtLink><a :href="`mailto:${site.email}`">Contact</a><span>© {{ new Date().getFullYear() }} Rysmaan</span>
       </nav>
     </div>
   </footer>

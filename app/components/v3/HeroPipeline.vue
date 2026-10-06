@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
             <a
               href="#challenge-discovery"
               class="pipeline-hub stage-link"
-              aria-label="Rysmaan — explore the challenge of finding project experience"
+              aria-label="Rysmaan"
             >
               <div class="hub-brand">
                 <span class="hub-logo"><V3RysmaanMark class="size-8" /></span>
@@ -132,12 +132,6 @@ onBeforeUnmount(() => {
               <p class="hub-purpose">
                 Bring order to your information.
               </p>
-              <span class="stage-action">
-                <UIcon
-                  name="i-lucide-arrow-down"
-                  aria-hidden="true"
-                />Why it’s hard today
-              </span>
             </a>
           </div>
 
@@ -148,7 +142,7 @@ onBeforeUnmount(() => {
             <a
               href="#challenge-consistency"
               class="data-card stage-link"
-              aria-label="Connected knowledge — explore the challenge of conflicting project details"
+              aria-label="Connected knowledge"
             >
               <span
                 class="data-connection"
@@ -228,12 +222,6 @@ onBeforeUnmount(() => {
                 <h2>Connected<br><span>knowledge</span></h2>
                 <p>Structured. Ready to use.</p>
               </div>
-              <span class="stage-action">
-                <UIcon
-                  name="i-lucide-arrow-down"
-                  aria-hidden="true"
-                />Why structure matters
-              </span>
             </a>
           </div>
           <div class="outputs-column">

@@ -5,7 +5,7 @@ withDefaults(defineProps<{ onPaper?: boolean, activeSection?: string }>(), {
 })
 
 const links = [
-  { label: 'About', to: '#about', section: 'about' },
+  { label: 'About', to: '/about', section: 'about' },
   { label: 'Calgary', to: '#calgary', section: 'calgary' },
   { label: 'Contact', to: 'mailto:hello@rysmaan.com', section: 'contact' }
 ]
