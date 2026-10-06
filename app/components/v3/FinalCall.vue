@@ -30,7 +30,7 @@ const { v3: site } = useAppConfig()
             You’ve already done<br>the work. Put it to use.
           </h2>
           <p class="final-description mt-6 max-w-md text-base leading-relaxed">
-            Thirty minutes, no slides. Tell us about your company, and we’ll explore solutions.
+            Tell us about your company, and we’ll explore solutions.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-4">
             <UButton

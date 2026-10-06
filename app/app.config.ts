@@ -3,7 +3,7 @@ export default defineAppConfig({
     showChallengeSections: false,
     // Restore the video, comparison, and results sections together.
     showOverviewSections: false,
-    email: 'hello@rysmaan.com',
+    email: 'support@rysmaan.com',
     bookingUrl: '#pilot'
   },
   ui: {

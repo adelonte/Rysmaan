@@ -130,7 +130,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         color="neutral"
         variant="ghost"
         class="hidden lg:flex"
-        to="mailto:hello@rysmaan.com"
+        to="mailto:support@rysmaan.com"
       />
       <UButton
         label="Book a demo"
@@ -205,7 +205,7 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
           label="Contact"
           color="neutral"
           variant="soft"
-          to="mailto:hello@rysmaan.com"
+          to="mailto:support@rysmaan.com"
           block
         />
         <UButton

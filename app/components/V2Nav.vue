@@ -7,7 +7,7 @@ withDefaults(defineProps<{ onPaper?: boolean, activeSection?: string }>(), {
 const links = [
   { label: 'About', to: '/about', section: 'about' },
   { label: 'Calgary', to: '#calgary', section: 'calgary' },
-  { label: 'Contact', to: 'mailto:hello@rysmaan.com', section: 'contact' }
+  { label: 'Contact', to: 'mailto:support@rysmaan.com', section: 'contact' }
 ]
 const time = ref('')
 const menuOpen = ref(false)
@@ -87,7 +87,7 @@ onBeforeUnmount(() => clearInterval(clockInterval))
           >{{ link.label }}</a>
         </div>
         <a
-          href="mailto:hello@rysmaan.com"
+          href="mailto:support@rysmaan.com"
           class="nav-cta"
         >
           Get in touch <span

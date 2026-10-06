@@ -3,18 +3,23 @@ const items = [
   {
     label: 'Does our team need to learn a new app?',
     content:
-      'No. Your team keeps working in its folders and SharePoint. Rysmaan connects the project history in those documents, and the results appear in Power BI and your AI assistant.'
+      'No. Your team keeps working exactly as they do today. Rysmaan runs quietly in the background as a searchable knowledge base. Depending on their role and needs, team members can use it to instantly pull past data for everything from preparing proposals and SOQs to researching technical questions and supporting day-to-day work.'
   },
   {
-    label: 'Which sources do you work with?',
+    label: 'Which databases and files do you work with?',
     content:
-      'We focus on file systems (local folders and shared drives) and SharePoint document libraries. We work with project documents such as project briefs, project sheets, reports and CVs. We agree on the folders and file types to include before starting your pilot.'
+      'We connect to your existing server folders, SharePoint libraries, email archives, and cloud-based software databases like Autodesk. We focus strictly on relevant project documentation without requiring you to change how you store your files.'
   },
   {
-    label: 'How is this different from searching our files?',
+    label: 'How is this different from standard file searching?',
     content:
-      'Searching helps you find a document. Rysmaan connects differently named files to the same project, joins related information, and flags conflicting details for your team to confirm.'
+      'Standard searching only looks for individual files based on keywords. Rysmaan uses a specialized technical pipeline to extract, tag, and organize all your disconnected data silos into a structured, referenceable knowledge hub.'
   },
+  {
+    label: 'How is our data secured?',
+    content:
+      'Security is built into our core architecture. Rysmaan operates as a read-only metadata overlay inside an isolated, single-tenant cloud environment for your firm. Your files are completely sandboxed, your data is never used to train public AI models, and we enforce strict access filters so employees can only surface files they have active permission to see.'
+  }
 ]
 </script>
 

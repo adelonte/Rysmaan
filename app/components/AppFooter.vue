@@ -3,7 +3,7 @@ const links = [
   { label: 'About', to: '/about' },
   { label: 'Solutions', to: '/v2#services' },
   { label: 'Why Rysmaan', to: '/v2#results' },
-  { label: 'Contact', to: 'mailto:hello@rysmaan.com' },
+  { label: 'Contact', to: 'mailto:support@rysmaan.com' },
   { label: 'Privacy', to: '#' },
   { label: 'Terms', to: '#' }
 ]

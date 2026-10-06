@@ -47,12 +47,16 @@ async function submit() {
 
 const scope = [
   {
-    term: 'Focused scope',
-    detail: 'One folder collection or SharePoint document library, for one service line.'
+    term: 'Zero-disruption setup',
+    detail: 'We connect a read-only layer to your system. Your files stay exactly where they are.'
   },
   {
-    term: 'Three to four weeks',
-    detail: 'From access to delivery, with your team helping confirm unclear details.'
+    term: 'Focused scope',
+    detail: 'We start with just one SharePoint folder or project archive.'
+  },
+  {
+    term: 'Background delivery',
+    detail: 'The tool works automatically in the background. It never interrupts your team’s daily work.'
   }
 ]
 </script>

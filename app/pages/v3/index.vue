@@ -3,10 +3,10 @@ definePageMeta({ layout: 'v3', colorMode: 'light' })
 const { v3: site } = useAppConfig()
 
 useSeoMeta({
-  title: 'Rysmaan — Your project history. Finally connected.',
-  description: 'Rysmaan turns engineering project files from file systems and SharePoint into checked, connected records for Power BI and AI assistants.',
-  ogTitle: 'Your project history. Finally connected.',
-  ogDescription: 'Connect the project knowledge in your file systems and SharePoint. Checked records for clearer reports and more useful AI answers.',
+  title: 'Rysmaan — Your Entire Project History. Unified into a Single Source of Truth.',
+  description: 'Rysmaan connects your firm’s fragmented archives, server folders, SharePoint, emails, and other databases into a single, searchable knowledge base—without changing how you store your documents.',
+  ogTitle: 'Your Entire Project History. Unified into a Single Source of Truth.',
+  ogDescription: 'Instantly extract historical metrics to accelerate non-billable tasks and day-to-day engineering work from a single, searchable knowledge base.',
   ogImage: '/v3/video/rysmaan-overview-poster.jpg',
   twitterImage: '/v3/video/rysmaan-overview-poster.jpg',
   robots: 'noindex, nofollow'
@@ -35,7 +35,6 @@ useSeoMeta({
         <V3UnlocksCards />
       </template>
       <V3PilotApply />
-      <V3YourData />
       <V3FaqList />
       <V3FinalCall />
     </main>

@@ -2,8 +2,10 @@
 const { v3: site } = useAppConfig()
 
 const sources = [
-  { name: 'File systems', icon: 'i-lucide-folder-open' },
-  { name: 'Cloud drives', icon: 'i-lucide-cloud' }
+  { name: 'On-Premise Server Folders', icon: 'i-lucide-folder-open' },
+  { name: 'Archive Folders', icon: 'i-lucide-archive' },
+  { name: 'SharePoint & Cloud Libraries', icon: 'i-lucide-cloud' },
+  { name: 'Outlook & Teams Archives', icon: 'i-lucide-messages-square' }
 ]
 const services = [
   { name: 'LLMs', icon: 'i-lucide-sparkles', tone: 'violet' },
@@ -51,11 +53,10 @@ onBeforeUnmount(() => {
             aria-hidden="true"
           /></a>
         <h1 id="hero-title">
-          All your documents,<br><span>Finally Connected.</span>
+          Your Entire Project History.<br><span>Unified into a Single Source of Truth.</span>
         </h1>
         <p class="hero-description">
-          Rysmaan brings order to your firm’s information,
-          making it ready for the tools you work with.
+          Rysmaan connects your firm’s fragmented archives, server folders, SharePoint, emails, and other databases into a single, searchable knowledge base. Instantly extract historical metrics to accelerate non-billable tasks and day-to-day engineering work—without changing how you currently store your documents.
         </p>
         <div class="mt-7 flex flex-wrap justify-center gap-3">
           <V3GradientButton
@@ -80,7 +81,7 @@ onBeforeUnmount(() => {
         ref="canvas"
         class="pipeline-canvas"
         :class="{ 'motion-running': motionRunning }"
-        aria-label="File systems and cloud drives flow through Rysmaan’s custom algorithms and AI into structured, connected data for LLMs, analytics and a knowledge hub."
+        aria-label="On-premise server folders, archive folders, SharePoint and cloud libraries, and Outlook and Teams archives flow through Rysmaan’s non-invasive metadata ingestion into structured, connected data for LLMs, analytics and a knowledge hub."
       >
         <div class="pipeline-grid">
           <div class="sources-column">
@@ -110,11 +111,7 @@ onBeforeUnmount(() => {
             <p class="stage-label">
               Organized by Rysmaan
             </p>
-            <a
-              href="#challenge-discovery"
-              class="pipeline-hub stage-link"
-              aria-label="Rysmaan"
-            >
+            <div class="pipeline-hub">
               <div class="hub-brand">
                 <span class="hub-logo"><V3RysmaanMark class="size-8" /></span>
                 <span>rysmaan</span>
@@ -130,20 +127,16 @@ onBeforeUnmount(() => {
                 />
               </div>
               <p class="hub-purpose">
-                Bring order to your information.
+                Non-Invasive Metadata Ingestion
               </p>
-            </a>
+            </div>
           </div>
 
           <div class="data-column">
             <p class="stage-label">
               Your connected data
             </p>
-            <a
-              href="#challenge-consistency"
-              class="data-card stage-link"
-              aria-label="Connected knowledge"
-            >
+            <div class="data-card">
               <span
                 class="data-connection"
                 aria-hidden="true"
@@ -222,7 +215,7 @@ onBeforeUnmount(() => {
                 <h2>Connected<br><span>knowledge</span></h2>
                 <p>Structured. Ready to use.</p>
               </div>
-            </a>
+            </div>
           </div>
           <div class="outputs-column">
             <p class="stage-label">
@@ -306,7 +299,7 @@ onBeforeUnmount(() => {
 }
 .hero-shell { max-width: 1480px; }
 .hero-copy {
-  max-width: 840px;
+  max-width: 1080px;
   margin: 0 auto;
   text-align: center;
 }
@@ -344,7 +337,7 @@ h1 > span {
 }
 .hero-description {
   margin: 22px auto 0;
-  max-width: 600px;
+  max-width: 840px;
   font-size: 17px;
   line-height: 1.65;
   color: var(--ui-text-muted);
@@ -388,21 +381,22 @@ h1 > span {
   position: relative;
   display: grid;
   align-content: center;
-  gap: 28px;
+  gap: 14px;
   height: 348px;
 }
 .source-card {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   height: 76px;
-  padding: 14px 16px;
+  padding: 12px;
   border: 1px solid #cbdcf1;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 3px 8px #315da308;
-  font-size: 15px;
+  font-size: 13px;
+  line-height: 1.4;
   font-weight: 500;
 }
 .source-icon {
@@ -444,15 +438,6 @@ h1 > span {
 .hub-organization span { width: 9px; height: 9px; border-radius: 2px; background: #7ce6d6; }
 .hub-organization span:nth-child(3n + 1) { background: #c1dcff; }
 .hub-purpose { max-width: 185px; font-size: 16px; line-height: 1.45; color: #f4f8ff; }
-.stage-link { text-decoration: none; cursor: pointer; }
-.stage-link:focus-visible { outline: 3px solid #287bc3; outline-offset: 5px; }
-.stage-action { display: flex; align-items: center; gap: 7px; margin-top: 18px; padding: 7px 10px; border: 1px solid #ffffff38; border-radius: 6px; background: #ffffff0d; color: #fff; font-size: 11px; line-height: 1.3; }
-.stage-action > :first-child { font-size: 13px; flex-shrink: 0; transition: transform 180ms var(--ease-out); }
-.stage-link:active .stage-action { background: #ffffff26; }
-@media (hover: hover) and (pointer: fine) {
-  .stage-link:hover .stage-action { background: #ffffff20; border-color: #ffffff80; }
-  .stage-link:hover .stage-action > :first-child { transform: translateY(2px); }
-}
 .data-card {
   position: relative;
   display: flex;
@@ -533,7 +518,6 @@ h1 > span {
   .hub-brand { font-size: 24px; gap: 7px; }
   .hub-logo { width: 34px; height: 34px; }
   .hub-purpose { font-size: 14px; }
-  .stage-action { font-size: 10px; padding-inline: 7px; }
   .data-card h2 { font-size: 25px; }
   .data-heading p { font-size: 11px; }
   .service-name { font-size: 11px; gap: 5px; }

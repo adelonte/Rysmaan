@@ -111,6 +111,8 @@ The generated `/v3` HTML includes the `pilot` form, hidden form name, and honeyp
 Enhanced submissions POST to `/v3`; native submissions use `/v3/thanks/`.
 The thank-you page links back to `/v3`.
 
-Confirm `hello@rysmaan.com`, then verify a real application arrives in Netlify
+The contact address is `support@rysmaan.com`, defined in `app/app.config.ts`.
+Provision this mailbox or alias with the domain’s email provider and confirm it
+receives mail, then verify a real application arrives in Netlify
 Forms before sharing publicly. Other hosts need a form backend before enabling
 submission. Keep the flag disabled until that integration is in place.
