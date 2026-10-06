@@ -40,7 +40,7 @@ const facts = [
 const footerLinks = [
   { label: 'About', to: '/about' },
   { label: 'Calgary', to: '#calgary' },
-  { label: 'Contact', to: 'mailto:hello@rysmaan.com' },
+  { label: 'Contact', to: 'mailto:support@rysmaan.com' },
   { label: 'Previous site', to: '/v2' }
 ]
 
@@ -163,10 +163,10 @@ function scrollMotion(delay: number = 0) {
             </nav>
 
             <a
-              href="mailto:hello@rysmaan.com"
+              href="mailto:support@rysmaan.com"
               class="group flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm text-white transition-colors hover:bg-white/20"
             >
-              hello@rysmaan.com
+              support@rysmaan.com
               <span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
             </a>
           </div>

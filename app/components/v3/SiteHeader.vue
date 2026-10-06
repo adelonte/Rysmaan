@@ -21,7 +21,6 @@ const links = computed(() => [
         { label: 'Results', to: '/v3#unlocks' }
       ]
     : []),
-  { label: 'Your data', to: '/v3#data' },
   { label: 'FAQ', to: '/v3#faq' },
   { label: 'About', to: '/about' }
 ])

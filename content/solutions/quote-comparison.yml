@@ -39,8 +39,8 @@ features:
 cta:
   title: "Compare your next\ntender properly."
   description: Bring a package you are tendering now and we will run the comparison with you.
-  contact: hello@rysmaan.com
+  contact: support@rysmaan.com
   links:
     - label: Book a demo
       color: primary
-      to: 'mailto:hello@rysmaan.com'
+      to: 'mailto:support@rysmaan.com'

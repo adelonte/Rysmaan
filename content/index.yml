@@ -89,8 +89,8 @@ metrics:
 cta:
   title: "Start with one\npackage."
   description: Bring your own vendors or use ours. No rollout programme, no data migration — just your next tender, run properly.
-  contact: hello@rysmaan.com
+  contact: support@rysmaan.com
   links:
     - label: Book a demo
       color: primary
-      to: 'mailto:hello@rysmaan.com'
+      to: 'mailto:support@rysmaan.com'
