@@ -101,18 +101,22 @@ continue using their existing layouts.
 
 ### Pilot applications
 
-The imported form uses Netlify Forms. Online submission is disabled by default,
-with an email fallback, to avoid reporting success from an unconfigured server.
-Development mode always uses this fallback.
+The `/v3#pilot` form embeds Apollo's Form Builder. The surrounding pilot panel
+stays in the site; fields, validation, styling, submission confirmation, and
+follow-up workflows are managed in Apollo. The public embed app ID is configured
+as `v3.apolloAppId` in `app/app.config.ts`.
 
-For a Netlify deployment, enable form detection and set
-`NUXT_PUBLIC_V3_FORMS_ENABLED=true` **before building** (the form is prerendered).
-The generated `/v3` HTML includes the `pilot` form, hidden form name, and honeypot.
-Enhanced submissions POST to `/v3`; native submissions use `/v3/thanks/`.
-The thank-you page links back to `/v3`.
+The SDK loads only when this form mounts in the browser. A loading message and
+email fallback cover script errors, rejected domains, and loading timeouts.
+Nuxt navigation reuses the SDK and destroys the widget when leaving the page.
+The old Netlify submission flow and `NUXT_PUBLIC_V3_FORMS_ENABLED` flag are no
+longer used.
+
+In Apollo, publish the form and allow the HTTPS domains that will host it,
+including `https://rysmaan.com`, `https://www.rysmaan.com` if used, and any preview
+domains. A localhost preview may show the email fallback if Apollo doesn't allow
+its origin. Configure the fields and appearance in Apollo's form editor, then
+verify a real submission arrives in Apollo after deployment.
+See [Apollo's embedding guide](https://knowledge.apollo.io/hc/en-us/articles/46495970617485-Use-Apollo-s-Form-Builder-to-Capture-and-Route-Prospects).
 
 The contact address is `support@rysmaan.com`, defined in `app/app.config.ts`.
-Provision this mailbox or alias with the domain’s email provider and confirm it
-receives mail, then verify a real application arrives in Netlify
-Forms before sharing publicly. Other hosts need a form backend before enabling
-submission. Keep the flag disabled until that integration is in place.

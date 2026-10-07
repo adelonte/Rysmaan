@@ -4,6 +4,7 @@ export default defineAppConfig({
     // Restore the video, comparison, and results sections together.
     showOverviewSections: false,
     email: 'support@rysmaan.com',
+    apolloAppId: '6ac167d9397ade0010f0a2a0',
     bookingUrl: '#pilot'
   },
   ui: {
