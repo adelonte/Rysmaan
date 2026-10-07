@@ -31,13 +31,6 @@ export default defineNuxtConfig({
     }
   },
 
-  runtimeConfig: {
-    public: {
-      // Enable only on a Netlify deployment with form detection configured.
-      v3FormsEnabled: false
-    }
-  },
-
   // Nitro serves its own placeholder at /favicon.ico when the file is absent;
   // the Rysmaan mark is a PNG, so point that request at it.
   routeRules: {
