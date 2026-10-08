@@ -85,23 +85,25 @@ content/
 
 ## Version 3
 
-The engineering data pipeline landing site is available at `/v3`. It was
+The engineering data pipeline landing site is the default homepage at `/`. The
+`/v3` URL remains an alias for existing bookmarks and campaign links. It was
 integrated from the standalone `landing/` site with its pipeline animation,
 comparison, pilot application, FAQ, and captioned overview video.
 
-- Page: `app/pages/v3/index.vue`; standalone layout: `app/layouts/v3.vue`.
+- Page: `app/pages/index.vue`; standalone layout: `app/layouts/v3.vue`.
 - Components: `app/components/v3/`; scoped theme: `app/assets/css/v3.css`.
 - Contact email and pilot link: `v3` in `app/app.config.ts`.
 - Video, captions, poster, favicon, and licensed Figtree font: `public/v3/`.
 - Reveal animations: `app/plugins/v3-reveal.ts`, registered as `v-v3-reveal`.
 
-The route is prerendered and marked `noindex, nofollow` while it is an alternate
-version. Its theme is scoped to the v3 layout; `/`, `/v2`, and the solution pages
+The homepage and its `/v3` alias are prerendered, with a canonical URL of
+`https://rysmaan.com/` and indexing enabled. Navigation and pilot links point to
+the homepage. The theme is scoped to the v3 layout; `/v2` and the solution pages
 continue using their existing layouts.
 
 ### Pilot applications
 
-The `/v3#pilot` form embeds Apollo's Form Builder. The surrounding pilot panel
+The `/#pilot` form embeds Apollo's Form Builder. The surrounding pilot panel
 stays in the site; fields, validation, styling, submission confirmation, and
 follow-up workflows are managed in Apollo. The public embed app ID is configured
 as `v3.apolloAppId` in `app/app.config.ts`.

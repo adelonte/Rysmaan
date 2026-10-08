@@ -378,18 +378,32 @@ h1 > span {
 .rysmaan-column .stage-label { color: #2e60a8; }
 .data-column .stage-label { color: #14776c; }
 .source-list {
+  --source-height: 76px;
+  --source-gap: 14px;
   position: relative;
   display: grid;
   align-content: center;
-  gap: 14px;
+  gap: var(--source-gap);
   height: 348px;
+}
+.source-list::before {
+  content: '';
+  position: absolute;
+  /* Span the first and last card centers, including the centered list's inset. */
+  top: calc((100% - 3 * (var(--source-height) + var(--source-gap))) / 2);
+  bottom: calc((100% - 3 * (var(--source-height) + var(--source-gap))) / 2);
+  left: 100%;
+  width: calc(var(--gap) / 2);
+  border: 1px solid var(--connector);
+  border-left: 0;
+  border-radius: 0 12px 12px 0;
 }
 .source-card {
   position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 76px;
+  height: var(--source-height);
   padding: 12px;
   border: 1px solid #cbdcf1;
   border-radius: 10px;
@@ -412,8 +426,8 @@ h1 > span {
 }
 .source-card:last-child .source-icon { color: #057d9d; background: #ddf4fc; }
 .source-port { position: absolute; right: -3px; width: 5px; height: 5px; border-radius: 50%; background: #6b9ccc; }
-.source-card::after { content: ''; position: absolute; left: 100%; top: 50%; width: calc(var(--gap) / 2); height: 52px; border-top: 1px solid var(--connector); border-right: 1px solid var(--connector); border-top-right-radius: 12px; }
-.source-card:last-child::after { top: auto; bottom: 50%; border-top: 0; border-bottom: 1px solid var(--connector); border-top-right-radius: 0; border-bottom-right-radius: 12px; }
+.source-card::after { content: ''; position: absolute; left: 100%; top: 50%; width: calc(var(--gap) / 2); border-top: 1px solid var(--connector); }
+.source-card:first-child::after, .source-card:last-child::after { display: none; }
 .pipeline-hub {
   position: relative;
   display: flex;
@@ -531,7 +545,7 @@ h1 > span {
   .stage-label { text-align: center; margin-bottom: 14px; }
   .source-list { height: auto; grid-template-columns: 1fr 1fr; gap: 12px; }
   .source-card { justify-content: center; }
-  .source-port, .source-card::after, .pipeline-hub::before { display: none; }
+  .source-port, .source-list::before, .source-card::after, .pipeline-hub::before { display: none; }
   .pipeline-hub, .data-card { width: min(100%, 290px); height: 270px; padding: 20px 16px; }
   .pipeline-hub { margin: 28px auto 12px; }
   .data-card { margin: 0 auto; }
