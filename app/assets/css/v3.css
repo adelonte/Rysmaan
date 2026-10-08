@@ -1,4 +1,4 @@
-/* Scoped to /v3 so its theme cannot restyle the existing landing pages. */
+/* Scoped to the V3 layout used by the homepage and About page. */
 /* Route CSS can precede the main stylesheet in prerendered HTML. Declare the
    shared layer order before components so Tailwind's reset stays below them. */
 @layer theme, base, components, utilities;

@@ -2,7 +2,8 @@
 const scope = [
   {
     term: 'Zero-disruption setup',
-    detail: 'We connect a read-only layer to your system. Your files stay exactly where they are.'
+    detail:
+      'We connect a read-only layer to your system. Your files stay exactly where they are.'
   },
   {
     term: 'Focused scope',
@@ -10,7 +11,8 @@ const scope = [
   },
   {
     term: 'Background delivery',
-    detail: 'The tool works automatically in the background. It never interrupts your team’s daily work.'
+    detail:
+      'The tool works automatically in the background. It never interrupts your team’s daily work.'
   }
 ]
 </script>
@@ -39,7 +41,8 @@ const scope = [
             We’ll help integrate Rysmaan into your system.
           </h2>
           <p class="pilot-description mt-5 max-w-md text-base leading-relaxed">
-            Start with a collection of project files from your file system or SharePoint.
+            Start with a collection of project files from your file system or
+            SharePoint.
           </p>
           <dl class="pilot-scope mt-8">
             <div
@@ -57,9 +60,6 @@ const scope = [
           </dl>
         </div>
         <div class="bg-default p-7 sm:p-10">
-          <h3 class="mb-5 text-xl font-medium tracking-tight">
-            Tell us about your firm
-          </h3>
           <V3ApolloForm />
         </div>
       </div>

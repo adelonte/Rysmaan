@@ -9,7 +9,7 @@ const { v3: site } = useAppConfig()
     >
       <div>
         <NuxtLink
-          to="/v3#top"
+          to="/#top"
           class="flex items-center gap-2"
         ><V3RysmaanMark class="size-6" /><span class="text-lg font-semibold tracking-[-0.05em]">rysmaan</span></NuxtLink>
         <p class="mt-2 text-xs text-muted">
@@ -20,7 +20,7 @@ const { v3: site } = useAppConfig()
         aria-label="Footer"
         class="flex flex-wrap items-center gap-6 text-xs text-muted"
       >
-        <NuxtLink to="/v3#pilot">Founding pilot</NuxtLink><NuxtLink to="/v3#faq">FAQ</NuxtLink><NuxtLink to="/about">About</NuxtLink><a :href="`mailto:${site.email}`">Contact</a><span>© {{ new Date().getFullYear() }} Rysmaan</span>
+        <NuxtLink to="/#pilot">Founding pilot</NuxtLink><NuxtLink to="/#faq">FAQ</NuxtLink><NuxtLink to="/about">About</NuxtLink><a :href="`mailto:${site.email}`">Contact</a><span>© {{ new Date().getFullYear() }} Rysmaan</span>
       </nav>
     </div>
   </footer>

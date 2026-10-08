@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { v3: site } = useAppConfig()
 const route = useRoute()
-const bookingUrl = computed(() => site.bookingUrl.startsWith('#') ? `/v3${site.bookingUrl}` : site.bookingUrl)
+const bookingUrl = computed(() => site.bookingUrl.startsWith('#') ? `/${site.bookingUrl}` : site.bookingUrl)
 const menuOpen = ref(false)
 const menuButton = ref<HTMLButtonElement>()
 function closeMenu() {
@@ -11,17 +11,17 @@ function closeMenu() {
 const links = computed(() => [
   ...(site.showChallengeSections
     ? [
-        { label: 'The challenge', to: '/v3#challenges' },
-        { label: 'How it works', to: '/v3#how-it-works' }
+        { label: 'The challenge', to: '/#challenges' },
+        { label: 'How it works', to: '/#how-it-works' }
       ]
     : []),
   ...(site.showOverviewSections
     ? [
-        { label: 'Overview', to: '/v3#overview' },
-        { label: 'Results', to: '/v3#unlocks' }
+        { label: 'Overview', to: '/#overview' },
+        { label: 'Results', to: '/#unlocks' }
       ]
     : []),
-  { label: 'FAQ', to: '/v3#faq' },
+  { label: 'FAQ', to: '/#faq' },
   { label: 'About', to: '/about' }
 ])
 </script>
@@ -33,7 +33,7 @@ const links = computed(() => [
   >
     <div class="section-shell flex h-18 items-center justify-between gap-4">
       <NuxtLink
-        to="/v3#top"
+        to="/#top"
         aria-label="Rysmaan home"
         class="flex items-center gap-2.5"
         @click="menuOpen = false"

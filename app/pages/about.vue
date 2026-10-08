@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'v3', colorMode: 'light' })
 const { v3: site } = useAppConfig()
-const bookingUrl = computed(() => site.bookingUrl.startsWith('#') ? `/v3${site.bookingUrl}` : site.bookingUrl)
+const bookingUrl = computed(() => site.bookingUrl.startsWith('#') ? `/${site.bookingUrl}` : site.bookingUrl)
 
 const title = 'About Rysmaan — Connecting company knowledge'
 const description = 'Built by engineers in Calgary, Rysmaan turns company files from file systems, SharePoint or drives into checked, connected records for analytics and AI.'
